@@ -213,6 +213,8 @@ class EditViewModel(private val repo: VoterRepository, private val app: VoterDir
 /** Which voters to export. [Preset] = a list prepared by the caller (selection, household, filter). */
 sealed interface ExportScope {
     val label: String
+    /** What the PDF header says about the export: like [label], without counts such as "96 households". */
+    val pdfLabel: String get() = label
     data class Preset(override val label: String, val ids: List<Int>) : ExportScope
     /** Every voter of [ward]; null = every imported ward (explicit global, multi-ward export). */
     data class All(val ward: Int?) : ExportScope {
@@ -226,6 +228,10 @@ sealed interface ExportScope {
         override val label: String get() = listOfNotNull(
             blocks.takeIf { it.isNotEmpty() }?.let { b -> "Block " + sortBlocks(b).joinToString(", ") { if (it == Blocks.UNASSIGNED) "Unassigned" else it } },
             households.takeIf { it.isNotEmpty() }?.let { "${it.size} household${if (it.size == 1) "" else "s"}" },
+        ).joinToString(" + ").ifEmpty { "Nothing selected" }
+        override val pdfLabel: String get() = listOfNotNull(
+            blocks.takeIf { it.isNotEmpty() }?.let { b -> "Block " + sortBlocks(b).joinToString(", ") { if (it == Blocks.UNASSIGNED) "Unassigned" else it } },
+            households.takeIf { it.isNotEmpty() }?.let { "Households" },
         ).joinToString(" + ").ifEmpty { "Nothing selected" }
     }
 }
@@ -243,6 +249,8 @@ data class PlannedSection(
     val keepTogether: Boolean,
     /** Members already printed in an earlier section, with the name of that section. */
     val alreadyListed: List<Pair<Int, String>> = emptyList(),
+    /** A household (consecutive single-member households are printed side by side). */
+    val household: Boolean = false,
 )
 
 data class ExportPlan(val sections: List<PlannedSection>) {
@@ -313,7 +321,7 @@ class ExportViewModel(private val repo: VoterRepository, private val app: VoterD
                 "${members.size} member${if (members.size == 1) "" else "s"}",
                 if (dup.isNotEmpty()) "${dup.size} already listed above" else null,
             ).joinToString(" · ")
-            sections += PlannedSection(h.name, subtitle, fresh, startNewPage = options.householdNewPage, keepTogether = true, alreadyListed = dup)
+            sections += PlannedSection(h.name, subtitle, fresh, startNewPage = options.householdNewPage, keepTogether = true, alreadyListed = dup, household = true)
             fresh.forEach { listedIn.putIfAbsent(it, h.name) }
         }
         return ExportPlan(sections)
@@ -329,6 +337,7 @@ class ExportViewModel(private val repo: VoterRepository, private val app: VoterD
                 records = s.ids.mapNotNull { records[it] },
                 startNewPage = s.startNewPage,
                 keepTogether = s.keepTogether,
+                household = s.household,
                 references = s.alreadyListed.map { (id, where) ->
                     val v = records[id]?.voter
                     "${v?.gpSerialNo ?: ""} ${v?.nameEn ?: ""} ($where)".trim()
@@ -368,7 +377,7 @@ class ExportViewModel(private val repo: VoterRepository, private val app: VoterD
                 }
                 val pages = withContext(Dispatchers.Default) {
                     file.outputStream().buffered().use { out ->
-                        PdfExporter(app).writeSections(sections, scope.label, options, out) { done, total ->
+                        PdfExporter(app).writeSections(sections, scope.pdfLabel, options, out) { done, total ->
                             _status.value = ExportStatus.Working("Creating page $done of $total…")
                         }
                     }

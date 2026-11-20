@@ -30,6 +30,10 @@ class PdfExportDeviceTest {
     private val repo = app.repository
     private val outDir = File(app.getExternalFilesDir(null), "qa-pdf").also { it.mkdirs() }
 
+    // The export reads data for Admin only (Viewer sessions cannot export).
+    @org.junit.Before fun signIn() = signInAdminDirect(app)
+    @org.junit.After fun signOut() = signOutDirect(app)
+
     private fun export(name: String, serials: List<Int>, label: String, options: PdfOptions): Pair<File, Int> = runBlocking {
         repo.ensureImported()
         val records = repo.exportRecords(serials)

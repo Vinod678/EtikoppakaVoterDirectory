@@ -50,3 +50,14 @@ fun AndroidComposeTestRule<*, *>.openWard11(role: Role = Role.ADMIN) {
     }
     waitUntilAtLeastOneExists(hasText("Ward 11 · 369 Voters"), 30_000)
 }
+
+/**
+ * Signs in as Admin without the UI (for tests that call Admin-only repository functions such as
+ * the PDF export directly). Pair with [signOutDirect].
+ */
+fun signInAdminDirect(app: VoterDirectoryApp) = kotlinx.coroutines.runBlocking {
+    val r = app.auth.attempt(testPassword(Role.ADMIN).toCharArray(), Role.ADMIN)
+    check(r == com.example.etikoppakavoterdirectory.auth.AttemptResult.Success) { "Admin sign-in failed: $r" }
+}
+
+fun signOutDirect(app: VoterDirectoryApp) = app.auth.logout()

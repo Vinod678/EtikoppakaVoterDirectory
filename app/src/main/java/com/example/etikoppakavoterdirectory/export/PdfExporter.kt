@@ -46,10 +46,12 @@ data class PdfOptions(
  * A part of the PDF with an optional heading, e.g. "Block A — 85 Voters" or a household.
  *
  * @param startNewPage the section begins on a new page
- * @param keepTogether move the whole section to the next page when it does not fit on the current
- *        one but would fit on an empty page; a longer section continues with a "(continued)" heading
+ * @param keepTogether a short section (up to two card rows) moves to the next page instead of being
+ *        split; a longer section continues on the next page with a "(continued)" heading
  * @param references members already printed in an earlier section (one short line each), listed
  *        under the heading instead of repeating their full record
+ * @param household a household section: two consecutive single-member households are printed side
+ *        by side, each with its own heading
  */
 data class PdfSection(
     val title: String?,
@@ -58,10 +60,13 @@ data class PdfSection(
     val startNewPage: Boolean = false,
     val keepTogether: Boolean = false,
     val references: List<String> = emptyList(),
+    val household: Boolean = false,
 )
 
 /**
- * Builds an A4 PDF entirely on the device.
+ * Builds an A4 PDF entirely on the device. Every export (voter lists, blocks, tags, households)
+ * uses the same page layout and voter card: a compact header with "Page X of Y" at the top right,
+ * no footer, and two voter cards per row.
  *
  * Text is laid out with Android's [StaticLayout], which shapes complex scripts (Telugu conjuncts,
  * vowel signs) with HarfBuzz before drawing; [PdfDocument] then records the already-shaped glyphs
@@ -73,15 +78,19 @@ class PdfExporter(private val context: Context) {
     // A4 in PostScript points (1/72 inch).
     private val pageW = 595
     private val pageH = 842
-    private val margin = 36f
+    private val margin = 28f
     private val contentW = pageW - 2 * margin
-    private val footerH = 22f
+    private val colGap = 8f
+    private val rowGap = 6f
+    /** Two cards per row on every export. */
+    private val cardW = (contentW - colGap) / 2
 
     private val teal = Color.rgb(0x00, 0x69, 0x6A)
     private val ink = Color.rgb(0x18, 0x1C, 0x1C)
     private val muted = Color.rgb(0x55, 0x60, 0x60)
     private val hairline = Color.rgb(0xC4, 0xCD, 0xCC)
     private val cardFill = Color.rgb(0xF6, 0xF9, 0xF9)
+    private val badgeFill = Color.rgb(0xD5, 0xEC, 0xEB)
 
     private val regular = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL)
     private val bold = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
@@ -92,6 +101,7 @@ class PdfExporter(private val context: Context) {
         typeface = if (isBold) bold else regular
     }
 
+    /** Wraps freely (no line limit, nothing cut) unless [maxLines] is given. */
     private fun layout(text: String, p: TextPaint, width: Float, maxLines: Int = Int.MAX_VALUE, spacing: Float = 1.0f): StaticLayout =
         StaticLayout.Builder.obtain(text, 0, text.length, p, max(1, width.roundToInt()))
             .setAlignment(Layout.Alignment.ALIGN_NORMAL)
@@ -101,10 +111,10 @@ class PdfExporter(private val context: Context) {
             .setEllipsize(if (maxLines == Int.MAX_VALUE) null else TextUtils.TruncateAt.END)
             .build()
 
-    /** A measured card, drawn later at its final position. */
+    /** A measured block (card, heading, ...), drawn later at its final position. */
     private class Card(val height: Float, val draw: (Canvas, Float, Float) -> Unit)
 
-    /** Writes a single list of records without section headings (all earlier export types). */
+    /** Writes a single list of records without section headings. */
     fun write(
         records: List<ExportRecord>,
         scopeLabel: String,
@@ -114,8 +124,8 @@ class PdfExporter(private val context: Context) {
     ): Int = writeSections(listOf(PdfSection(title = null, records = records)), scopeLabel, options, out, onProgress)
 
     /**
-     * Writes the PDF to [out]. Card rows never split across pages; section headings are never left
-     * alone at the bottom of a page.
+     * Writes the PDF to [out]. Voter cards are never split across pages; headings always stay with
+     * their first row of cards.
      * @return number of pages.
      */
     fun writeSections(
@@ -128,18 +138,18 @@ class PdfExporter(private val context: Context) {
         val all = sections.flatMap { it.records }
         require(all.isNotEmpty() || sections.any { it.references.isNotEmpty() }) { "Nothing to export" }
         val wards = all.map { it.voter.wardNo }.toSortedSet()
-        val place = if (wards.size == 1) "Ward ${wards.first()} · $VILLAGE" else "All wards · $VILLAGE"
+        val wardText = if (wards.size == 1) "Ward ${wards.first()}" else "All wards"
         val showWard = wards.size > 1
-        val count = all.map { it.voter.voterId }.toSet().size
-        val columns = if (options.layout == PdfLayout.COMPACT) 2 else 1
-        val gap = 10f
-        val cardW = (contentW - gap * (columns - 1)) / columns
-        fun card(r: ExportRecord) = if (options.layout == PdfLayout.COMPACT) compactCard(r, options, cardW, showWard) else detailedCard(r, options, cardW, showWard)
+        fun card(r: ExportRecord) = voterCard(r, options, cardW, showWard)
+
+        val generated = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(Date())
+        val first = firstHeader(wardText, scopeLabel, generated)
+        val running = runningHeader(wardText, scopeLabel)
 
         // ---- paginate ----
-        val firstTop = margin + firstHeaderHeight(scopeLabel, count, place)
-        val nextTop = margin + 26f
-        val bottom = pageH - margin - footerH
+        val firstTop = margin + first.height + HEADER_GAP
+        val nextTop = margin + running.height + HEADER_GAP
+        val bottom = pageH - margin
         val pages = ArrayList<MutableList<(Canvas) -> Unit>>()
         var current = ArrayList<(Canvas) -> Unit>().also { pages += it }
         var y = firstTop
@@ -147,45 +157,71 @@ class PdfExporter(private val context: Context) {
         fun hasContent() = y > top() + 0.5f
         fun newPage() { current = ArrayList<(Canvas) -> Unit>().also { pages += it }; y = nextTop }
         fun put(c: Card, x: Float) { val py = y; current += { canvas -> c.draw(canvas, x, py) } }
+        fun single(s: PdfSection?) = s != null && s.household && s.title != null && s.records.size == 1 && s.references.isEmpty()
 
-        sections.forEach { s ->
-            val heading = s.title?.let { sectionHeading(it, s.subtitle, s.references) }
-            val rows = s.records.map(::card).chunked(columns)
+        var i = 0
+        while (i < sections.size) {
+            val s = sections[i]
+            val next = sections.getOrNull(i + 1)
+            // Two consecutive single-member households: side by side, each with its own heading.
+            if (single(s) && single(next) && !next!!.startNewPage) {
+                if (s.startNewPage && hasContent()) newPage()
+                val left = householdHalf(s, ::card)
+                val right = householdHalf(next, ::card)
+                val h = max(left.height, right.height)
+                if (y + h > bottom && hasContent()) newPage()
+                put(left, margin)
+                put(right, margin + cardW + colGap)
+                val py = y
+                current += { c ->
+                    val x = margin + cardW + colGap / 2
+                    c.drawRect(x - 0.3f, py, x + 0.3f, py + h, Paint().apply { color = hairline })
+                }
+                y += h + SECTION_GAP
+                i += 2
+                continue
+            }
+
+            val heading = s.title?.let { sectionHeading(it, s.subtitle, s.references, contentW) }
+            val rows = s.records.map(::card).chunked(2)
             val rowHeights = rows.map { row -> row.maxOf { it.height } }
-            val total = (heading?.height?.plus(HEADING_GAP) ?: 0f) + rowHeights.sum() + gap * rows.size
+            val headH = heading?.let { it.height + HEADING_GAP } ?: 0f
+            val total = headH + rowHeights.sum() + rowGap * max(0, rows.size - 1)
             when {
                 s.startNewPage && hasContent() -> newPage()
-                s.keepTogether && hasContent() && y + total > bottom && total <= bottom - nextTop -> newPage()
+                // Short sections are not split; longer ones simply continue on the next page.
+                s.keepTogether && rows.size <= 2 && hasContent() && y + total > bottom && total <= bottom - nextTop -> newPage()
             }
             if (heading != null) {
-                if (y + heading.height + (rowHeights.firstOrNull() ?: 0f) > bottom && hasContent()) newPage()
+                if (y + headH + (rowHeights.firstOrNull() ?: 0f) > bottom && hasContent()) newPage()
                 put(heading, margin)
-                y += heading.height + HEADING_GAP
+                y += headH
             }
-            rows.forEachIndexed { i, row ->
-                if (y + rowHeights[i] > bottom && hasContent()) {
+            rows.forEachIndexed { r, row ->
+                if (y + rowHeights[r] > bottom && hasContent()) {
                     newPage()
                     s.title?.let { t ->
-                        val cont = sectionHeading("$t (continued)", null, emptyList(), small = true)
+                        val cont = sectionHeading("$t (continued)", null, emptyList(), contentW, small = true)
                         put(cont, margin)
                         y += cont.height + HEADING_GAP
                     }
                 }
-                row.forEachIndexed { col, c -> put(c, margin + col * (cardW + gap)) }
-                y += rowHeights[i] + gap
+                row.forEachIndexed { col, c -> put(c, margin + col * (cardW + colGap)) }
+                y += rowHeights[r] + rowGap
             }
-            if (heading != null) y += SECTION_GAP
+            if (rows.isNotEmpty()) y -= rowGap
+            y += if (s.title != null) SECTION_GAP else rowGap
+            i++
         }
 
-        val generated = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(Date())
         val doc = PdfDocument()
         try {
             pages.forEachIndexed { index, drawables ->
                 val page = doc.startPage(PdfDocument.PageInfo.Builder(pageW, pageH, index + 1).create())
                 val c = page.canvas
-                if (index == 0) drawFirstHeader(c, scopeLabel, count, generated, place) else drawRunningHeader(c, scopeLabel, place)
+                val pageText = "Page ${index + 1} of ${pages.size}"
+                if (index == 0) first.draw(c, pageText) else running.draw(c, pageText)
                 drawables.forEach { it(c) }
-                drawFooter(c, index + 1, pages.size)
                 doc.finishPage(page)
                 onProgress(index + 1, pages.size)
             }
@@ -196,171 +232,142 @@ class PdfExporter(private val context: Context) {
         return pages.size
     }
 
+    /** One single-member household in half the page width: compact heading and its voter card. */
+    private fun householdHalf(s: PdfSection, card: (ExportRecord) -> Card): Card {
+        val heading = sectionHeading(s.title!!, s.subtitle, emptyList(), cardW)
+        val c = card(s.records.single())
+        return Card(heading.height + HEADING_GAP + c.height) { canvas, x, y ->
+            heading.draw(canvas, x, y)
+            c.draw(canvas, x, y + heading.height + HEADING_GAP)
+        }
+    }
+
     /** Section heading: accent bar, bold title, optional subtitle and "already listed" references. */
-    private fun sectionHeading(title: String, subtitle: String?, references: List<String>, small: Boolean = false): Card {
-        val textW = contentW - 10f
-        val t = layout(title, paint(if (small) 10f else 13f, teal, true), textW, 2)
-        val sub = subtitle?.let { layout(it, paint(9f, muted), textW, 2) }
+    private fun sectionHeading(title: String, subtitle: String?, references: List<String>, width: Float, small: Boolean = false): Card {
+        val textW = width - 9f
+        val t = layout(title, paint(if (small) 9.5f else 11.5f, teal, true), textW)
+        val sub = subtitle?.let { layout(it, paint(8.5f, muted), textW) }
         val refs = if (references.isEmpty()) null else layout(
             "Already listed in an earlier section: " + references.joinToString("; "),
-            paint(7.5f, muted), textW, 8,
+            paint(7.5f, muted), textW,
         )
-        val h = t.height + (sub?.height ?: 0) + (refs?.let { it.height + 2f } ?: 0f) + 6f
+        val h = t.height + (sub?.height ?: 0) + (refs?.let { it.height + 2f } ?: 0f)
         return Card(h) { c, x, y ->
-            c.drawRect(x, y + 1f, x + 3.5f, y + h - 4f, Paint().apply { color = teal })
+            c.drawRect(x, y + 1f, x + 3f, y + h - 1f, Paint().apply { color = teal })
             var ty = y
-            c.save(); c.translate(x + 10f, ty); t.draw(c); c.restore(); ty += t.height
-            sub?.let { c.save(); c.translate(x + 10f, ty); it.draw(c); c.restore(); ty += it.height }
-            refs?.let { c.save(); c.translate(x + 10f, ty + 2f); it.draw(c); c.restore() }
-            c.drawRect(x, y + h - 1.5f, x + contentW, y + h - 1f, Paint().apply { color = hairline })
+            c.save(); c.translate(x + 9f, ty); t.draw(c); c.restore(); ty += t.height
+            sub?.let { c.save(); c.translate(x + 9f, ty); it.draw(c); c.restore(); ty += it.height }
+            refs?.let { c.save(); c.translate(x + 9f, ty + 2f); it.draw(c); c.restore() }
         }
     }
 
     // ------------------------------------------------------------------------------------------
-    // Headers and footer
+    // Page headers ("Page X of Y" at the top right, above the divider; no footer)
     // ------------------------------------------------------------------------------------------
 
-    private fun firstHeaderLayouts(scope: String, count: Int, generated: String, place: String): List<StaticLayout> = listOf(
-        layout("Etikoppaka Voter Directory", paint(19f, teal, true), contentW),
-        layout(place, paint(10.5f, ink), contentW),
-        layout("$scope · ${plural(count, "record")} · Generated $generated", paint(9f, muted), contentW),
-    )
+    private class Header(val height: Float, val draw: (Canvas, String) -> Unit)
 
-    private fun firstHeaderHeight(scope: String, count: Int, place: String) =
-        firstHeaderLayouts(scope, count, "00 Mmm 0000, 00:00 AM", place).sumOf { it.height.toDouble() }.toFloat() + 18f
+    private val pagePaint get() = paint(8.5f, muted)
+    /** Room for the widest page number ("Page 999 of 999"). */
+    private val pageNumberW get() = pagePaint.measureText("Page 999 of 999") + 8f
 
-    private fun drawFirstHeader(c: Canvas, scope: String, count: Int, generated: String, place: String) {
-        var y = margin
-        firstHeaderLayouts(scope, count, generated, place).forEach { l ->
-            c.save(); c.translate(margin, y); l.draw(c); c.restore()
-            y += l.height + 1f
+    private fun drawPageNumber(c: Canvas, text: String, baseline: Float) {
+        val p = pagePaint
+        c.drawText(text, pageW - margin - p.measureText(text), baseline, p)
+    }
+
+    /** First page: app name, ward and Gram Panchayat, what is exported and when (first page only). */
+    private fun firstHeader(ward: String, scope: String, generated: String): Header {
+        val textW = contentW - pageNumberW
+        val title = layout("Etikoppaka Voter Directory", paint(15f, teal, true), textW)
+        val place = layout("$ward · $VILLAGE", paint(9.5f, ink), textW)
+        val info = layout("$scope · Generated $generated", paint(8.5f, muted), textW)
+        val textH = title.height + place.height + info.height
+        val h = textH + 5f + 1.2f
+        return Header(h) { c, pageText ->
+            var y = margin
+            listOf(title, place, info).forEach { l -> c.save(); c.translate(margin, y); l.draw(c); c.restore(); y += l.height }
+            drawPageNumber(c, pageText, margin + title.getLineBaseline(0) - 2f)
+            val dy = margin + textH + 5f
+            c.drawRect(margin, dy, pageW - margin, dy + 1.2f, Paint().apply { color = teal })
         }
-        y += 6f
-        c.drawRect(margin, y, pageW - margin, y + 1.5f, Paint().apply { color = teal })
     }
 
-    private fun drawRunningHeader(c: Canvas, scope: String, place: String) {
-        val l = layout("Etikoppaka Voter Directory · ${place.substringBefore(" · ")} · $scope", paint(8.5f, muted), contentW, maxLines = 1)
-        c.save(); c.translate(margin, margin); l.draw(c); c.restore()
-        c.drawRect(margin, margin + l.height + 4f, pageW - margin, margin + l.height + 4.75f, Paint().apply { color = hairline })
-    }
-
-    private fun drawFooter(c: Canvas, page: Int, total: Int) {
-        val y = pageH - margin - 10f
-        c.drawRect(margin, y - 6f, pageW - margin, y - 5.25f, Paint().apply { color = hairline })
-        val left = layout("Private – contains personal voter information. Handle with care.", paint(7.5f, muted), contentW * 0.7f, maxLines = 1)
-        c.save(); c.translate(margin, y); left.draw(c); c.restore()
-        val p = paint(8f, muted)
-        val text = "Page $page of $total"
-        c.drawText(text, pageW - margin - p.measureText(text), y + 8f, p)
+    /** Later pages: one short line (app, ward, export) and the page number. */
+    private fun runningHeader(ward: String, scope: String): Header {
+        val l = layout("Etikoppaka Voter Directory · $ward · $scope", paint(8.5f, muted), contentW - pageNumberW, maxLines = 2)
+        val h = l.height + 4f + 0.75f
+        return Header(h) { c, pageText ->
+            c.save(); c.translate(margin, margin); l.draw(c); c.restore()
+            drawPageNumber(c, pageText, margin + l.getLineBaseline(0))
+            val dy = margin + l.height + 4f
+            c.drawRect(margin, dy, pageW - margin, dy + 0.75f, Paint().apply { color = hairline })
+        }
     }
 
     // ------------------------------------------------------------------------------------------
-    // Cards
+    // Voter card (the same design in every export; Detailed = larger photo and labelled lines)
     // ------------------------------------------------------------------------------------------
 
-    private fun compactCard(r: ExportRecord, o: PdfOptions, w: Float, showWard: Boolean): Card {
-        val pad = 7f
-        val photoW = 50f
-        val photoH = 66f
+    private fun voterCard(r: ExportRecord, o: PdfOptions, w: Float, showWard: Boolean): Card {
+        val detailed = o.layout == PdfLayout.DETAILED
+        val pad = 6f
+        val photoW = if (detailed) 56f else 46f
+        val photoH = photoW * 4f / 3f
+        val textX = pad * 2 + photoW
         val textW = w - photoW - pad * 3
         val v = r.voter
-        val blocks = ArrayList<Pair<StaticLayout, Float>>() // layout, space after
 
+        // Serial number: small highlighted box at the top right, beside the name.
+        val badgeText = if (showWard) "Ward ${v.wardNo} · ${v.gpSerialNo}" else "${v.gpSerialNo}"
+        val badgePaint = paint(8.5f, teal, true)
+        val badgeW = badgePaint.measureText(badgeText) + 8f
+        val badgeH = 13f
+
+        val nameSize = if (detailed) 11f else 10f
+        val small = if (detailed) 8.2f else 7.8f
+        val nameEn = layout(v.nameEn ?: NA, paint(nameSize, ink, true), textW - badgeW - 4f)
+        val lines = ArrayList<Pair<StaticLayout, Float>>() // layout, space after
+        lines += layout(v.nameTe ?: NA, paint(nameSize, ink), textW, spacing = 1.05f) to 1f
         val status = statusText(r, o)
-        val serial = if (showWard) "Ward ${v.wardNo} · ${v.gpSerialNo}" else "${v.gpSerialNo}"
-        blocks += layout(serial + (if (status.isNotEmpty()) "   $status" else ""), paint(9.5f, teal, true), textW, 1) to 1f
-        blocks += layout(v.nameEn ?: NA, paint(10.5f, ink, true), textW, 3) to 0f
-        blocks += layout(v.nameTe ?: NA, paint(10.5f, ink), textW, 3, spacing = 1.05f) to 1f
+        if (status.isNotEmpty()) lines += layout(status, paint(small, teal, true), textW) to 0f
         if (o.relativeNames) {
-            blocks += layout(relativeLine(r), paint(8f, muted), textW, 2) to 0f
-            v.relativeNameTe?.let { blocks += layout(it, paint(8f, muted), textW, 2) to 0f }
+            lines += layout(relativeLine(r), paint(small, muted), textW) to 0f
+            v.relativeNameTe?.let { lines += layout(it, paint(small, muted), textW) to 0f }
         }
-        val facts = factsLine(r, o)
-        if (facts.isNotEmpty()) blocks += layout(facts, paint(7.5f, ink), textW, 3) to 0f
-        if (o.tags && r.tags.isNotEmpty()) blocks += layout("Tags: " + r.tags.joinToString(", "), paint(7.5f, ink), textW, 2) to 0f
-        if (o.notes && !r.note.isNullOrBlank()) blocks += layout("Note: " + r.note.trim(), paint(7.5f, ink), textW, 4) to 0f
+        if (detailed) {
+            detailLines(r, o).forEach { lines += layout(it, paint(small, ink), textW) to 0f }
+        } else {
+            val facts = factsLine(r, o)
+            if (facts.isNotEmpty()) lines += layout(facts, paint(7.5f, ink), textW) to 0f
+        }
+        if (o.tags && r.tags.isNotEmpty()) lines += layout("Tags: " + r.tags.joinToString(", "), paint(7.5f, ink), textW) to 0f
+        if (o.notes && !r.note.isNullOrBlank()) lines += layout("Note: " + r.note.trim(), paint(7.5f, ink), textW) to 0f
 
-        val textH = blocks.sumOf { (it.first.height + it.second).toDouble() }.toFloat()
+        val headH = max(nameEn.height.toFloat(), badgeH)
+        val textH = headH + lines.sumOf { (it.first.height + it.second).toDouble() }.toFloat()
         val h = max(photoH, textH) + pad * 2
         return Card(h) { c, x, y ->
             drawCardBackground(c, x, y, w, h)
             drawPhoto(c, v.photoFilename, RectF(x + pad, y + pad, x + pad + photoW, y + pad + photoH))
-            var ty = y + pad
-            blocks.forEach { (l, after) ->
-                c.save(); c.translate(x + pad * 2 + photoW, ty); l.draw(c); c.restore()
+            val bx = x + w - pad - badgeW
+            val by = y + pad
+            c.drawRoundRect(RectF(bx, by, bx + badgeW, by + badgeH), 3f, 3f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = badgeFill })
+            val fm = badgePaint.fontMetrics
+            c.drawText(badgeText, bx + 4f, by + badgeH / 2 - (fm.ascent + fm.descent) / 2, badgePaint)
+            c.save(); c.translate(x + textX, y + pad); nameEn.draw(c); c.restore()
+            var ty = y + pad + headH
+            lines.forEach { (l, after) ->
+                c.save(); c.translate(x + textX, ty); l.draw(c); c.restore()
                 ty += l.height + after
-            }
-        }
-    }
-
-    private fun detailedCard(r: ExportRecord, o: PdfOptions, w: Float, showWard: Boolean): Card {
-        val pad = 9f
-        val photoW = 72f
-        val photoH = 96f
-        val textW = w - photoW - pad * 3
-        val v = r.voter
-        val head = ArrayList<StaticLayout>()
-        val status = statusText(r, o)
-        val serial = (if (showWard) "Ward ${v.wardNo} · " else "") + "GP Serial No. ${v.gpSerialNo}"
-        head += layout(serial + (if (status.isNotEmpty()) "   $status" else ""), paint(10f, teal, true), textW, 1)
-        head += layout(v.nameEn ?: NA, paint(12.5f, ink, true), textW)
-        head += layout(v.nameTe ?: NA, paint(12.5f, ink), textW, spacing = 1.05f)
-
-        val fields = ArrayList<Pair<String, String>>()
-        if (o.relativeNames) {
-            fields += "Relationship" to (v.relationship ?: NA)
-            fields += "Relative (English)" to (v.relativeNameEn ?: NA)
-            fields += "Relative (Telugu)" to (v.relativeNameTe ?: NA)
-        }
-        if (o.ageGender) {
-            fields += "Age" to (v.age?.toString() ?: NA)
-            fields += "Gender" to (v.gender ?: NA)
-        }
-        if (o.houseNo) fields += "House no." to (v.houseNo ?: NA)
-        if (o.assemblySerial) fields += "Assembly roll serial" to (v.assemblySerial ?: NA)
-        if (o.epic) fields += "EPIC no." to (v.epicNo ?: NA)
-        if (o.tags) fields += "Tags" to (r.tags.joinToString(", ").ifEmpty { "None" })
-
-        val colGap = 10f
-        val cols = 3
-        val cellW = (textW - colGap * (cols - 1)) / cols
-        val cells = fields.map { (label, value) ->
-            layout(label.uppercase(), paint(6.5f, muted, true), cellW, 1) to layout(value, paint(9f, ink), cellW, 4)
-        }
-        val gridRows = cells.chunked(cols)
-        val rowHeights = gridRows.map { row -> row.maxOf { it.first.height + it.second.height + 0f } + 3f }
-        val note = if (o.notes && !r.note.isNullOrBlank()) {
-            layout("NOTE", paint(6.5f, muted, true), textW, 1) to layout(r.note.trim(), paint(9f, ink), textW, 12)
-        } else null
-
-        val textH = head.sumOf { it.height.toDouble() }.toFloat() + 4f + rowHeights.sum() +
-            (note?.let { it.first.height + it.second.height + 2f } ?: 0f)
-        val h = max(photoH, textH) + pad * 2
-        return Card(h) { c, x, y ->
-            drawCardBackground(c, x, y, w, h)
-            drawPhoto(c, v.photoFilename, RectF(x + pad, y + pad, x + pad + photoW, y + pad + photoH))
-            val tx = x + pad * 2 + photoW
-            var ty = y + pad
-            head.forEach { l -> c.save(); c.translate(tx, ty); l.draw(c); c.restore(); ty += l.height }
-            ty += 4f
-            gridRows.forEachIndexed { i, row ->
-                row.forEachIndexed { col, (label, value) ->
-                    val cx = tx + col * (cellW + colGap)
-                    c.save(); c.translate(cx, ty); label.draw(c); c.translate(0f, label.height.toFloat()); value.draw(c); c.restore()
-                }
-                ty += rowHeights[i]
-            }
-            note?.let { (label, value) ->
-                c.save(); c.translate(tx, ty); label.draw(c); c.translate(0f, label.height.toFloat()); value.draw(c); c.restore()
             }
         }
     }
 
     private fun drawCardBackground(c: Canvas, x: Float, y: Float, w: Float, h: Float) {
         val r = RectF(x, y, x + w, y + h)
-        c.drawRoundRect(r, 6f, 6f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = cardFill })
-        c.drawRoundRect(r, 6f, 6f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = hairline; style = Paint.Style.STROKE; strokeWidth = 0.6f })
+        c.drawRoundRect(r, 5f, 5f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = cardFill })
+        c.drawRoundRect(r, 5f, 5f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = hairline; style = Paint.Style.STROKE; strokeWidth = 0.6f })
     }
 
     /** Original photo, fitted (never cropped or stretched) and scaled only to print resolution. */
@@ -429,13 +436,24 @@ class PdfExporter(private val context: Context) {
         ).joinToString(" · ")
     }
 
-    private fun plural(n: Int, word: String) = "$n $word${if (n == 1) "" else "s"}"
+    /** Detailed card: one labelled line per chosen fact. */
+    private fun detailLines(r: ExportRecord, o: PdfOptions): List<String> {
+        val v = r.voter
+        return listOfNotNull(
+            if (o.ageGender) "Age / Gender: " + (listOfNotNull(v.age?.toString(), v.gender).joinToString(", ").ifEmpty { NA }) else null,
+            if (o.houseNo) "House no.: ${v.houseNo ?: NA}" else null,
+            if (o.assemblySerial) "Assembly roll serial: ${v.assemblySerial ?: NA}" else null,
+            if (o.epic) "EPIC no.: ${v.epicNo ?: NA}" else null,
+        )
+    }
 
     companion object {
         const val NA = "Not available"
         const val VILLAGE = "Etikoppaka Gram Panchayat, Andhra Pradesh"
-        private const val HEADING_GAP = 6f
-        private const val SECTION_GAP = 8f
+        private const val HEADER_GAP = 8f
+        private const val HEADING_GAP = 4f
+        /** Space between two sections (households, blocks). */
+        private const val SECTION_GAP = 10f
         private const val PRINT_DPI = 150f
     }
 }
