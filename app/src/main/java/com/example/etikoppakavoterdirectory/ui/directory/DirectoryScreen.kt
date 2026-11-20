@@ -228,7 +228,7 @@ fun DirectoryScreen(
                     if (!readOnly) {
                         QuickFilters(filter = filter, tags = tags, total = stats?.total, onOpenFilters = { showFilters = true }, actions = actions)
                     }
-                    DirectorySearchField(filter.query, actions.onQueryChange)
+                    DirectorySearchField(filter.query, actions.onQueryChange, topPadding = if (readOnly) 14.dp else 8.dp)
                 }
                 Column(Modifier.fillMaxSize().then(if (compact || selecting) Modifier.statusBarsPadding() else Modifier)) {
                     if (selecting) {
@@ -359,12 +359,14 @@ private fun Header(ward: Int, onHome: () -> Unit, stats: DirectoryStats?, applyS
         Box(
             Modifier
                 .matchParentSize()
-                .padding(bottom = 30.dp)
+                // Admin: the summary tiles overlap the lower edge. Viewer: no tiles, so the blue
+                // header ends right under the ward line (the count is shown there).
+                .padding(bottom = if (readOnly) 0.dp else 30.dp)
                 .clip(RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp))
                 .background(Brush.verticalGradient(listOf(brand.header, brand.headerEnd))),
         )
         Column(Modifier.fillMaxWidth().then(if (applyStatusBarPadding) Modifier.statusBarsPadding() else Modifier)) {
-            Row(Modifier.padding(start = 4.dp, end = 16.dp, top = 2.dp, bottom = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.padding(start = 4.dp, end = 16.dp, top = 2.dp, bottom = if (readOnly) 18.dp else 10.dp), verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = onHome, modifier = Modifier.testTag("homeButton")) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "All wards (home)", tint = brand.onHeader)
                 }
@@ -382,7 +384,7 @@ private fun Header(ward: Int, onHome: () -> Unit, stats: DirectoryStats?, applyS
                     )
                 }
             }
-            SummaryRow(stats, Modifier.padding(horizontal = 16.dp), totalOnly = readOnly)
+            if (!readOnly) SummaryRow(stats, Modifier.padding(horizontal = 16.dp))
         }
     }
 }
@@ -393,16 +395,15 @@ private fun Header(ward: Int, onHome: () -> Unit, stats: DirectoryStats?, applyS
 
 /** Real counts from the database: total, visited, not visited. */
 @Composable
-fun SummaryRow(stats: DirectoryStats?, modifier: Modifier = Modifier, totalOnly: Boolean = false) {
+fun SummaryRow(stats: DirectoryStats?, modifier: Modifier = Modifier) {
     val brand = AppTheme.brand
     val total = stats?.total
     val visited = stats?.visited
     val unvisited = if (total != null && visited != null) total - visited else null
     // Complete numbers at every width / font size (tiles stack when three do not fit).
-    val totalTile = com.example.etikoppakavoterdirectory.ui.components.SummaryStat(AppIcons.Group, total?.toString() ?: "–", "Total Voters", brand.total, brand.totalContainer)
     com.example.etikoppakavoterdirectory.ui.components.SummaryTiles(
-        if (totalOnly) listOf(totalTile) else listOf(
-            totalTile,
+        listOf(
+            com.example.etikoppakavoterdirectory.ui.components.SummaryStat(AppIcons.Group, total?.toString() ?: "–", "Total Voters", brand.total, brand.totalContainer),
             com.example.etikoppakavoterdirectory.ui.components.SummaryStat(Icons.Filled.CheckCircle, visited?.toString() ?: "–", "Visited", AppTheme.status.visited, AppTheme.status.visitedContainer),
             com.example.etikoppakavoterdirectory.ui.components.SummaryStat(Icons.Filled.Person, unvisited?.toString() ?: "–", "Not Visited", brand.unvisited, brand.unvisitedContainer),
         ),
@@ -524,13 +525,13 @@ private fun QuickFilters(filter: VoterFilter, tags: List<TagWithCount>, total: I
 // ------------------------------------------------------------------------------------------
 
 @Composable
-private fun DirectorySearchField(value: String, onChange: (String) -> Unit) {
+private fun DirectorySearchField(value: String, onChange: (String) -> Unit, topPadding: androidx.compose.ui.unit.Dp = 8.dp) {
     val focus = LocalFocusManager.current
     val brand = AppTheme.brand
     OutlinedTextField(
         value = value,
         onValueChange = onChange,
-        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 10.dp).testTag("wardSearch"),
+        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = topPadding, bottom = 10.dp).testTag("wardSearch"),
         singleLine = true,
         shape = RoundedCornerShape(26.dp),
         textStyle = MaterialTheme.typography.bodyMedium,

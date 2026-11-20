@@ -71,7 +71,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.etikoppakavoterdirectory.ui.components.AppIcons
 
-private enum class SettingsPage(val title: String) { MENU("Settings"), BACKUP("Backup & Restore"), SECURITY("Sign-in & Security"), ABOUT("About") }
+private enum class SettingsPage(val title: String) { MENU("Settings"), BACKUP("Backup & Restore"), SECURITY("Sign-in & Security"), ABOUT("About"), TERMS("Terms & Conditions") }
+
+/** Where Back goes from each page: Terms returns to About, the other pages to the menu. */
+private val SettingsPage.parent get() = if (this == SettingsPage.TERMS) SettingsPage.ABOUT else SettingsPage.MENU
+
+/** Shown on the Terms & Conditions page (Admin and Viewer). */
+val TERMS_AND_CONDITIONS = listOf(
+    "This application is intended for authorized directory reference and voter-record management.",
+    "Voter information must be handled responsibly and used only for lawful, legitimate purposes.",
+    "Do not copy, distribute, publish, or misuse personal information without appropriate authorization.",
+    "Information is provided for reference and may contain errors or require updates. Verify important details against official records.",
+    "Users are responsible for protecting their login credentials and preventing unauthorized access.",
+    "This is an independently developed application and is not an official government or Election Commission application.",
+)
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 @Composable
@@ -93,13 +106,15 @@ fun SettingsScreen(
     val canUndo by vm.canUndo.collectAsState()
 
     var pageName by rememberSaveable { mutableStateOf(SettingsPage.MENU.name) }
-    // A Viewer can only ever be on the menu or About.
-    val page = SettingsPage.valueOf(pageName).let { if (viewer && it != SettingsPage.ABOUT) SettingsPage.MENU else it }
+    // A Viewer can only ever be on the menu, About or Terms & Conditions.
+    val page = SettingsPage.valueOf(pageName).let {
+        if (viewer && it != SettingsPage.ABOUT && it != SettingsPage.TERMS) SettingsPage.MENU else it
+    }
     var showExportPassword by rememberSaveable { mutableStateOf(false) }
     var restoreUri by rememberSaveable { mutableStateOf<Uri?>(null) }
     var confirmUndo by rememberSaveable { mutableStateOf(false) }
     var confirmSignOut by rememberSaveable { mutableStateOf(false) }
-    androidx.activity.compose.BackHandler(enabled = page != SettingsPage.MENU) { pageName = SettingsPage.MENU.name }
+    androidx.activity.compose.BackHandler(enabled = page != SettingsPage.MENU) { pageName = page.parent.name }
 
     val createDoc = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
         if (uri == null) vm.cancelExport() else vm.writeBackup(context.contentResolver, uri)
@@ -125,11 +140,12 @@ fun SettingsScreen(
                 subtitle = if (ward != null) "Ward $ward" else "Viewer · read-only access",
                 navIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 navDescription = when {
+                    page == SettingsPage.TERMS -> "Back to About"
                     page != SettingsPage.MENU -> "Back to settings"
                     viewer -> "Back"
                     else -> "All wards (home)"
                 },
-                onNav = { if (page != SettingsPage.MENU) pageName = SettingsPage.MENU.name else onHome() },
+                onNav = { if (page != SettingsPage.MENU) pageName = page.parent.name else onHome() },
             )
         },
     ) { padding ->
@@ -208,12 +224,25 @@ fun SettingsScreen(
                 SettingsPage.ABOUT -> Section("Etikoppaka Voter Directory") {
                     Row2("Application", "Etikoppaka Voter Directory")
                     Row2("Version", versionName)
-                    Row2("Created by", "Vinod Dadla")
+                    Row2("Created by", "Vinod Yedla")
                     Spacer(Modifier.height(6.dp))
                     Text(
                         "An offline Android application for organizing and searching village voter-directory records.",
                         style = MaterialTheme.typography.bodyMedium,
                     )
+                    Spacer(Modifier.height(8.dp))
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                    MenuRow(Icons.Filled.Info, "Terms & Conditions", "How this app and its information may be used") {
+                        pageName = SettingsPage.TERMS.name
+                    }
+                }
+                SettingsPage.TERMS -> Section("Terms & Conditions") {
+                    TERMS_AND_CONDITIONS.forEachIndexed { i, term ->
+                        Row(Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text("${i + 1}.", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
+                            Text(term, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                        }
+                    }
                 }
             }
         }

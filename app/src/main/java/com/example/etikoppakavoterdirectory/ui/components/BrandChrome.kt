@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
@@ -151,17 +152,58 @@ fun ScreenHeader(
     }
 }
 
-/** Exact developer credit shown on the sign-in screen and on Settings. */
-const val FOOTER_CREDIT = "Digitizing Etikoppaka ❤️ — @vinod_yedla"
+/** Exact developer credit shown on the sign-in screen and on Settings / About. */
+const val FOOTER_CREDIT_PREFIX = "Digitizing Etikoppaka ❤️ — "
+const val FOOTER_HANDLE = "@vinod_yedla"
+const val FOOTER_CREDIT = FOOTER_CREDIT_PREFIX + FOOTER_HANDLE
 
-/** Small, centred, muted credit line (never a banner). */
+/** The developer's Instagram profile (opened from the "@vinod_yedla" part of the credit). */
+const val INSTAGRAM_PROFILE_URL = "https://www.instagram.com/vinod_yedla/"
+
+/**
+ * Small, centred, muted credit line (never a banner). Only "@vinod_yedla" is a link: it opens the
+ * Instagram profile, in the Instagram app when installed, otherwise in the browser.
+ */
 @Composable
 fun FooterCredit(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val text = androidx.compose.ui.text.buildAnnotatedString {
+        append(FOOTER_CREDIT_PREFIX)
+        withLink(
+            androidx.compose.ui.text.LinkAnnotation.Clickable(
+                tag = "instagram",
+                linkInteractionListener = { openInstagramProfile(context) },
+            ),
+        ) { append(FOOTER_HANDLE) }
+    }
     androidx.compose.material3.Text(
-        FOOTER_CREDIT,
+        text,
         style = androidx.compose.material3.MaterialTheme.typography.labelMedium,
         color = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
         modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp).testTag("footerCredit"),
     )
+}
+
+/**
+ * Opens [INSTAGRAM_PROFILE_URL]: first in the Instagram app, then in any browser. Never crashes - if
+ * nothing can open the link, a short message is shown instead.
+ */
+fun openInstagramProfile(context: android.content.Context) {
+    val uri = android.net.Uri.parse(INSTAGRAM_PROFILE_URL)
+    fun view(pkg: String?) = android.content.Intent(android.content.Intent.ACTION_VIEW, uri).apply {
+        if (pkg != null) setPackage(pkg)
+        if (context !is android.app.Activity) addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
+    for (intent in listOf(view("com.instagram.android"), view(null))) {
+        try {
+            context.startActivity(intent)
+            return
+        } catch (e: android.content.ActivityNotFoundException) {
+            // try the next way
+        } catch (e: SecurityException) {
+            // try the next way
+        }
+    }
+    android.widget.Toast.makeText(context, "Could not open Instagram. Please visit instagram.com/vinod_yedla", android.widget.Toast.LENGTH_LONG).show()
 }

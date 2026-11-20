@@ -93,7 +93,9 @@ class RolesTest {
     @Test
     fun viewer_wardList_isReadOnly_withoutTabs() {
         rule.openWard11(Role.VIEWER)
-        rule.onNodeWithText("Total Voters").assertIsDisplayed()
+        // The count is in the header ("Ward 11 · 369 Voters"); no separate summary card.
+        rule.onNodeWithText("Ward 11 · 369 Voters").assertIsDisplayed()
+        assertTrue("no Total Voters card", none(hasText("Total Voters")))
         assertTrue("no visit counts", none(hasText("Visited")) && none(hasText("Not Visited")))
         assertTrue("no favourites filter", none(hasText("Favourites")))
         assertTrue("no block / tag filters", none(hasText("Blocks & tags")))
@@ -132,6 +134,17 @@ class RolesTest {
         for (hidden in listOf("Export PDF", "Backup & Restore", "Sign-in & Security")) {
             assertTrue("$hidden must not be shown to a Viewer", none(hasText(hidden)))
         }
+        // About: corrected creator name and the Terms & Conditions page (Back returns to About).
+        rule.onNodeWithText("About").performClick()
+        rule.waitUntilAtLeastOneExists(hasText("Vinod Yedla"), 10_000)
+        assertTrue(none(hasText("Vinod Dadla")))
+        rule.onNodeWithText("Terms & Conditions").performScrollTo().performClick()
+        rule.waitUntilAtLeastOneExists(hasText("not an official government", substring = true), 10_000)
+        rule.onNodeWithTag("footerCredit").assertExists()
+        Espresso.pressBack()
+        rule.waitUntilAtLeastOneExists(hasText("Vinod Yedla"), 10_000)
+        Espresso.pressBack()
+        rule.waitUntilAtLeastOneExists(hasText("Sign out"), 10_000)
         Espresso.pressBack()
         rule.waitUntilAtLeastOneExists(hasTestTag("homeGrid"), 10_000)
     }
