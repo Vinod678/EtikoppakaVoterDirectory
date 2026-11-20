@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -76,12 +77,15 @@ private enum class SettingsPage(val title: String) { MENU("Settings"), BACKUP("B
 @Composable
 fun SettingsScreen(
     vm: SettingsViewModel,
-    ward: Int,
+    /** The open ward (Admin); null for the Viewer settings opened from the home screen. */
+    ward: Int?,
     importState: ImportState,
     onRetryImport: () -> Unit,
     onExportPdf: () -> Unit,
     onHome: () -> Unit,
     onLogout: () -> Unit,
+    /** Viewer: only About and Sign out (no export, backup or other management pages). */
+    viewer: Boolean = false,
 ) {
     val context = LocalContext.current
     val info by vm.datasetInfo.collectAsState()
@@ -89,7 +93,8 @@ fun SettingsScreen(
     val canUndo by vm.canUndo.collectAsState()
 
     var pageName by rememberSaveable { mutableStateOf(SettingsPage.MENU.name) }
-    val page = SettingsPage.valueOf(pageName)
+    // A Viewer can only ever be on the menu or About.
+    val page = SettingsPage.valueOf(pageName).let { if (viewer && it != SettingsPage.ABOUT) SettingsPage.MENU else it }
     var showExportPassword by rememberSaveable { mutableStateOf(false) }
     var restoreUri by rememberSaveable { mutableStateOf<Uri?>(null) }
     var confirmUndo by rememberSaveable { mutableStateOf(false) }
@@ -113,32 +118,32 @@ fun SettingsScreen(
     }
 
     Scaffold(
+        containerColor = com.example.etikoppakavoterdirectory.ui.theme.AppTheme.brand.page,
         topBar = {
-            TopAppBar(
-                title = {
-                    Column {
-                        Text(page.title, maxLines = 1)
-                        Text("Ward $ward", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    }
+            com.example.etikoppakavoterdirectory.ui.components.ScreenHeader(
+                title = page.title,
+                subtitle = if (ward != null) "Ward $ward" else "Viewer · read-only access",
+                navIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                navDescription = when {
+                    page != SettingsPage.MENU -> "Back to settings"
+                    viewer -> "Back"
+                    else -> "All wards (home)"
                 },
-                navigationIcon = {
-                    if (page == SettingsPage.MENU) {
-                        IconButton(onClick = onHome) { Icon(AppIcons.Grid, contentDescription = "All wards (home)") }
-                    } else {
-                        IconButton(onClick = { pageName = SettingsPage.MENU.name }) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back to settings")
-                        }
-                    }
-                },
+                onNav = { if (page != SettingsPage.MENU) pageName = SettingsPage.MENU.name else onHome() },
             )
         },
     ) { padding ->
+        // The credit sits at the bottom of the screen when the page is short and after the content
+        // when it is long (it scrolls, so it never covers buttons or the navigation bar).
+        androidx.compose.foundation.layout.BoxWithConstraints(Modifier.fillMaxSize().padding(padding)) {
+        val viewport = maxHeight
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
         Column(
-            Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
+            Modifier.fillMaxWidth().heightIn(min = viewport),
+            verticalArrangement = Arrangement.SpaceBetween,
+        ) {
+        Column(
+            Modifier.fillMaxWidth().padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             when (page) {
@@ -153,12 +158,14 @@ fun SettingsScreen(
                         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f)),
                     ) {
                         Column {
-                            MenuRow(Icons.Filled.Share, "Export PDF", "Create, preview, save or share a PDF", onClick = onExportPdf)
-                            HorizontalDivider()
-                            MenuRow(Icons.Filled.Refresh, "Backup & Restore", "Encrypted backup of your own data") { pageName = SettingsPage.BACKUP.name }
-                            HorizontalDivider()
-                            MenuRow(Icons.Filled.Lock, "Sign-in & Security", "Login help") { pageName = SettingsPage.SECURITY.name }
-                            HorizontalDivider()
+                            if (!viewer) {
+                                MenuRow(Icons.Filled.Share, "Export PDF", "Create, preview, save or share a PDF", onClick = onExportPdf)
+                                HorizontalDivider()
+                                MenuRow(Icons.Filled.Refresh, "Backup & Restore", "Encrypted backup of your own data") { pageName = SettingsPage.BACKUP.name }
+                                HorizontalDivider()
+                                MenuRow(Icons.Filled.Lock, "Sign-in & Security", "Login help") { pageName = SettingsPage.SECURITY.name }
+                                HorizontalDivider()
+                            }
                             MenuRow(Icons.Filled.Info, "About", "Version $versionName") { pageName = SettingsPage.ABOUT.name }
                             HorizontalDivider()
                             MenuRow(AppIcons.Logout, "Sign out", null, tint = MaterialTheme.colorScheme.error) { confirmSignOut = true }
@@ -209,6 +216,10 @@ fun SettingsScreen(
                     )
                 }
             }
+        }
+        com.example.etikoppakavoterdirectory.ui.components.FooterCredit(Modifier.padding(top = 8.dp, bottom = 4.dp))
+        }
+        }
         }
     }
 

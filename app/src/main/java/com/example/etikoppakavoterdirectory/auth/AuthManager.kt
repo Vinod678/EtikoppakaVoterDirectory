@@ -29,11 +29,17 @@ enum class LockReason(val message: String?) {
 
 sealed interface AuthState {
     data class Locked(val reason: LockReason) : AuthState
-    data object Unlocked : AuthState
+    /**
+     * Signed in as [role]. [session] is new for every sign-in (also after a restart), so screens
+     * and search state from an earlier sign-in are never brought back.
+     */
+    data class Unlocked(val role: Role, val session: Long) : AuthState
 }
 
 sealed interface AttemptResult {
     data object Success : AttemptResult
+    /** Sign-in for this role is not possible today (Admin from 3 Dec 2026 without an Admin password configured). */
+    data object RoleUnavailable : AttemptResult
     /** Wrong password. [attemptsLeft] before a temporary lock-out. */
     data class Wrong(val attemptsLeft: Int) : AttemptResult
     data class LockedOut(val secondsLeft: Long) : AttemptResult
@@ -59,7 +65,8 @@ class AuthManager(
     private val store: AuthStore,
     private val elapsed: () -> Long,
     private val wall: () -> Long = System::currentTimeMillis,
-    private val verifier: (CharArray, LocalDate) -> Boolean = PasswordPolicy::verify,
+    private val verifier: (CharArray, Role, LocalDate) -> Boolean = { pw, r, d -> PasswordPolicy.verify(pw, r, d) },
+    private val available: (Role, LocalDate) -> Boolean = { r, d -> PasswordPolicy.isAvailable(r, d) },
 ) {
     private class Session(val startElapsed: Long, val date: LocalDate)
 
@@ -70,14 +77,25 @@ class AuthManager(
     /** Lock-out end on the elapsed clock (so moving the wall clock back does not shorten it in this run). */
     private var lockoutUntilElapsed = 0L
 
-    val isUnlocked get() = _state.value == AuthState.Unlocked
+    val isUnlocked get() = _state.value is AuthState.Unlocked
+
+    /** Role of the current session; null while locked. */
+    val role: Role? get() = (_state.value as? AuthState.Unlocked)?.role
+
+    /** True only for a signed-in Admin. Every data-changing operation checks this. */
+    val canEdit: Boolean get() = role == Role.ADMIN
+
+    /** Whether [role] can sign in today (see [PasswordPolicy.isAvailable]). */
+    fun isRoleAvailable(role: Role): Boolean = available(role, PasswordPolicy.dateAt(wall()))
 
     /** Re-checks the session; locks the app if it is no longer valid. Cheap; call often. */
     fun check() {
         val s = session ?: return
         val reason = when {
             elapsed() - s.startElapsed >= SESSION_MS || elapsed() < s.startElapsed -> LockReason.EXPIRED
-            PasswordPolicy.dateAt(wall()) != s.date -> LockReason.NEW_DAY
+            // Daily passwords: a new day needs the new password (also on the switch to the fixed
+            // password on 3 Dec). With the fixed password only the 3-hour limit applies.
+            PasswordPolicy.isDaily(s.date) && PasswordPolicy.dateAt(wall()) != s.date -> LockReason.NEW_DAY
             else -> null
         }
         if (reason != null) lock(reason)
@@ -94,7 +112,7 @@ class AuthManager(
     fun millisUntilExpiry(): Long {
         val s = session ?: return Long.MAX_VALUE
         val bySession = SESSION_MS - (elapsed() - s.startElapsed)
-        val byDate = PasswordPolicy.nextMidnight(wall()) - wall()
+        val byDate = if (PasswordPolicy.isDaily(s.date)) PasswordPolicy.nextMidnight(wall()) - wall() else Long.MAX_VALUE
         return maxOf(0L, minOf(bySession, byDate))
     }
 
@@ -106,19 +124,24 @@ class AuthManager(
         return if (ms <= 0) 0 else (minOf(ms, MAX_LOCKOUT_MS) + 999) / 1000
     }
 
-    /** Checks [password] (cleared afterwards). Runs the slow verifier off the main thread. */
-    suspend fun attempt(password: CharArray): AttemptResult = mutex.withLock {
+    /**
+     * Checks [password] (cleared afterwards) against the credential of [role] only, and on success
+     * signs in as exactly that role. Runs the slow verifier off the main thread.
+     */
+    suspend fun attempt(password: CharArray, role: Role): AttemptResult = mutex.withLock {
         try {
             val wait = lockoutSecondsLeft()
             if (wait > 0) return@withLock AttemptResult.LockedOut(wait)
             val today = PasswordPolicy.dateAt(wall())
-            val ok = withContext(Dispatchers.Default) { verifier(password, today) }
+            // Not a wrong password: nothing is checked and no failure is counted.
+            if (!available(role, today)) return@withLock AttemptResult.RoleUnavailable
+            val ok = withContext(Dispatchers.Default) { verifier(password, role, today) }
             if (ok) {
                 store.failures = 0
                 store.lockoutUntilWallMs = 0
                 lockoutUntilElapsed = 0
                 session = Session(elapsed(), today)
-                _state.value = AuthState.Unlocked
+                _state.value = AuthState.Unlocked(role, sessionIds.nextLong())
                 AttemptResult.Success
             } else {
                 val failures = store.failures + 1
@@ -136,6 +159,8 @@ class AuthManager(
             password.fill('\u0000')
         }
     }
+
+    private val sessionIds = java.security.SecureRandom()
 
     companion object {
         const val SESSION_MS = 3L * 60 * 60 * 1000

@@ -32,6 +32,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Place
@@ -107,6 +108,8 @@ fun HomeScreen(
     onOpenResult: (Int, List<Int>) -> Unit,
     onRetryImport: () -> Unit,
     onLogout: () -> Unit,
+    /** Viewer only: opens About / Sign out (Admin settings live in the ward tabs). */
+    onSettings: (() -> Unit)? = null,
 ) {
     val brand = AppTheme.brand
     val totalVoters = wards.sumOf { it.voters }
@@ -138,6 +141,11 @@ fun HomeScreen(
                         brand.onHeader,
                     )
                     Text("Etikoppaka Village · All Wards", style = MaterialTheme.typography.bodyMedium, color = brand.onHeaderVariant)
+                }
+                if (onSettings != null) {
+                    IconButton(onClick = onSettings, modifier = Modifier.testTag("viewerSettings")) {
+                        Icon(Icons.Filled.Settings, contentDescription = "Settings", tint = brand.onHeader)
+                    }
                 }
                 IconButton(onClick = onLogout) { Icon(AppIcons.Logout, contentDescription = "Sign out", tint = brand.onHeader) }
             }

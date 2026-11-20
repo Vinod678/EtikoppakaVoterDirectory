@@ -70,7 +70,10 @@ data class ImportResult(
     val failed: List<String> = emptyList(),
 )
 
-class UserInputException(message: String) : Exception(message)
+open class UserInputException(message: String) : Exception(message)
+
+/** A data-changing operation was attempted without Admin access (Viewer sessions are read-only). */
+class ReadOnlyAccessException : UserInputException("Viewer access is read-only. Sign in as Admin to make changes.")
 
 class VoterRepository(
     private val db: VoterDatabase,
@@ -81,6 +84,12 @@ class VoterRepository(
     private val clock: () -> Long = System::currentTimeMillis,
     /** Lists a bundled asset folder (for datasets of further wards in assets/wards/). */
     private val listAssets: (String) -> List<String> = { emptyList() },
+    /**
+     * True when the signed-in person may change data (Admin). Checked by every operation that
+     * changes the user's data, exports it or restores a backup - not only hidden in the UI.
+     * The bundled dataset import at start-up is not a user change and is not affected.
+     */
+    private val canEdit: () -> Boolean = { true },
 ) {
     private val voterDao = db.voterDao()
     private val userDao = db.userDataDao()
@@ -212,10 +221,11 @@ class VoterRepository(
 
     // ---------- user edits (by voter id) ----------
 
-    suspend fun setFavourite(id: Int, favourite: Boolean) = userDao.setFavourite(id, favourite, clock())
+    suspend fun setFavourite(id: Int, favourite: Boolean) = guarded { userDao.setFavourite(id, favourite, clock()) }
 
     /** @param recordTime when true the current time is stored as the visit time. */
     suspend fun setVisited(id: Int, visited: Boolean, recordTime: Boolean = true) {
+        requireEdit()
         val now = clock()
         userDao.setVisited(id, visited, if (visited && recordTime) now else null, now)
     }
@@ -225,21 +235,25 @@ class VoterRepository(
 
     /** Puts back an earlier visit state exactly (flag and original time) - used by "Undo". */
     suspend fun restoreVisit(id: Int, visited: Boolean, visitedAt: Long?) {
+        requireEdit()
         userDao.setVisited(id, visited, visitedAt, clock())
     }
 
     suspend fun clearVisitTime(id: Int) {
+        requireEdit()
         val current = userDao.userData(id) ?: return
         if (current.visited) userDao.setVisited(id, true, null, clock())
     }
 
     suspend fun setBlock(id: Int, block: String?) {
+        requireEdit()
         require(Blocks.isValid(block)) { "Invalid block" }
         userDao.setBlock(id, block, clock())
     }
 
     /** Removes block [block] from every voter of [ward] that has it. @return number of voters changed. */
     suspend fun clearBlock(ward: Int, block: String): Int {
+        requireEdit()
         require(block in Blocks.ALL) { "Invalid block" }
         val r = VoterIds.range(ward)
         return userDao.clearBlock(block, r.first, r.last, clock())
@@ -250,6 +264,7 @@ class VoterRepository(
      * to [to]. Only that ward is affected. @return number of voters changed.
      */
     suspend fun setBlockForRange(ward: Int, from: Int, to: Int, block: String?): Int {
+        requireEdit()
         require(Blocks.isValid(block)) { "Invalid block" }
         if (from > to) throw UserInputException("The first serial number must not be larger than the last.")
         if (from < 1 || to >= VoterIds.FACTOR) throw UserInputException("Serial numbers are out of range.")
@@ -266,6 +281,7 @@ class VoterRepository(
 
     /** Sets, changes or (blank [label]) clears the label of a block. Block assignments are not touched. */
     suspend fun setBlockLabel(ward: Int, block: String, label: String?) {
+        requireEdit()
         require(block in Blocks.ALL) { "Invalid block" }
         val clean = label?.trim()?.replace(Regex("\\s+"), " ").orEmpty()
         if (clean.length > BackupCodec.MAX_BLOCK_LABEL_LENGTH) {
@@ -276,6 +292,7 @@ class VoterRepository(
     }
 
     suspend fun setNote(id: Int, note: String) {
+        requireEdit()
         if (note.length > BackupCodec.MAX_NOTE_LENGTH) {
             throw UserInputException("Note is too long (maximum ${BackupCodec.MAX_NOTE_LENGTH} characters).")
         }
@@ -284,19 +301,23 @@ class VoterRepository(
 
     // ---------- bulk updates (selected voters) ----------
 
-    suspend fun setFavourites(ids: Collection<Int>, favourite: Boolean): Int =
+    suspend fun setFavourites(ids: Collection<Int>, favourite: Boolean): Int = guarded {
         if (ids.isEmpty()) 0 else ids.distinct().chunked(500).sumOf { userDao.setFavourites(it, favourite, clock()) }
+    }
 
     /** Existing visit times are kept when marking visited; only voters not yet visited get "now". */
-    suspend fun setVisitedMany(ids: Collection<Int>, visited: Boolean): Int =
+    suspend fun setVisitedMany(ids: Collection<Int>, visited: Boolean): Int = guarded {
         if (ids.isEmpty()) 0 else ids.distinct().chunked(500).sumOf { userDao.setVisitedMany(it, visited, clock()) }
+    }
 
     suspend fun setBlocks(ids: Collection<Int>, block: String?): Int {
+        requireEdit()
         require(Blocks.isValid(block)) { "Invalid block" }
         return if (ids.isEmpty()) 0 else ids.distinct().chunked(500).sumOf { userDao.setBlocks(it, block, clock()) }
     }
 
     suspend fun setTagForMany(ids: Collection<Int>, tagId: Long, attached: Boolean) {
+        requireEdit()
         if (ids.isEmpty()) return
         ids.distinct().chunked(500).forEach { chunk ->
             if (attached) userDao.attachTags(chunk.map { VoterTagEntity(it, tagId) }) else userDao.detachTagFrom(chunk, tagId)
@@ -307,11 +328,13 @@ class VoterRepository(
 
     /** Adds any missing default neutral tags (never duplicates). @return number added. */
     suspend fun addDefaultTags(): Int {
+        requireEdit()
         val now = clock()
         return db.withTransaction { DefaultTags.NAMES.count { userDao.insertTagIfMissing(it, now) > 0 } }
     }
 
     suspend fun createTag(name: String): Long {
+        requireEdit()
         val clean = validateTagName(name)
         return try {
             userDao.insertTag(TagEntity(name = clean, createdAt = clock()))
@@ -321,6 +344,7 @@ class VoterRepository(
     }
 
     suspend fun renameTag(id: Long, name: String) {
+        requireEdit()
         val clean = validateTagName(name)
         try {
             userDao.renameTag(id, clean)
@@ -329,10 +353,20 @@ class VoterRepository(
         }
     }
 
-    suspend fun deleteTag(id: Long) = userDao.deleteTag(id)
+    suspend fun deleteTag(id: Long) = guarded { userDao.deleteTag(id) }
 
     suspend fun setTagAttached(voterId: Int, tagId: Long, attached: Boolean) {
+        requireEdit()
         if (attached) userDao.attachTag(VoterTagEntity(voterId, tagId)) else userDao.detachTag(voterId, tagId)
+    }
+
+    private fun requireEdit() {
+        if (!canEdit()) throw ReadOnlyAccessException()
+    }
+
+    private inline fun <T> guarded(block: () -> T): T {
+        requireEdit()
+        return block()
     }
 
     private fun validateTagName(name: String): String {
@@ -411,6 +445,7 @@ class VoterRepository(
 
     /** Re-runs automatic grouping on request (Households menu). Manual corrections are kept. */
     suspend fun regroupWardNow(ward: Int) {
+        requireEdit()
         regroupWard(ward)
         voterDao.datasetInfo(ward)?.let { voterDao.setGroupingKey(ward, groupingKey(it)) }
     }
@@ -440,6 +475,7 @@ class VoterRepository(
      * "Household — House <no.>".
      */
     suspend fun createHousehold(name: String?, ids: Collection<Int>): Long {
+        requireEdit()
         val members = ids.distinct()
         if (members.isEmpty()) throw UserInputException("Choose at least one voter for the household.")
         val clean = name?.takeIf { it.isNotBlank() }?.let(::validateHouseholdName)
@@ -464,6 +500,7 @@ class VoterRepository(
     }
 
     suspend fun renameHousehold(id: Long, name: String) {
+        requireEdit()
         val clean = validateHouseholdName(name)
         db.withTransaction {
             householdDao.rename(id, clean, clock())
@@ -473,12 +510,14 @@ class VoterRepository(
 
     /** "Mark as reviewed": the automatic household is confirmed as correct and becomes the user's. */
     suspend fun markHouseholdReviewed(id: Long) = db.withTransaction {
+        requireEdit()
         if (householdDao.household(id) == null) throw UserInputException("This household no longer exists.")
         lock(emptyList(), listOf(id))
     }
 
     /** Adds voters to household [id]; voters in another household are moved here. */
     suspend fun addHouseholdMembers(id: Long, ids: Collection<Int>) {
+        requireEdit()
         val members = ids.distinct()
         if (members.isEmpty()) return
         db.withTransaction {
@@ -500,6 +539,7 @@ class VoterRepository(
      * left without members is deleted.
      */
     suspend fun removeHouseholdMembers(ids: Collection<Int>): Int = db.withTransaction {
+        requireEdit()
         if (ids.isEmpty()) return@withTransaction 0
         val sources = membershipsOf(ids).values.toSet()
         val n = ids.distinct().chunked(500).sumOf { householdDao.removeMembers(it) }
@@ -510,6 +550,7 @@ class VoterRepository(
 
     /** Moves every member of [others] into [targetId] and deletes the emptied households. */
     suspend fun mergeHouseholds(targetId: Long, others: Collection<Long>) {
+        requireEdit()
         val sources = others.filter { it != targetId }.distinct()
         if (sources.isEmpty()) return
         db.withTransaction {
@@ -530,6 +571,7 @@ class VoterRepository(
      * emptied household is then deleted (inside the same transaction as the move).
      */
     suspend fun splitHousehold(id: Long, ids: Collection<Int>, newName: String?): Long {
+        requireEdit()
         val current = householdDao.memberIds(id).toSet()
         val moving = ids.distinct().filter { it in current }
         if (moving.isEmpty()) throw UserInputException("Choose the members to move to a new household.")
@@ -552,6 +594,7 @@ class VoterRepository(
      * visits, notes, tags and blocks are separate tables and are not touched.
      */
     suspend fun moveHouseholdMembers(sourceId: Long, ids: Collection<Int>, targetId: Long): MoveResult {
+        requireEdit()
         val requested = ids.distinct()
         if (requested.isEmpty()) throw UserInputException("Choose the members to move.")
         if (sourceId == targetId) throw UserInputException("The voter is already in this household.")
@@ -588,6 +631,7 @@ class VoterRepository(
 
     /** Removes the grouping; the members stay in no household (kept that way by automatic grouping). */
     suspend fun deleteHousehold(id: Long) = db.withTransaction {
+        requireEdit()
         val members = householdDao.memberIds(id)
         householdDao.deleteHousehold(id)
         val now = clock()
@@ -623,6 +667,7 @@ class VoterRepository(
 
     /** Voter records plus markers for [ids], in the given order. */
     suspend fun exportRecords(ids: List<Int>): List<ExportRecord> = withContext(Dispatchers.IO) {
+        requireEdit()
         if (ids.isEmpty()) return@withContext emptyList()
         db.withTransaction {
             val distinct = ids.distinct()
@@ -671,11 +716,13 @@ class VoterRepository(
 
     /** Builds the encrypted backup bytes for the document picker to write. */
     suspend fun createBackup(password: CharArray): ByteArray = withContext(Dispatchers.IO) {
+        requireEdit()
         BackupCodec.encrypt(BackupCodec.toJson(snapshot()), password)
     }
 
     /** Decrypts and validates a backup without changing anything. */
     suspend fun readBackup(file: ByteArray, password: CharArray): BackupContent = withContext(Dispatchers.Default) {
+        requireEdit()
         val json = BackupCodec.decrypt(file, password)
         BackupCodec.fromJson(json, voterDao.allIds(null).toSet())
     }
@@ -685,6 +732,7 @@ class VoterRepository(
      * app-private storage so the restore can be undone with [undoLastRestore].
      */
     suspend fun restore(content: BackupContent) = withContext(Dispatchers.IO) {
+        requireEdit()
         val before = BackupCodec.toJson(snapshot())
         safetyDir.mkdirs()
         val tmp = File(safetyDir, "$SAFETY_FILE.tmp")
@@ -699,6 +747,7 @@ class VoterRepository(
     fun hasUndoSnapshot(): Boolean = safetyFile().isFile
 
     suspend fun undoLastRestore() = withContext(Dispatchers.IO) {
+        requireEdit()
         val file = safetyFile()
         if (!file.isFile) throw BackupException("There is no earlier state to go back to.")
         val content = BackupCodec.fromJson(file.readText(Charsets.UTF_8), voterDao.allIds(null).toSet())

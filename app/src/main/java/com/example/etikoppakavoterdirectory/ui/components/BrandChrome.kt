@@ -19,6 +19,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
@@ -99,5 +102,66 @@ fun HeaderTitle(text: String, style: androidx.compose.ui.text.TextStyle, color: 
             minFontSize = androidx.compose.ui.unit.TextUnit(13f, androidx.compose.ui.unit.TextUnitType.Sp),
             maxFontSize = style.fontSize,
         ),
+    )
+}
+
+/**
+ * Deep-blue page header used by Households, Blocks, Tags and Settings: navigation icon, white title
+ * (up to two lines, never cut), a smaller subtitle (the current ward) and optional actions; the same
+ * height, spacing and rounded lower corners as the Voters header.
+ */
+@Composable
+fun ScreenHeader(
+    title: String,
+    subtitle: String?,
+    navIcon: androidx.compose.ui.graphics.vector.ImageVector,
+    navDescription: String,
+    onNav: () -> Unit,
+    modifier: Modifier = Modifier,
+    actions: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit = {},
+) {
+    val brand = AppTheme.brand
+    LightStatusBarIcons(enabled = true)
+    BrandHeader(modifier) {
+        androidx.compose.foundation.layout.Row(
+            Modifier.padding(start = 4.dp, end = 4.dp, top = 2.dp, bottom = 12.dp),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+        ) {
+            androidx.compose.material3.IconButton(onClick = onNav) {
+                androidx.compose.material3.Icon(navIcon, contentDescription = navDescription, tint = brand.onHeader)
+            }
+            Column(Modifier.weight(1f).padding(end = 8.dp)) {
+                HeaderTitle(
+                    title,
+                    androidx.compose.material3.MaterialTheme.typography.titleLarge,
+                    brand.onHeader,
+                    Modifier.semantics { heading() },
+                )
+                if (subtitle != null) {
+                    androidx.compose.material3.Text(
+                        subtitle,
+                        style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+                        color = brand.onHeaderVariant,
+                        modifier = Modifier.testTag("screenSubtitle"),
+                    )
+                }
+            }
+            actions()
+        }
+    }
+}
+
+/** Exact developer credit shown on the sign-in screen and on Settings. */
+const val FOOTER_CREDIT = "Digitizing Etikoppaka ❤️ — @vinod_yedla"
+
+/** Small, centred, muted credit line (never a banner). */
+@Composable
+fun FooterCredit(modifier: Modifier = Modifier) {
+    androidx.compose.material3.Text(
+        FOOTER_CREDIT,
+        style = androidx.compose.material3.MaterialTheme.typography.labelMedium,
+        color = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+        modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp).testTag("footerCredit"),
     )
 }

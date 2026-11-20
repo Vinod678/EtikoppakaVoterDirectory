@@ -42,6 +42,7 @@ class UiSmokeTest {
         rule.onNodeWithText("For any information regarding login, please contact: 938one0638eight").assertIsDisplayed()
         // No voter data is composed behind the lock.
         assertTrue(rule.onAllNodes(hasText("Varahalamma")).fetchSemanticsNodes().isEmpty())
+        rule.onNodeWithTag("roleAdmin").performClick()
         rule.onNodeWithTag("passwordField").performTextInput(todaysPassword().lowercase())
         rule.onNodeWithTag("unlockButton").performClick()
         rule.waitUntilAtLeastOneExists(hasText("Incorrect password", substring = true), 10_000)

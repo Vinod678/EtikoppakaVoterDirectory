@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
@@ -79,24 +80,24 @@ fun TagsScreen(
     val fabShown = com.example.etikoppakavoterdirectory.ui.components.rememberFloatingActionVisible(listState, "newTag")
 
     Scaffold(
+        containerColor = com.example.etikoppakavoterdirectory.ui.theme.AppTheme.brand.page,
         topBar = {
-            TopAppBar(
-                title = {
-                    Column {
-                        Text("Tags")
-                        Text("Ward $ward · counts are for this ward", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
+            com.example.etikoppakavoterdirectory.ui.components.ScreenHeader(
+                title = "Tags",
+                subtitle = "Ward $ward · counts are for this ward",
+                navIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                navDescription = "All wards (home)",
+                onNav = onHome,
+            ) {
+                Box {
+                    IconButton(onClick = { menu = true }) {
+                        Icon(Icons.Filled.MoreVert, contentDescription = "More tag options", tint = com.example.etikoppakavoterdirectory.ui.theme.AppTheme.brand.onHeader)
                     }
-                },
-                navigationIcon = { IconButton(onClick = onHome) { Icon(com.example.etikoppakavoterdirectory.ui.components.AppIcons.Grid, contentDescription = "All wards (home)") } },
-                actions = {
-                    Box {
-                        IconButton(onClick = { menu = true }) { Icon(Icons.Filled.MoreVert, contentDescription = "More tag options") }
-                        DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
-                            DropdownMenuItem(text = { Text("Add missing suggested tags") }, onClick = { menu = false; onAddDefaults() })
-                        }
+                    DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                        DropdownMenuItem(text = { Text("Add missing suggested tags") }, onClick = { menu = false; onAddDefaults() })
                     }
-                },
-            )
+                }
+            }
         },
         floatingActionButton = {
             androidx.compose.animation.AnimatedVisibility(

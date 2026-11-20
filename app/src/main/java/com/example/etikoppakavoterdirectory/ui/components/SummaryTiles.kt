@@ -83,7 +83,9 @@ fun SummaryTiles(
             val value = w(s.value, spec.value)
             val word = s.label.split(' ').maxOf { w(it, spec.label) }
             with(density) {
-                val pad = (spec.hPad * 2).roundToPx() + 2 // + border
+                // + border and a safety margin: weighted widths are rounded down to whole pixels, and
+                // a value such as "368/369" must never lose its last digit.
+                val pad = (spec.hPad * 2 + 2.dp + 6.dp).roundToPx()
                 val icon = (spec.iconBox + spec.gap).roundToPx()
                 val side = when (style) {
                     SummaryTileStyle.Compact -> maxOf(pad + icon + value, pad + word)

@@ -18,6 +18,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -90,19 +91,13 @@ fun BlocksScreen(
     var manage by rememberSaveable { mutableStateOf(false) }
     var editing by rememberSaveable { mutableStateOf<String?>(null) }
 
-    Column(Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = {
-                Column {
-                    Text("Blocks")
-                    Text("Ward $ward", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
-            },
-            navigationIcon = {
-                androidx.compose.material3.IconButton(onClick = onHome) {
-                    androidx.compose.material3.Icon(com.example.etikoppakavoterdirectory.ui.components.AppIcons.Grid, contentDescription = "All wards (home)")
-                }
-            },
+    Column(Modifier.fillMaxSize().background(com.example.etikoppakavoterdirectory.ui.theme.AppTheme.brand.page)) {
+        com.example.etikoppakavoterdirectory.ui.components.ScreenHeader(
+            title = "Blocks",
+            subtitle = "Ward $ward",
+            navIcon = androidx.compose.material.icons.Icons.AutoMirrored.Filled.ArrowBack,
+            navDescription = "All wards (home)",
+            onNav = onHome,
         )
         Column(
             Modifier

@@ -169,6 +169,27 @@ class DirectoryViewModel(private val repo: VoterRepository, private val app: Vot
         _filter.value = if (w == null) VoterFilter(ward = NO_WARD) else savedFilters[w] ?: VoterFilter(ward = w)
     }
 
+    /**
+     * Back to the start state of a fresh sign-in: home screen, no ward open, empty searches and no
+     * filters (also forgets the filters remembered per ward). Saved data is not touched.
+     */
+    private var session: Long? = null
+
+    /** Called when sign-in [id] starts showing screens; a new sign-in resets the browsing state. */
+    fun startSession(id: Long): Boolean {
+        if (session == id) return false // same sign-in (e.g. after rotation): keep everything
+        session = id
+        resetBrowsing()
+        return true
+    }
+
+    fun resetBrowsing() {
+        savedFilters.clear()
+        _ward.value = null
+        _filter.value = VoterFilter(ward = NO_WARD)
+        _globalQuery.value = ""
+    }
+
     fun setQuery(q: String) = _filter.update { it.copy(query = q) }
     fun setFavouritesOnly(on: Boolean) = _filter.update { it.copy(favouritesOnly = on) }
     fun setVisitedFilter(v: Boolean?) = _filter.update { it.copy(visited = v) }

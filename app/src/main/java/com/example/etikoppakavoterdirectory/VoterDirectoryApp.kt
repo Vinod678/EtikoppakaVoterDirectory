@@ -18,6 +18,8 @@ class VoterDirectoryApp : Application() {
             readAsset = { name -> assets.open(name).bufferedReader(Charsets.UTF_8).use { it.readText() } },
             safetyDir = File(filesDir, "safety"),
             listAssets = { dir -> assets.list(dir)?.toList().orEmpty() },
+            // Viewer sessions (and a locked app) can never change data.
+            canEdit = { auth.canEdit },
         )
     }
     val messages = UserMessages()

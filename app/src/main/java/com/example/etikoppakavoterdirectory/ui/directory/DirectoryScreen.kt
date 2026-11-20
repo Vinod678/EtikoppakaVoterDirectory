@@ -178,11 +178,16 @@ fun DirectoryScreen(
     households: List<HouseholdSummary>,
     listState: LazyListState,
     actions: DirectoryActions,
+    /**
+     * Viewer: total voters, search and voter cards only - no visit counts, favourite / visited
+     * filters, stars, visit buttons, multi-selection or block / tag filters.
+     */
+    readOnly: Boolean = false,
 ) {
     var showFilters by remember { mutableStateOf(false) }
     var selected by rememberSaveable { mutableStateOf(ArrayList<Int>()) }
     var sheet by rememberSaveable { mutableStateOf<String?>(null) } // "tags" | "household"
-    val selecting = selected.isNotEmpty()
+    val selecting = !readOnly && selected.isNotEmpty()
     // Selection only ever contains voters that are still in the list.
     val visibleSerials = remember(items) { items.map { it.voter.voterId } }
     val selection = remember(selected, visibleSerials) { selected.filter { it in visibleSerials.toSet() } }
@@ -216,11 +221,13 @@ fun DirectoryScreen(
                 val compact = maxHeight < 520.dp
                 // Narrow screen or large font: the Visited pill moves under the names so they keep room.
                 val fontScale = LocalDensity.current.fontScale
-                val stackedControls = maxWidth - 32.dp - 96.dp - 104.dp * fontScale < 150.dp
+                val stackedControls = !readOnly && maxWidth - 32.dp - 96.dp - 104.dp * fontScale < 150.dp
                 LightStatusBarIcons(enabled = !compact && !selecting)
                 val header: @Composable () -> Unit = {
-                    Header(ward = ward, onHome = onHome, stats = stats, applyStatusBarPadding = !compact)
-                    QuickFilters(filter = filter, tags = tags, total = stats?.total, onOpenFilters = { showFilters = true }, actions = actions)
+                    Header(ward = ward, onHome = onHome, stats = stats, applyStatusBarPadding = !compact, readOnly = readOnly)
+                    if (!readOnly) {
+                        QuickFilters(filter = filter, tags = tags, total = stats?.total, onOpenFilters = { showFilters = true }, actions = actions)
+                    }
                     DirectorySearchField(filter.query, actions.onQueryChange)
                 }
                 Column(Modifier.fillMaxSize().then(if (compact || selecting) Modifier.statusBarsPadding() else Modifier)) {
@@ -289,11 +296,12 @@ fun DirectoryScreen(
                                             item = item,
                                             selected = if (selecting) isSel else null,
                                             stackedControls = stackedControls,
+                                            readOnly = readOnly,
                                             onClick = {
                                                 if (selecting) setSelected(if (isSel) selection - serial else selection + serial)
                                                 else actions.onOpenVoter(serial, visibleSerials, label)
                                             },
-                                            onLongClick = { setSelected(if (isSel) selection - serial else selection + serial) },
+                                            onLongClick = { if (!readOnly) setSelected(if (isSel) selection - serial else selection + serial) },
                                             onToggleFavourite = { actions.onToggleFavourite(serial, it) },
                                             onToggleVisited = { actions.onToggleVisited(serial, it) },
                                         )
@@ -325,10 +333,10 @@ fun DirectoryScreen(
         }
     }
 
-    if (showFilters) {
+    if (showFilters && !readOnly) {
         FilterSheet(filter = filter, tags = tags, actions = actions, onDismiss = { showFilters = false })
     }
-    when (sheet) {
+    if (!readOnly) when (sheet) {
         "tags" -> BulkTagSheet(tags, selection.size, onApply = { t, attach -> sheet = null; actions.onBulkTag(selection, t, attach) }, onDismiss = { sheet = null })
         "household" -> HouseholdPickerSheet(
             title = "Add ${selection.size} to a household",
@@ -345,7 +353,7 @@ fun DirectoryScreen(
 // ------------------------------------------------------------------------------------------
 
 @Composable
-private fun Header(ward: Int, onHome: () -> Unit, stats: DirectoryStats?, applyStatusBarPadding: Boolean = true) {
+private fun Header(ward: Int, onHome: () -> Unit, stats: DirectoryStats?, applyStatusBarPadding: Boolean = true, readOnly: Boolean = false) {
     val brand = AppTheme.brand
     Box(Modifier.fillMaxWidth()) {
         Box(
@@ -374,7 +382,7 @@ private fun Header(ward: Int, onHome: () -> Unit, stats: DirectoryStats?, applyS
                     )
                 }
             }
-            SummaryRow(stats, Modifier.padding(horizontal = 16.dp))
+            SummaryRow(stats, Modifier.padding(horizontal = 16.dp), totalOnly = readOnly)
         }
     }
 }
@@ -385,15 +393,16 @@ private fun Header(ward: Int, onHome: () -> Unit, stats: DirectoryStats?, applyS
 
 /** Real counts from the database: total, visited, not visited. */
 @Composable
-fun SummaryRow(stats: DirectoryStats?, modifier: Modifier = Modifier) {
+fun SummaryRow(stats: DirectoryStats?, modifier: Modifier = Modifier, totalOnly: Boolean = false) {
     val brand = AppTheme.brand
     val total = stats?.total
     val visited = stats?.visited
     val unvisited = if (total != null && visited != null) total - visited else null
     // Complete numbers at every width / font size (tiles stack when three do not fit).
+    val totalTile = com.example.etikoppakavoterdirectory.ui.components.SummaryStat(AppIcons.Group, total?.toString() ?: "–", "Total Voters", brand.total, brand.totalContainer)
     com.example.etikoppakavoterdirectory.ui.components.SummaryTiles(
-        listOf(
-            com.example.etikoppakavoterdirectory.ui.components.SummaryStat(AppIcons.Group, total?.toString() ?: "–", "Total Voters", brand.total, brand.totalContainer),
+        if (totalOnly) listOf(totalTile) else listOf(
+            totalTile,
             com.example.etikoppakavoterdirectory.ui.components.SummaryStat(Icons.Filled.CheckCircle, visited?.toString() ?: "–", "Visited", AppTheme.status.visited, AppTheme.status.visitedContainer),
             com.example.etikoppakavoterdirectory.ui.components.SummaryStat(Icons.Filled.Person, unvisited?.toString() ?: "–", "Not Visited", brand.unvisited, brand.unvisitedContainer),
         ),
@@ -521,7 +530,7 @@ private fun DirectorySearchField(value: String, onChange: (String) -> Unit) {
     OutlinedTextField(
         value = value,
         onValueChange = onChange,
-        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 10.dp),
+        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 10.dp).testTag("wardSearch"),
         singleLine = true,
         shape = RoundedCornerShape(26.dp),
         textStyle = MaterialTheme.typography.bodyMedium,
@@ -563,6 +572,8 @@ fun VoterCard(
     onToggleFavourite: (Boolean) -> Unit,
     onToggleVisited: (Boolean) -> Unit,
     stackedControls: Boolean = false,
+    /** Viewer: no favourite star, no visit button, no long-press selection. */
+    readOnly: Boolean = false,
 ) {
     val v = item.voter
     val thumbPx = with(LocalDensity.current) { 64.dp.roundToPx() }
@@ -589,9 +600,9 @@ fun VoterCard(
                 interactionSource = interaction,
                 indication = androidx.compose.material3.ripple(),
                 onClick = onClick,
-                onLongClick = onLongClick,
+                onLongClick = if (readOnly) null else onLongClick,
                 onClickLabel = if (selected != null) "Select or unselect" else "Open details",
-                onLongClickLabel = "Select",
+                onLongClickLabel = if (readOnly) null else "Select",
             )
             .semantics { if (selected != null) this.selected = isSel },
     ) {
@@ -636,12 +647,14 @@ fun VoterCard(
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-                if (selected == null && stackedControls) {
+                if (selected == null && stackedControls && !readOnly) {
                     Spacer(Modifier.height(4.dp))
                     VisitPill(item.visited, v.gpSerialNo, onToggleVisited)
                 }
             }
-            if (selected == null) {
+            if (readOnly) {
+                Spacer(Modifier.width(6.dp))
+            } else if (selected == null) {
                 Column(horizontalAlignment = Alignment.End) {
                     FavouriteStar(item.favourite, v.gpSerialNo, onToggleFavourite)
                     if (!stackedControls) VisitPill(item.visited, v.gpSerialNo, onToggleVisited)

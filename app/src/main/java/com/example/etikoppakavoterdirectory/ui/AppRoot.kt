@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Column
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.etikoppakavoterdirectory.VoterDirectoryApp
+import com.example.etikoppakavoterdirectory.auth.Role
 import com.example.etikoppakavoterdirectory.ui.blocks.BlocksScreen
 import com.example.etikoppakavoterdirectory.ui.components.FitLabel
 import com.example.etikoppakavoterdirectory.ui.detail.VoterPagerScreen
@@ -95,6 +96,13 @@ private sealed interface Route {
     data class Unassigned(val ward: Int) : Route {
         override fun encode() = listOf("U", ward.toString()).joinToString(SEP)
     }
+    /** Viewer settings (About and Sign out), opened from the home screen. */
+    data object Settings : Route {
+        override fun encode() = "S"
+    }
+
+    /** Screens a Viewer may open. Everything else is Admin-only and is never shown to a Viewer. */
+    fun allowedFor(role: Role) = role == Role.ADMIN || this is Voter || this is Settings
 
     companion object {
         const val SEP = "\u001F"
@@ -107,14 +115,20 @@ private sealed interface Route {
                 "E" -> if (p.size == 3) Export(p[1].ifEmpty { null }, ints(p[2])) else null
                 "I" -> p.getOrNull(1)?.toLongOrNull()?.let { Image(it, p.getOrNull(2) == "1") }
                 "U" -> p.getOrNull(1)?.toIntOrNull()?.let { Unassigned(it) }
+                "S" -> Settings
                 else -> null
             }
         }
     }
 }
 
+/**
+ * The signed-in app. [role] decides what is shown: Admin gets every screen; Viewer gets the home
+ * screen, ward voter lists, read-only voter details and a small settings page. [session] is new for
+ * every sign-in, which resets searches, filters and navigation.
+ */
 @Composable
-fun AppRoot() {
+fun AppRoot(role: Role, session: Long) {
     val app = LocalContext.current.applicationContext as VoterDirectoryApp
     val directoryVm: DirectoryViewModel = viewModel(factory = DirectoryViewModel.Factory)
     val tagsVm: TagsViewModel = viewModel(factory = TagsViewModel.Factory)
@@ -122,6 +136,11 @@ fun AppRoot() {
     val edit: EditViewModel = viewModel(factory = EditViewModel.Factory)
     val exportVm: ExportViewModel = viewModel(factory = ExportViewModel.Factory)
     val imageVm: ImageExportViewModel = viewModel(factory = ImageExportViewModel.Factory)
+    val viewer = role == Role.VIEWER
+    // A fresh sign-in starts from the home screen with empty searches and no filters.
+    remember(session) {
+        if (directoryVm.startSession(session)) { exportVm.discard(); imageVm.discard() }
+    }
 
     val importState by directoryVm.importState.collectAsState()
     val ward by directoryVm.ward.collectAsState()
@@ -137,7 +156,8 @@ fun AppRoot() {
     val globalResults by directoryVm.globalResults.collectAsState()
 
     var tabName by rememberSaveable { mutableStateOf(Tab.Voters.name) }
-    val tab = Tab.valueOf(tabName)
+    // A Viewer has no tabs: always the voter list.
+    val tab = if (viewer) Tab.Voters else Tab.valueOf(tabName)
     var stack by rememberSaveable { mutableStateOf(ArrayList<String>()) }
     // Households tab browsing state (search, sort, list position): kept while moving inside the
     // Households tab (household details, members, voters, assignment, back), reset on a tab switch.
@@ -195,6 +215,29 @@ fun AppRoot() {
         )
     }
 
+    // Viewer: searching and opening voters only; nothing that changes data.
+    val viewerActions = remember(directoryVm) {
+        DirectoryActions(
+            onQueryChange = directoryVm::setQuery,
+            onFavouritesOnly = {},
+            onVisitedFilter = {},
+            onBlockFilter = {},
+            onTagFilter = {},
+            onResetFilters = directoryVm::clearFilters,
+            onRetryImport = directoryVm::runImport,
+            onToggleFavourite = { _, _ -> },
+            onToggleVisited = { _, _ -> },
+            onOpenVoter = { id, list, label -> push(Route.Voter(label, id, list)) },
+            onBulkFavourite = { _, _ -> },
+            onBulkVisited = { _, _ -> },
+            onBulkBlock = { _, _ -> },
+            onBulkTag = { _, _, _ -> },
+            onAddToHousehold = { _, _ -> },
+            onCreateHousehold = {},
+            onExport = { _, _ -> },
+        )
+    }
+
     LaunchedEffect(Unit) {
         app.messages.events.collect { m ->
             snackbar.showSnackbar(
@@ -206,7 +249,11 @@ fun AppRoot() {
     }
 
     // ---------------- screens on top of home / the ward tabs ----------------
-    val top = stack.lastOrNull()?.let(Route::decode)
+    // Admin-only screens can never be shown in a Viewer session (whatever is on the back stack).
+    val top = stack.lastOrNull()?.let(Route::decode)?.takeIf { it.allowedFor(role) }
+    if (viewer && stack.isNotEmpty() && top == null) {
+        LaunchedEffect(stack) { stack = ArrayList(stack.filter { Route.decode(it)?.allowedFor(role) == true }) }
+    }
     if (top != null) {
         BackHandler {
             when (top) {
@@ -226,9 +273,20 @@ fun AppRoot() {
                     allTags = tags,
                     onSerialChange = { s -> if (s != top.current) replaceTop(top.copy(current = s)) },
                     onBack = { pop() },
-                    onManageTags = { if (ward != null) goToTab(Tab.Tags) },
-                    onOpenHousehold = { id -> push(Route.Household(id)) },
+                    onManageTags = { if (ward != null && !viewer) goToTab(Tab.Tags) },
+                    onOpenHousehold = { id -> if (!viewer) push(Route.Household(id)) },
                     onHome = { goHome() },
+                    readOnly = viewer,
+                )
+                Route.Settings -> SettingsScreen(
+                    vm = settingsVm,
+                    ward = null,
+                    importState = importState,
+                    onRetryImport = directoryVm::runImport,
+                    onExportPdf = {},
+                    onHome = { pop() },
+                    onLogout = app.auth::logout,
+                    viewer = viewer,
                 )
                 is Route.Household -> HouseholdDetailScreen(
                     id = top.id,
@@ -296,6 +354,30 @@ fun AppRoot() {
                     },
                     onRetryImport = directoryVm::runImport,
                     onLogout = app.auth::logout,
+                    onSettings = if (viewer) ({ push(Route.Settings) }) else null,
+                )
+            }
+        }
+        return
+    }
+
+    // ---------------- Viewer: one ward's voter list, read-only, no tabs ----------------
+    if (viewer) {
+        BackHandler { goHome() }
+        Scaffold(snackbarHost = { SnackbarHost(snackbar) }, contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(0)) { padding ->
+            Box(Modifier.fillMaxSize().padding(padding)) {
+                DirectoryScreen(
+                    ward = w,
+                    onHome = ::goHome,
+                    importState = importState,
+                    filter = filter,
+                    items = items,
+                    stats = stats,
+                    tags = emptyList(),
+                    households = emptyList(),
+                    listState = listState,
+                    actions = viewerActions,
+                    readOnly = true,
                 )
             }
         }

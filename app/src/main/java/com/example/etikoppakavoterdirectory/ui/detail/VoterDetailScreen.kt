@@ -129,6 +129,8 @@ fun VoterPagerScreen(
     onOpenHousehold: (Long) -> Unit,
     /** "Back to Home" (all wards); null hides the button. */
     onHome: (() -> Unit)? = null,
+    /** Viewer: photo, names and the voter-list facts only; nothing that can be changed. */
+    readOnly: Boolean = false,
 ) {
     val start = remember(serials) { serials.indexOf(initialSerial).coerceAtLeast(0) }
     val pager = rememberPagerState(initialPage = start) { serials.size }
@@ -195,7 +197,7 @@ fun VoterPagerScreen(
             modifier = Modifier.fillMaxSize().padding(padding).imePadding().testTag("voterPager"),
         ) { page ->
             val serial = serials[page]
-            VoterPage(
+            if (readOnly) ReadOnlyVoterPage(serial, edit) else VoterPage(
                 serial = serial,
                 isCurrent = pager.settledPage == page,
                 edit = edit,
@@ -291,6 +293,37 @@ private fun VoterPage(
             onCreateNew = { sheet = null; edit.createHousehold(null, listOf(serial)) },
             onDismiss = { sheet = null },
         )
+    }
+    if (showPhoto) PhotoDialog(v) { showPhoto = false }
+}
+
+/**
+ * Viewer page: photo, ward, GP serial, names, age, gender, relationship, relative names, house
+ * number, assembly roll serial and EPIC number. The user's own data (favourite, visits, household,
+ * block, notes, tags) is not even loaded.
+ */
+@Composable
+private fun ReadOnlyVoterPage(serial: Int, edit: EditViewModel) {
+    val voter by remember(serial) { edit.repository.voter(serial) }.collectAsState(initial = null)
+    var showPhoto by rememberSaveable(serial) { mutableStateOf(false) }
+    val v = voter
+    if (v == null) {
+        Box(Modifier.fillMaxSize())
+        return
+    }
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+        Column(
+            Modifier
+                .widthIn(max = 640.dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            ProfileHeader(v, onPhoto = { showPhoto = true })
+            PersonalInfoCard(v)
+            Spacer(Modifier.height(4.dp))
+        }
     }
     if (showPhoto) PhotoDialog(v) { showPhoto = false }
 }
