@@ -1,0 +1,370 @@
+serial | draft EN | rel | draft rel EN | TE (artefacts fixed) | rel TE | PDF label | sim name/rel | PDF text | draft EPIC/house vs PDF | known spellings
+1108 | Srinivasa Rao Satapathi | Father | Uma Maheswara Rao | శ్రీనివాసరావు శతపతి | ఉమామహేశ్వరరావు | Father | 0.94/0.92 | �శీనివాసరావు శతపతి / ఉమామహేశ� రరావు |  | {}
+1109 | Kishore Kumar Satapathi | Father | Uma Maheswara Rao | కిషోర్ కుమార్ శతపతి | ఉమామహేశ్వరరావు | Father | 1.00/0.92 | కిషోర్ కుమార్ శతపతి / ఉమామహేశ� రరావు |  | {'కుమార్': ['Kumar']}
+1110 | Lakshmi Isarapu | Husband | Apparao | లక్ష్మి ఇసరపు | అప్పారావు | Husband | 0.91/0.88 | లక్షి�  ఇసరపు / అపా� రావు |  | {'లక్ష్మి': ['Lakshmi'], 'అప్పారావు': ['Apparao']}
+1111 | Manga Isarapu | Husband | Ramu Isarapu | మంగా ఇసరపూ | రామూ ఇసరపూ | Husband | 1.00/1.00 | మంగా ఇసరపూ / రామూ ఇసరపూ |  | {'మంగా': ['Manga']}
+1112 | Chinathalli Gontumurthi | Husband | Bandayya | చినతల్లి గోన్టూమూర్తి | బండియ్య | Husband | 0.82/0.83 | చినతలి� గోనూ� మూరి� / బండియ� |  | {'బండియ్య': ['Bandayya']}
+1113 | Nookaratnam Isarapu | Husband | Venkata Ramana | నూకరత్నం ఇసరపు | వెంకట రమణ | Husband | 0.92/1.00 | నూకరత� ం ఇసరపు / వెంకట రమణ |  | {'నూకరత్నం': ['Nookaratnam', 'Nukaarathnam'], 'వెంకట': ['Venkata'], 'రమణ': ['Ramana']}
+1114 | Venkataramana Isarapu | Father | Apparao | వెంకాటరమణ ఇస్రాపు | అప్పారావు | Father | 0.93/0.88 | వెంకాటరమణ ఇ�సాపు / అపా� రావు |  | {'అప్పారావు': ['Apparao']}
+1115 | Manga Sennamsetti | Husband | Sriram | మంగ శెన్నంశెట్టి | శ్రీరాం | Husband | 0.85/0.83 | మంగ శెన� ంశెటి� / �శీరాం |  | {'మంగ': ['Manga'], 'శెన్నంశెట్టి': ['Sennamsetti']}
+1116 | Venkatesh Pedapati | Father | Srinivasa Rao Pedapati | వెంకటెష్ పెదపాటి | శ్రీనివాసరావు పెదపాటి | Father | 1.00/0.95 | వెంకటెష్ పెదపాటి / �శీనివాసరావు పెదపాటి |  | {'పెదపాటి': ['Pedapati']}
+1117 | Varalakshmi Kothavala | Husband | Nageswara Rao Kothavala | వరలక్ష్మి కొఠవాలా | నాగేశ్వర రావు కొఠవాలా | Husband | 0.93/0.94 | వరలక్షి�  కొఠవాలా / నాగేశ� ర రావు కొఠవాలా |  | {'వరలక్ష్మి': ['Varalakshmi'], 'నాగేశ్వర': ['Nageswara'], 'రావు': ['Rao']}
+1118 | Gayathri Kothavala | Husband | Babuji Kothavala | గాయత్రి కోఠవాల్ | బాబుజీ కొథఈలా | Husband | 0.92/1.00 | గాయ�తి కోఠవాల్ / బాబుజీ కొథఈలా |  | {'గాయత్రి': ['Gayathri']}
+1119 | Swapna Pedapati | Father | Brahmaji Pedapati | స్వప్న పెదపాటి | బ్రహ్మాజీ పెదపాటి | Father | 0.82/0.86 | స� ప�  పెదపాటి / �బహా� జీ పెదపాటి |  | {'పెదపాటి': ['Pedapati']}
+1120 | Jayanthi Satapathi | Husband | Kishore Kumar Satapathi | జయంతి శతపతి | కిశోర్ కుమార్ శతపతి | Husband | 1.00/1.00 | జయంతి శతపతి / కిశోర్ కుమార్ శతపతి |  | {'కిశోర్': ['Kishor'], 'కుమార్': ['Kumar']}
+1121 | Satyavathi Senapati | Husband | Srinivasa Rao | సత్యవతి సేనాపతి | శ్రీనివాసరావు | Husband | 0.92/0.92 | సత� వతి సేనాపతి / �శీనివాసరావు |  | {'సత్యవతి': ['Satyavathi'], 'సేనాపతి': ['Senapathi']}
+1122 | Satyanarayanaraju Kankipati | Father | Narasimharaju | సత్యనారాయణరాజు కంకిపాటి | నరసిమ్హరాజు | Father | 0.95/0.90 | సత� నారాయణరాజు కంకిపాటి / నరసిమ�రాజు |  | {}
+1123 | Padma Kankipati | Husband | Satyanarayana | పద్మా కంకిపాటి | సత్యనారాయణ | Husband | 0.92/0.89 | పదా�  కంకిపాటి / సత� నారాయణ |  | {'సత్యనారాయణ': ['Satyanarayana']}
+1124 | Ramana Sennamsetti | Father | Tatabbayi | రమణ శెన్నంశెట్టి | తాతబ్బాయి | Father | 0.85/0.88 | రమణ శెన� ంశెటి� / తాతబా� యి |  | {'రమణ': ['Ramana'], 'శెన్నంశెట్టి': ['Sennamsetti'], 'తాతబ్బాయి': ['Tatabbayi']}
+1125 | Srinu Sennamsetti | Father | Tatabbayi | శ్రీను శనంసేట్టీ | తాతబ్బాయి | Father | 0.85/0.88 | �శీను శనంసేటీ� / తాతబా� యి |  | {'శ్రీను': ['Srinu'], 'తాతబ్బాయి': ['Tatabbayi']}
+1126 | Parvathi Illapu | Mother | Venkata Lakshmi Illapu | పార్వతి ఇల్లపు | వెంకట లక్ష్మి ఇల్లపు | Mother | 0.82/0.88 | పార� తి ఇల�పు / వెంకట లక్షి�  ఇల�పు |  | {'పార్వతి': ['Parvathi'], 'వెంకట': ['Venkata'], 'లక్ష్మి': ['Lakshmi']}
+1127 | Sanyasi Rao Dana | Mother | Konda | సన్యాసీరావు దానా | కోండ | Mother | 0.93/1.00 | సనా� సీరావు దానా / కోండ |  | {'కోండ': ['Konda']}
+1128 | Ganga Rao Isarapu | Mother | Ramu Isarapu | గంగ రావు ఏసారపు | రాము ఏసారపు | Mother | 1.00/1.00 | గంగ రావు ఏసారపు / రాము ఏసారపు |  | {'గంగ': ['Ganga'], 'రావు': ['Rao'], 'రాము': ['Ramu']}
+1129 | Ramadevi Kankipati | Husband | Sankara Raju | రమాదేవి కంకిపాటి | శంకర రాజు | Husband | 1.00/1.00 | రమాదేవి కంకిపాటి / శంకర రాజు |  | {'రమాదేవి': ['Ramadevi'], 'శంకర': ['Shankara'], 'రాజు': ['Raju']}
+1130 | Sankaramraju Kankipati | Father | Jogiraju | శంకరంరాజు కంకిపాటి | జోగిరాజు | Father | 1.00/1.00 | శంకరంరాజు కంకిపాటి / జోగిరాజు |  | {}
+1131 | Jyothi Kankipati | Husband | Srinu Raju | జ్యోతి కంకిపాటి | శ్రీనూ రాజు | Husband | 0.92/0.89 | జో� తి కంకిపాటి / �శీనూ రాజు |  | {'జ్యోతి': ['Jyothi'], 'శ్రీనూ': ['Srinu'], 'రాజు': ['Raju']}
+1132 | Nooka Ratnam Dara | Husband | Sanyasi Rao | నూకా రత్నం దారా | సన్యాసీ రావు | Husband | 0.92/0.90 | నూకా రత� ం దారా / సనా� సీ రావు |  | {'రత్నం': ['Ratnam'], 'సన్యాసీ': ['Sanyasi'], 'రావు': ['Rao']}
+1133 | Ramya Isarapu | Father | Venkataramana Isarapu | రమ్య ఏసరపు | వెంకటరమణ ఏసరపు | Father | 0.88/1.00 | రమ�  ఏసరపు / వెంకటరమణ ఏసరపు |  | {'వెంకటరమణ': ['Venkataramana']}
+1134 | Ramya Isarapu | Father | Venkataramana | రమ్య ఏసారపూ | వెంకటరమణ | Father | 0.89/1.00 | రమ�  ఏసారపూ / వెంకటరమణ |  | {'వెంకటరమణ': ['Venkataramana']}
+1135 | Ramya Isarapu | Father | Venkata Ramana Isarapu | రమ్య ఏసరపు | వెంకట రమణ ఏసరపు | Father | 0.88/1.00 | రమ�  ఏసరపు / వెంకట రమణ ఏసరపు |  | {'వెంకట': ['Venkata'], 'రమణ': ['Ramana']}
+1136 | Raju Nagireddi | Husband | Achibabu | రాజు నగిరెడ్డి | అచ్చిబాబు | Husband | 0.92/0.88 | రాజు నగిరెడి� / అచి� బాబు |  | {'రాజు': ['Raju'], 'నగిరెడ్డి': ['Nagireddi'], 'అచ్చిబాబు': ['Achchibabu']}
+1137 | Achibabu Nagireddi | Father | Ramaswamy | అచ్చిబాబు నాగిరెడ్డి | రామస్వామి | Father | 0.88/0.88 | అచి� బాబు నాగిరెడి� / రామసా� మి |  | {'అచ్చిబాబు': ['Achchibabu']}
+1138 | Simhachalam Battina | Husband | Durgalu | సింహచలం బత్తిన | దుర్గాలు | Husband | 0.92/0.86 | సింహచలం బతి�న / దురా� లు |  | {'సింహచలం': ['Simhachalam']}
+1139 | Musilinayudu Goddu | Father | Narasimhulu | ముసిలినాయుడు గొడ్డు | నరసింహులు | Father | 0.94/1.00 | ముసిలినాయుడు గొడు� / నరసింహులు |  | {'గొడ్డు': ['Goddu'], 'నరసింహులు': ['Narasimhulu']}
+1140 | Teja Sri Goddu | Father | Raja Kumar Goddu | తేజ శ్రీ గొడ్డు | రాజ కుమార్ గొడ్డు | Father | 0.82/0.93 | తేజ �శీ గొడు� / రాజ కుమార్ గొడు� |  | {'తేజ': ['Teja'], 'గొడ్డు': ['Goddu'], 'కుమార్': ['Kumar']}
+1141 | Sanyasamma Goddu | Husband | Sanyasi Rao | సన్యాసమ్మ గొడ్డు | సన్యాశిరావు | Husband | 0.75/0.90 | సనా� సమ�  గొడు� / సనా� శిరావు |  | {'గొడ్డు': ['Goddu']}
+1142 | Chittemma Goddu | Husband | Musilinayudu | చిట్టెమ్మ గొడ్డు | None | None | 0.75/0.00 | చిటె�మ�  గొడు� / ముసిలినాయుడు | REL draft Husband pdf None; TE-MISMATCH | {'గొడ్డు': ['Goddu']}
+1143 | Ramesh Goddu | Father | Sanyasirao Goddu | రమేశ్ గొడ్డు | సన్యసిరావు గొడ్డు | Father | 0.90/0.86 | రమేశ్ గొడు� / సన� సిరావు గొడు� |  | {'గొడ్డు': ['Goddu']}
+1144 | Bandayya Panduri | Mother | Appala Konda | బండియ్యా పండూరి | అప్పల కోండ | Mother | 0.92/0.88 | బండియా�  పండూరి / అప� ల కోండ |  | {'బండియ్యా': ['Bandayya'], 'పండూరి': ['Panduri'], 'అప్పల': ['Appala'], 'కోండ': ['Konda']}
+1145 | Venkata Lakshmi Nagireddi | Father | Achiraju Nagireddi | వేంకట లక్ష్మీ నగిరెడ్డి | అచ్చిరాజు నగిరెడ్డి | Father | 0.89/0.88 | వేంకట లక్షీ�  నగిరెడి� / అచి� రాజు నగిరెడి� |  | {'వేంకట': ['Venkata'], 'లక్ష్మీ': ['Lakshmi'], 'నగిరెడ్డి': ['Nagireddi'], 'అచ్చిరాజు': ['Achchiraju']}
+1146 | Venkata Lakshmi Nagireddi | Father | Achi Raju Nagireddi | వెంకట లక్ష్మి నాగిరెడ్డి | అచ్చి రాజు నాగిరెడ్డి | Father | 0.90/0.88 | వెంకట లక్షి�  నాగిరెడి� / అచి�  రాజు నాగిరెడి� |  | {'వెంకట': ['Venkata'], 'లక్ష్మి': ['Lakshmi'], 'అచ్చి': ['Achchi'], 'రాజు': ['Raju']}
+1147 | Varalakshmi Morampudi | Husband | Venkatrao | వరలక్ష్మి మోరంపూడి | వెంకట్రావు | Husband | 0.94/0.89 | వరలక్షి�  మోరంపూడి / వెంక�టావు |  | {'వరలక్ష్మి': ['Varalakshmi']}
+1148 | Sanyasi Rao Battina | Father | Durgalu Battina | సన్యాసిరావు బత్తిన | దుర్గాలు బత్తిన | Father | 0.87/0.83 | సనా� సిరావు బతి�న / దురా� లు బతి�న |  | {}
+1149 | Nageswara Rao Battina | Father | Sanyasi Rao Battina | నాగేశ్వరరావు బత్తిన | సన్యాసిరావు బత్తిన | Father | 0.88/0.87 | నాగేశ� రరావు బతి�న / సనా� సిరావు బతి�న |  | {}
+1150 | Nagamani Morampudi | Father | Venkatrao | నాగమణి మోరంపూడి | వెంకట్రావు | Father | 1.00/0.89 | నాగమణి మోరంపూడి / వెంక�టావు |  | {'నాగమణి': ['Nagamani']}
+1151 | Devi Battina | Husband | Srinivasa Rao Battina | దేవి బట్టిన | శ్రీనివాసరావు బట్టిన | Husband | 0.89/0.88 | దేవి బటి�న / �శీనివాసరావు బటి�న |  | {'దేవి': ['Devi']}
+1152 | Ramakrishna Morampudi | Father | Venkatrao | రామకృష్ణ మోరంపూడి | వెంకట్రావు | Father | 0.93/0.89 | రామకృష� మోరంపూడి / వెంక�టావు |  | {}
+1153 | Sanyasi Rao Battina | Father | Durgalu Battina | సన్యాసిరావు బత్తిన | దుర్గాలు బత్తిన | Father | 0.87/0.83 | సనా� సిరావు బతి�న / దురా� లు బతి�న |  | {}
+1154 | Lakshmi Battina | Husband | Sanyasi Rao Battina | లక్ష్మి బత్తిన | సన్యాసిరావు బత్తిన | Husband | 0.82/0.87 | లక్షి�  బతి�న / సనా� సిరావు బతి�న |  | {'లక్ష్మి': ['Lakshmi']}
+1155 | Jaya Bhavani | Husband | Jaya Shankar (Late) | జయ భవనీ | జయ శంకర్ (లేటు ) | Husband | 1.00/1.00 | జయ భవనీ / జయ శంకర్ (లేటు ) |  | {'జయ': ['Jaya'], 'భవనీ': ['Bhavanee', 'Bhavani'], 'శంకర్': ['Shankar']}
+1156 | Nageswara Rao Battina | Father | Sanyasi Rao Battina | నాగేశ్వర రావు బత్తిన | సన్యాసిరావు బత్తిన | Father | 0.88/0.87 | నాగేశ� ర రావు బతి�న / సనా� సిరావు బతి�న |  | {'నాగేశ్వర': ['Nageswara'], 'రావు': ['Rao']}
+1157 | Kalavathi Pedapati | Husband | Brahmaji | కలావతీ పెద్దపాటి | బ్రహ్మజీ | Husband | 0.93/0.67 | కలావతీ పెద�పాటి / �బహ� జీ |  | {'కలావతీ': ['Kalavathi'], 'పెద్దపాటి': ['Peddapati']}
+1158 | Srinivasa Rao Battina | Father | Durgalu | శ్రీనివాస రావు బత్తిన | దుర్గాలు | Father | 0.88/0.86 | �శీనివాస రావు బతి�న / దురా� లు |  | {'శ్రీనివాస': ['Srinivasa'], 'రావు': ['Rao']}
+1159 | Sanyasi Rao Goddu | Father | Narasimhulu | సన్యాసీరావు గోడ్డు | నరసింహులు | Father | 0.87/1.00 | సనా� సీరావు గోడు� / నరసింహులు |  | {'నరసింహులు': ['Narasimhulu']}
+1160 | Nookaratnam Kurandasu | Husband | Venkataswamy | నూకరత్నం కురందాసు | వెంకటస్వామి | Husband | 0.93/0.90 | నూకరత� ం కురందాసు / వెంకటసా� మి |  | {'నూకరత్నం': ['Nookaratnam', 'Nukaarathnam']}
+1161 | Mouli Srimukesh Goddu | Father | Raj Kumar Goddu | మౌళి శ్రీముకేశ్ గొడ్డు | రాజ్ కుమార్ గొడ్డు | Father | 0.89/0.93 | మౌళి �శీముకేశ్ గొడు� / రాజ్ కుమార్ గొడు� |  | {'మౌళి': ['Mouli'], 'గొడ్డు': ['Goddu'], 'కుమార్': ['Kumar']}
+1162 | Sattibabu Goddu | Father | Chinaapparao | సత్తీబాబు గోడ్డు | చినఅప్పారావు | Father | 0.85/0.91 | సతీ�బాబు గోడు� / చినఅపా� రావు |  | {'సత్తీబాబు': ['Sattibabu']}
+1163 | Appalanarsamma Panasa | Husband | Appanna | అప్పలనర్సమ్మ పనసా | అప్పన్న | Husband | 0.77/0.60 | అప� లనర� మ�  పనసా / అప� న� |  | {'అప్పన్న': ['Appanna']}
+1164 | China Apparao Goddu | Father | Narasimhulu | చిన అప్పారావు గొడ్డు | నర్సింహులు | Father | 0.88/0.89 | చిన అపా� రావు గొడు� / నరి� ంహులు |  | {'చిన': ['China'], 'అప్పారావు': ['Apparao'], 'గొడ్డు': ['Goddu']}
+1165 | Ganapathi Goddu | Father | China Apparao | గణపతి గొడ్డు | చిన అప్పారావు | Father | 0.90/0.91 | గణపతి గొడు� / చిన అపా� రావు |  | {'గొడ్డు': ['Goddu'], 'చిన': ['China'], 'అప్పారావు': ['Apparao']}
+1166 | Varalakshmi Goddu | Husband | Raj Kumar | వరలక్ష్మి గొడ్డు | రాజ్ కుమార్ | Husband | 0.85/1.00 | వరలక్షి�  గొడు� / రాజ్ కుమార్ |  | {'వరలక్ష్మి': ['Varalakshmi'], 'గొడ్డు': ['Goddu'], 'కుమార్': ['Kumar']}
+1167 | Lakshmi Goddu | Husband | Achiraju | లక్ష్మి గొడ్డు | అచ్చిరాజు | Husband | 0.82/0.88 | లక్షి�  గొడు� / అచి� రాజు |  | {'లక్ష్మి': ['Lakshmi'], 'గొడ్డు': ['Goddu'], 'అచ్చిరాజు': ['Achchiraju']}
+1168 | Devi Doddi | Mother | Ravanamma Doddi | దేవీ దోడ్డీ | None | None | 0.89/0.00 | దేవీ దోడీ� / రావణమా�  దోడీ� | REL draft Mother pdf None; TE-MISMATCH | {'దేవీ': ['Devee']}
+1169 | Sanyasi Rao Goddu | Father | Apparao | సన్యాసిరావు గొడ్డు | అప్పారావు | Father | 0.87/0.88 | సనా� సిరావు గొడు� / అపా� రావు |  | {'గొడ్డు': ['Goddu'], 'అప్పారావు': ['Apparao']}
+1170 | Leelavathi Goddu | Husband | Sattibabu Goddu | లీలావతి గొద్ది | సత్తిబాబు గొద్ది | Husband | 0.92/0.85 | లీలావతి గొది� / సతి�బాబు గొది� |  | {'లీలావతి': ['Leelavathi'], 'సత్తిబాబు': ['Sattibabu']}
+1171 | Simhachalam Goddu | Husband | Peda Apparao | సింహచలం గొడ్డు | పెద అప్పారావు | Husband | 0.92/0.91 | సింహచలం గొడు� / పెద అపా� రావు |  | {'సింహచలం': ['Simhachalam'], 'గొడ్డు': ['Goddu'], 'పెద': ['Peda'], 'అప్పారావు': ['Apparao']}
+1172 | Mangeswari Goddu | Husband | Sanyasi Rao | మంగేశ్వరి గొడ్డు | సన్యాసిరావు | Husband | 0.85/0.90 | మంగేశ� రి గొడు� / సనా� సిరావు |  | {'గొడ్డు': ['Goddu']}
+1173 | Durga Sravani Goddu | Father | Goddu Achi Raju | దుర్గ శ్రావణి గొడ్డు | గొడ్డు ఆచి రాజు | Father | 0.80/0.92 | దుర� �శావణి గొడు� / గొడు� ఆచి రాజు |  | {'దుర్గ': ['Durga'], 'శ్రావణి': ['Shravani'], 'గొడ్డు': ['Goddu'], 'రాజు': ['Raju']}
+1174 | Rajalakshmi Amidi | Husband | Appalaraju Amidi | రాజలక్ష్మి అమిడి | అప్పలరాజు అమిడి | Husband | 0.93/0.92 | రాజలక్షి�  అమిడి / అప� లరాజు అమిడి |  | {'అప్పలరాజు': ['Appalaraju']}
+1175 | Ramana Jagu | Father | Appanna | రమణ జాగు | అప్పన్న | Father | 1.00/0.60 | రమణ జాగు / అప� న� |  | {'రమణ': ['Ramana'], 'జాగు': ['Jagu'], 'అప్పన్న': ['Appanna']}
+1176 | Srinu Nagireddi | Father | Achibabu Nagireddi | శ్రీను నగిరెడ్డి | అచ్చిబాబు నగిరెడ్డి | Father | 0.85/0.88 | �శీను నగిరెడి� / అచి� బాబు నగిరెడి� |  | {'శ్రీను': ['Srinu'], 'నగిరెడ్డి': ['Nagireddi'], 'అచ్చిబాబు': ['Achchibabu']}
+1177 | Lakshmi Jagu | Husband | Ramana | లక్ష్మి జుగు | రమణ | Husband | 0.90/1.00 | లక్షి�  జుగు / రమణ |  | {'లక్ష్మి': ['Lakshmi'], 'రమణ': ['Ramana']}
+1178 | Chitti Durga Devi Kosuri | Husband | Nagaraju | చిట్టీ దుర్గా దేవీ కోసూరీ | నాగరాజూ | Husband | 0.90/1.00 | చిటీ� దురా�  దేవీ కోసూరీ / నాగరాజూ |  | {'దేవీ': ['Devee']}
+1179 | Parvathi Kankipati | Husband | Tata Raju Kankipati | పార్వతి కంకిపాటి | తాఠ రాజు కాకిపాటి | Husband | 0.93/1.00 | పార� తి కంకిపాటి / తాఠ రాజు కాకిపాటి |  | {'పార్వతి': ['Parvathi'], 'రాజు': ['Raju']}
+1180 | Appalanarsa Chandanada | Husband | Gangaraju | అప్పలనర్స చందనాడ | గంగరాజు | Husband | 0.85/1.00 | అప� లనర�  చందనాడ / గంగరాజు |  | {'అప్పలనర్స': ['Appalanarsa'], 'గంగరాజు': ['Gangaraju']}
+1181 | S. S. V. Satyanarayanaraju Kankipati | Father | Rajanaraju | ఏస ఏస వీ సత్యనారాయణరాజు కంకిపాటి | రాజనరాజు | Father | 0.96/1.00 | ఏస ఏస వీ సత� నారాయణరాజు కంకిపాటి / రాజనరాజు |  | {'ఏస': ['S.'], 'వీ': ['V.', 'Vee']}
+1182 | Tata Raju Kankipati | Father | Suryanarayana Raju Kankipati | తాఠ రాజు కంకిపాటి | సూర్యనారాయణ రాజు కంకిపాటి వయస్సు : 48 లింగము : పు | Father | 1.00/0.48 | తాఠ రాజు కంకిపాటి / సూర� నారాయణ రాజు | TE-MISMATCH | {'రాజు': ['Raju'], 'సూర్యనారాయణ': ['Suryanarayana']}
+1183 | Nookalamma Isarapu | Husband | Ramana | నూకాలమ్మ ఇసరపు | రమణ | Husband | 0.92/1.00 | నూకాలమ�  ఇసరపు / రమణ |  | {'రమణ': ['Ramana']}
+1184 | Ramana Isarapu | Father | Venkataswamy | రమణ ఇసరపు | వెంకటస్వామి | Father | 1.00/0.90 | రమణ ఇసరపు / వెంకటసా� మి |  | {'రమణ': ['Ramana']}
+1185 | Sattibabu Isarapu | Father | Ramana | సత్తిబాబు ఇసరపు | రమణ | Father | 0.92/1.00 | సతి�బాబు ఇసరపు / రమణ |  | {'సత్తిబాబు': ['Sattibabu'], 'రమణ': ['Ramana']}
+1186 | Sivalakshmi Isarapu | Husband | Nagaraju | శివాలక్ష్మి ఇసరపు | నాగరాజు | Husband | 0.93/1.00 | శివాలక్షి�  ఇసరపు / నాగరాజు |  | {'నాగరాజు': ['Nagaraju']}
+1187 | Venkata Lakshmi Isarapu | Husband | Sattibabu Isarapu | వెంకట లక్ష్మి ఇస్సార్అపూ | సత్తిబాబు ఇస్సార్అపూ | Husband | 0.90/0.88 | వెంకట లక్షి�  ఇసా� ర్అపూ / సతి�బాబు ఇసా� ర్అపూ |  | {'వెంకట': ['Venkata'], 'లక్ష్మి': ['Lakshmi'], 'సత్తిబాబు': ['Sattibabu']}
+1188 | Navadeep Isarapu | Father | Srinivasa Rao Isarapu | నవదీప్ ఇసరపు | శ్రీనివాసరావు ఇసరపు | Father | 1.00/0.94 | నవదీప్ ఇసరపు / �శీనివాసరావు ఇసరపు |  | {}
+1189 | Nagaraju Isarapu | Father | Ramana | నాగరాజు ఇసరపు | రమణ | Father | 1.00/1.00 | నాగరాజు ఇసరపు / రమణ |  | {'నాగరాజు': ['Nagaraju'], 'రమణ': ['Ramana']}
+1190 | Srinu Isarapu | Father | Ramana | శ్రీను ఇసరపు | రమణ | Father | 0.90/1.00 | �శీను ఇసరపు / రమణ |  | {'శ్రీను': ['Srinu'], 'రమణ': ['Ramana']}
+1191 | Naga Mani Isarapu | Husband | Srinu | నాగ మణి ఇసరపు | శ్రీనూ | Husband | 1.00/0.80 | నాగ మణి ఇసరపు / �శీనూ |  | {'నాగ': ['Naga'], 'శ్రీనూ': ['Srinu']}
+1192 | Seethapathi Kucharlapati | Husband | Narasimha Raju | సీతాపతి కుచ్చర్లపాటి | నరసింహ రాజు | Husband | 0.88/1.00 | సీతాపతి కుచ� ర�పాటి / నరసింహ రాజు |  | {'రాజు': ['Raju']}
+1193 | Geethabhavani Kankipati | Husband | Rajan Raju | గీతాభవాని కంకిపాటి | రాజన్ రాజు | Husband | 1.00/1.00 | గీతాభవాని కంకిపాటి / రాజన్ రాజు |  | {'రాజు': ['Raju']}
+1194 | Rajanraju Kankipati | Father | Suryanarayanaraju | రాజన్రాజు కంకిపాటి | సూర్యనారాయణరాజు | Father | 0.94/0.93 | రాజ�నాజు కంకిపాటి / సూర� నారాయణరాజు |  | {}
+1195 | Sai Jyothi Jagu | Father | Ramana Jagu | సాయి జ్యోతి జగూ | రమణ జగూ | Father | 0.92/1.00 | సాయి జో� తి జగూ / రమణ జగూ |  | {'సాయి': ['Sai'], 'జ్యోతి': ['Jyothi'], 'జగూ': ['Jagu'], 'రమణ': ['Ramana']}
+1196 | Chiranjeevi Chandanada | Father | Gangaraju Chandanada | చిరంజీవి చందన్డ | గంగరాజు చందన్డ | Father | 0.92/0.92 | చిరంజీవి చందన� / గంగరాజు చందన� |  | {'చిరంజీవి': ['Chiranjeevi'], 'గంగరాజు': ['Gangaraju']}
+1197 | Nageswara Rao Chandanada | Father | Gangaraju Chandanada | నగేశ్వరరావు చందనాడ | గంగరాజు చందనాడ | Father | 0.94/1.00 | నగేశ� రరావు చందనాడ / గంగరాజు చందనాడ |  | {'నగేశ్వరరావు': ['Nageswara'], 'గంగరాజు': ['Gangaraju']}
+1198 | Achayyanayudu Malla | Father | Apparao | ఆచ్చయ్యనాయుడు మల్ల | అప్పారావు | Father | 0.79/0.88 | ఆచ� య� నాయుడు మల� / అపా� రావు |  | {'మల్ల': ['Malla'], 'అప్పారావు': ['Apparao']}
+1199 | Nagalakshmi Kakarla | Husband | Mallikarjunarao | నాగలక్ష్మి కాకర్ల | మల్లిఖార్జునరావు | Husband | 0.86/0.86 | నాగలక్షి�  కాకర� / మలి�ఖారు�నరావు |  | {}
+1200 | Mallikarjunarao Kakarla | Father | Adiyya | మల్లికార్జునరావు కాకర్ల | ఆదియ్య | Father | 0.84/0.80 | మలి�కారు�నరావు కాకర� / ఆదియ� |  | {'ఆదియ్య': ['Adiyya']}
+1201 | Meghana Chekuri | Father | Venkateswara Raju Chekuri | మేఘన చేకూరి | వెంకటేశ్వర రాజు చేకూరి | Father | 1.00/0.95 | మేఘన చేకూరి / వెంకటేశ� ర రాజు చేకూరి |  | {'రాజు': ['Raju']}
+1202 | Venkatalakshmi Kankipati | Husband | Appalaraju | వెంకటలక్ష్మి కంకిపాటి | అప్పలరాజు | Husband | 0.95/0.88 | వెంకటలక్షి�  కంకిపాటి / అప� లరాజు |  | {'వెంకటలక్ష్మి': ['Venkatalakshmi'], 'అప్పలరాజు': ['Appalaraju']}
+1203 | Sravanthi Kankipati | Mother | Rameshi Kankipati | శ్రావాంతీ కంకిపాటి | రమేశీ కంకిపాటి | Mother | 0.94/1.00 | �శావాంతీ కంకిపాటి / రమేశీ కంకిపాటి |  | {}
+1204 | Venkateswararao Chekuri | Father | Ramaraju Chekuri | వెంకటేశ్వరావ చేకూరి | రామరాజూ చేకూరి | Father | 0.94/1.00 | వెంకటేశ� రావ చేకూరి / రామరాజూ చేకూరి |  | {}
+1205 | Chekuri Harsha Vardhana Raju | Father | Chekuri Venkateswara Raju | చేకూరి హర్ష వర్ధన రాజు చేకూరి | చేకూరి వెంకటేశ్వర రాజు చేకూరి వయస్సు : 20 లింగము : పు | Father | 0.91/0.58 | చేకూరి హర� వర�న రాజు చేకూరి / చేకూరి వెంకటేశ� ర రాజు | TE-MISMATCH | {'రాజు': ['Raju']}
+1206 | Chekuri Saritha | Husband | Chekuri Venkateswararaju | చేకూరి సరిత | చేకూరి వెంకటేస్వరరాజు | Husband | 1.00/0.95 | చేకూరి సరిత / చేకూరి వెంకటేస� రరాజు |  | {}
+1207 | Udaya Pothuru | Husband | Satyanarayana Raju | ఉదయ పొత్తూరు | సత్యనారాయణ రాజు | Husband | 0.90/0.92 | ఉదయ పొతూ� రు / సత� నారాయణ రాజు |  | {'సత్యనారాయణ': ['Satyanarayana'], 'రాజు': ['Raju']}
+1208 | Ramesh Kankipati | Father | Appalaraju | రమేష్ కంకిపాటి | అప్పలరాజు | Father | 1.00/0.88 | రమేష్ కంకిపాటి / అప� లరాజు |  | {'అప్పలరాజు': ['Appalaraju']}
+1209 | Subbaraju Pothuru | Father | Achiraju | సుబ్బారాజు పోతూరు | అచ్చిరాజు | Father | 0.93/0.88 | సుబా� రాజు పోతూరు / అచి� రాజు |  | {'అచ్చిరాజు': ['Achchiraju']}
+1210 | Ramachandraraju Pothuru | Mother | Satyanarayanaraju | రామచంద్రరాజు పోతూరూ | సత్యనారాయణరాజు | Mother | 0.94/0.92 | రామచం�దరాజు పోతూరూ / సత� నారాయణరాజు |  | {}
+1211 | Jyothi Kankipati | Husband | China Satyanarayana Raju | జ్యోతి కంకిపాటి | చిన సత్యనారాయణ రాజు | Husband | 0.92/0.94 | జో� తి కంకిపాటి / చిన సత� నారాయణ రాజు |  | {'జ్యోతి': ['Jyothi'], 'చిన': ['China'], 'సత్యనారాయణ': ['Satyanarayana'], 'రాజు': ['Raju']}
+1212 | Sri Lakshmi Akula | Husband | Srinivasa Rao Akula | శ్రీ లక్ష్మి ఆకుల | శ్రీనివాస రావు ఆకుల | Husband | 0.85/0.94 | �శీ లక్షి�  ఆకుల / �శీనివాస రావు ఆకుల |  | {'లక్ష్మి': ['Lakshmi'], 'ఆకుల': ['Akula'], 'శ్రీనివాస': ['Srinivasa'], 'రావు': ['Rao']}
+1213 | Suridamma Chekuri | Husband | Sankara Raju | సూరీడమ్మ చేకూరి | శంకర రాజు | Husband | 0.92/1.00 | సూరీడమ�  చేకూరి / శంకర రాజు |  | {'శంకర': ['Shankara'], 'రాజు': ['Raju']}
+1214 | Savithri Sakineti | Husband | Satyanarayana Raju | సావిత్రి శకినేటి | సత్యనారాయణ రాజు | Husband | 0.93/0.92 | సావి�తి శకినేటి / సత� నారాయణ రాజు |  | {'సావిత్రి': ['Savithri'], 'సత్యనారాయణ': ['Satyanarayana'], 'రాజు': ['Raju']}
+1215 | Achyutha Surya Narayana Raju Pothuru | Father | Satyanarayana Raju Pothuru | అచుత సూర్యా నారాయణ రాజు పోతూరు | సత్యనారాయణ రాజు పోతూరు వయస్సు : 32 లింగము : పు | Father | 0.96/0.48 | అచుత సూరా�  నారాయణ రాజు పోతూరు / సత� నారాయణ రాజు | TE-MISMATCH | {'సూర్యా': ['Surya'], 'నారాయణ': ['Narayana', 'Satyanarayana'], 'రాజు': ['Raju'], 'సత్యనారాయణ': ['Satyanarayana']}
+1216 | Seetharamaraju Kusampudi | Father | Padmanabharaju | సీతారామరాజు కూసంపూడి | పద్మనాభరాజు | Father | 1.00/0.90 | సీతారామరాజు కూసంపూడి / పద� నాభరాజు |  | {}
+1217 | Satyanarayanaraju Sakineti | Father | Ramaraju | సత్యనారాయణరాజు శకినేటి | రామరాజు | Father | 0.95/1.00 | సత� నారాయణరాజు శకినేటి / రామరాజు |  | {}
+1218 | Prasanthirani Nakka | Father | Someswararao Nakka | ప్రసాంఠీరానీ నక్క | సోమేశ్వరరావు నక్క | Father | 0.86/0.86 | �పసాంఠీరానీ నక� / సోమేశ� రరావు నక� |  | {'నక్క': ['Nakka']}
+1219 | Shaik Rajansha | Father | Shaik Bade Sha | షేక్ రాజ్న్ష | షేక్ బడే షా | Father | 0.78/1.00 | షేక్ రాజ� � / షేక్ బడే షా |  | {}
+1220 | Padmavathi Kankipati | Husband | Rayapuraju | పద్మావతి కంకిపాటి | రాయపురాజు | Husband | 0.93/1.00 | పదా� వతి కంకిపాటి / రాయపురాజు |  | {}
+1221 | Srinu Medeti | Father | Veerabhadrarao | శ్రీను మేడేటి | వీరభద్రరావు | Father | 0.91/0.90 | �శీను మేడేటి / వీరభ�దరావు |  | {'శ్రీను': ['Srinu']}
+1222 | A. S. U. Siri Devi Kalidindi | Husband | Swami Siva Seetharama Raju Sakineti | ఏ ఏస యు సిరి దేవి కలిదిండి | స్వామి శివ సీతారామ రాజు సకినేటి వయస్సు : 29 లింగము : స్త్రీ | Husband | 1.00/0.54 | ఏ ఏస యు సిరి దేవి కలిదిండి / సా� మి శివ సీతారామ రాజు | TE-MISMATCH | {'ఏస': ['S.'], 'దేవి': ['Devi'], 'స్వామి': ['Swamy'], 'శివ': ['Siva'], 'రాజు': ['Raju']}
+1223 | Swami Siva Seetharamaraju Sakineti | Father | Satyanarayanaraju | స్వామీ శివ సీతారామరాజు సఖీనేటీ | సత్యనారాయణరాజు | Father | 0.96/0.92 | సా� మీ శివ సీతారామరాజు సఖీనేటీ / సత� నారాయణరాజు |  | {'శివ': ['Siva']}
+1224 | Vinodhkumar Sakineti | Father | Satyanarayanaraju | వినోధకుమార సఖీనేటీ | సత్యనారాయణరాజు | Father | 1.00/0.92 | వినోధకుమార సఖీనేటీ / సత� నారాయణరాజు |  | {}
+1225 | Likhitha Chakkidala | Father | Ramana Chakkidala | లిఖిత చక్కిదఅలా | రమణ చక్కిదఅలా | Father | 0.92/0.91 | లిఖిత చకి� దఅలా / రమణ చకి� దఅలా |  | {'రమణ': ['Ramana']}
+1226 | Neeraja Nakka | Father | Someswararao Nakka | నీరజ నక్క | సోమేశ్వరరావు నక్క | Father | 0.86/0.86 | నీరజ నక� / సోమేశ� రరావు నక� |  | {'నక్క': ['Nakka']}
+1227 | Prudhvi Nakka | Father | Someswara Rao Nakka | పృథ్వి నక్క | సోమేశ్వర రావు నక్క | Father | 0.75/0.86 | పృథి�  నక� / సోమేశ� ర రావు నక� |  | {'నక్క': ['Nakka'], 'రావు': ['Rao']}
+1228 | Lakshmi Kasireddi | Husband | Pentayya Kasireddi | లక్ష్మి కశిరెడ్డి | పెంటయ్య కశిరెడ్డి | Husband | 0.86/0.86 | లక్షి�  కశిరెడి� / పెంటయ�  కశిరెడి� |  | {'లక్ష్మి': ['Lakshmi'], 'కశిరెడ్డి': ['Kasireddy'], 'పెంటయ్య': ['Pentayya']}
+1229 | Pentayya Kasireddi | Father | Appanna Kasireddi | పెంటయ్య కసిరెడ్డి | అప్పన్న కసిరెడ్డి | Father | 0.86/0.77 | పెంటయ�  కసిరెడి� / అప� న�  కసిరెడి� |  | {'పెంటయ్య': ['Pentayya'], 'అప్పన్న': ['Appanna']}
+1230 | Sandhya Rani Nakka | Father | Someswararao Nakka | సంద్య రాణి నక్క | సోమేశ్వరావ నక్క | Father | 0.82/0.83 | సంద�  రాణి నక� / సోమేశ� రావ నక� |  | {'నక్క': ['Nakka']}
+1231 | Kandrakota Niranjan | Father | Kandrakota Venkatarao | కండ్రకోట నిరంజన్ | కండ్రకోట వెంకటరావు | Father | 0.93/0.94 | కం�డకోట నిరంజన్ / కం�డకోట వెంకటరావు |  | {}
+1232 | Sambasiva Vutla | Father | Achiyya | సాంబశివ వుట్ల | అచ్చియ్య | Father | 0.91/0.67 | సాంబశివ వుట� / అచి� య� |  | {'సాంబశివ': ['Sambashiva'], 'వుట్ల': ['Vutla']}
+1233 | Shanmukha Manikantha Sai Raju Goru | Father | Malleswara Rao Goru | షణ్ముక మణికాంత సాయి రాజు గోరు | మల్లీశ్వర రావు గోరు | Father | 0.96/0.87 | షణు� క మణికాంత సాయి రాజు గోరు / మలీ�శ� ర రావు గోరు |  | {'సాయి': ['Sai'], 'రాజు': ['Raju'], 'రావు': ['Rao']}
+1234 | Umasankar Goru | Father | Malleswararao Goru | ఉమాశంకర్ గోరు | మల్లేశ్వరరావు గోరు | Father | 1.00/0.87 | ఉమాశంకర్ గోరు / మలే�శ� రరావు గోరు |  | {}
+1235 | Varalakshmi Vutla | Husband | Sambasiva | వరలక్ష్మి వుట్ల | సాంబశివ | Husband | 0.83/1.00 | వరలక్షి�  వుట� / సాంబశివ |  | {'వరలక్ష్మి': ['Varalakshmi'], 'వుట్ల': ['Vutla'], 'సాంబశివ': ['Sambashiva']}
+1236 | Varalakshmi Indala | Husband | Venkata Ramanamurthy | వరలక్ష్మి ఇందల | వెంకట రమణమూర్తి | Husband | 0.92/0.92 | వరలక్షి�  ఇందల / వెంకట రమణమూరి� |  | {'వరలక్ష్మి': ['Varalakshmi'], 'ఇందల': ['Indala'], 'వెంకట': ['Venkata'], 'రమణమూర్తి': ['Ramanamurthy']}
+1237 | Rajayya Satya Santhoshi Nakkina | Father | Chinnaraju Nakkina | రాజయ్య సత్య సంతోషి నక్కిన | చిన్నరాజు నక్కిన | Father | 0.84/0.85 | రాజయ�  సత�  సంతోషి నకి� న / చిన� రాజు నకి� న |  | {'సత్య': ['Satya'], 'నక్కిన': ['Nakkina']}
+1238 | Suryakantham Nakkina | Husband | Rajeswara Rao | సూర్యకాంతం నక్కిన | రాజేశ్వర రావు | Husband | 0.86/0.91 | సూర� కాంతం నకి� న / రాజేశ� ర రావు |  | {'నక్కిన': ['Nakkina'], 'రావు': ['Rao']}
+1239 | Mohan Rajesh Nakkina | Father | Nageswara Rao Nakkina | మోహన్ రాజేశ్ నక్కిన | నగేశ్వరరావు నక్కిన | Father | 0.94/0.87 | మోహన్ రాజేశ్ నకి� న / నగేశ� రరావు నకి� న |  | {'మోహన్': ['Mohan'], 'నక్కిన': ['Nakkina'], 'నగేశ్వరరావు': ['Nageswara']}
+1240 | Panduranga Karri | Father | Appalakonda | పాండురంగ కర్రి | అప్పలకొండ | Father | 0.92/0.88 | పాండురంగ క�రి / అప� లకొండ |  | {'కర్రి': ['Karri'], 'అప్పలకొండ': ['Appalakonda']}
+1241 | Paparatnam Nakkina | Husband | Nageswara Rao | పాపారత్నం నక్కిన | నాగేశ్వరరావు | Husband | 0.85/0.91 | పాపారత� ం నకి� న / నాగేశ� రరావు |  | {'నక్కిన': ['Nakkina']}
+1242 | Chinaraju Nakkina | Father | Rajeswararao | చినరాజు నక్కిన | రాజేశ్వరరావు | Father | 0.92/0.91 | చినరాజు నకి� న / రాజేశ� రరావు |  | {'నక్కిన': ['Nakkina']}
+1243 | Nageswara Rao Nakkina | Father | Rajeswararao | నాగేశ్వరరావు నక్కిన | రాజేశ్వరరావు | Father | 0.88/0.91 | నాగేశ� రరావు నకి� న / రాజేశ� రరావు |  | {'నక్కిన': ['Nakkina']}
+1244 | Ramanamma Karri | Husband | Panduranga | రమణమ్మ కర్రి | పాండురంగ | Husband | 0.78/1.00 | రమణమ�  క�రి / పాండురంగ |  | {'రమణమ్మ': ['Ramanamma'], 'కర్రి': ['Karri']}
+1245 | Nageswara Rao Karri | Father | Pandu Ranga Karri | నాగేశ్వర రావు కర్రి | పాండు రంగ కర్రి | Father | 0.87/0.92 | నాగేశ� ర రావు క�రి / పాండు రంగ క�రి |  | {'నాగేశ్వర': ['Nageswara'], 'రావు': ['Rao'], 'కర్రి': ['Karri']}
+1246 | Uma Maheswara Rao Karri | Father | Pandu Ranga Karri | ఉమ మహేశ్వర రావు కర్రి | పాండు రంగ కర్రి | Father | 0.88/0.92 | ఉమ మహేశ� ర రావు క�రి / పాండు రంగ క�రి |  | {'రావు': ['Rao'], 'కర్రి': ['Karri']}
+1247 | Uma Karri | Husband | Nageswara Rao Karri | ఉమ కర్రి | నాగేశ్వరరావు కర్రి | Husband | 0.83/0.87 | ఉమ క�రి / నాగేశ� రరావు క�రి |  | {'కర్రి': ['Karri']}
+1248 | Ramana Botta | Father | Konda | రమణ బొట్టా | కొండ | Father | 0.88/1.00 | రమణ బొటా� / కొండ |  | {'రమణ': ['Ramana'], 'బొట్టా': ['Botta'], 'కొండ': ['Konda']}
+1249 | Jogamma Nakkina | Husband | Peda Apparao | జోగమ్మ నక్కిన | పెద అప్పారావు | Husband | 0.80/0.91 | జోగమ�  నకి� న / పెద అపా� రావు |  | {'నక్కిన': ['Nakkina'], 'పెద': ['Peda'], 'అప్పారావు': ['Apparao']}
+1250 | Kumarraja Indala | Father | Venkataramanamurthy Indala | కుమార్రాజ ఇందల | వెంకటరమణమూర్తి ఇందల | Father | 1.00/0.94 | కుమార్ రాజ ఇందల / వెంకటరమణమూరి� ఇందల |  | {'ఇందల': ['Indala'], 'వెంకటరమణమూర్తి': ['Venkataramanamoorthi']}
+1251 | Ramalakshmi Nakkina | Husband | Tarakeswara Rao Nakkina | రామలక్ష్మి నక్కిన | తారకేశ్వర రావు నక్కిన | Husband | 0.86/0.88 | రామలక్షి�  నకి� న / తారకేశ� ర రావు నకి� న |  | {'రామలక్ష్మి': ['Ramalakshmi'], 'నక్కిన': ['Nakkina'], 'రావు': ['Rao']}
+1252 | Nakkina Apparao | Father | Nakkina Sanyasi | నక్కిన అప్పారావు | నక్కిన సన్యాసి | Father | 0.85/0.82 | నకి� న అపా� రావు / నకి� న సనా� సి |  | {'నక్కిన': ['Nakkina'], 'అప్పారావు': ['Apparao'], 'సన్యాసి': ['Sanyasi']}
+1253 | Venkata Suryakumari Nakkina | Father | Chinaraju Nakkina | వెంకట సూర్యకుమారి నక్కిన | చినారాజు నక్కిన | Father | 0.90/0.92 | వెంకట సూర� కుమారి నకి� న / చినారాజు నకి� న |  | {'వెంకట': ['Venkata'], 'సూర్యకుమారి': ['Suryakumari'], 'నక్కిన': ['Nakkina']}
+1254 | Manikantha Ramasai Nakkina | Father | Chinaraju Nakkina | మణికాంత రామాసాయి నక్కిన | చినరాజు నక్కిన | Father | 0.95/0.92 | మణికాంత రామాసాయి నకి� న / చినరాజు నకి� న |  | {'నక్కిన': ['Nakkina']}
+1255 | Jhansi Priyanka Nakkina | Father | Nageswara Rao Nakkina | ఝాన్సిప్రీయాంకా నక్కిన | నగేశ్వరరావు నక్కిన | Father | 0.83/0.87 | ఝాని� �పీయాంకా నకి� న / నగేశ� రరావు నకి� న |  | {'నక్కిన': ['Nakkina'], 'నగేశ్వరరావు': ['Nageswara']}
+1256 | Sampath Devi Kanumuri | Father | Ramamurthy Raju Kanumuri | స్మ్ప దేవీ కనూమూరీ | రామమూర్తి రాజు కనూమూరీ | Father | 0.86/0.95 | స� �  దేవీ కనూమూరీ / రామమూరి� రాజు కనూమూరీ |  | {'దేవీ': ['Devee'], 'రాజు': ['Raju']}
+1257 | Satya Narayana Budida | Father | Venkata Ramana Budida | సత్య నారాయణ బుడిద | వేంకట రమన బుడిద | Father | 0.93/1.00 | సత�  నారాయణ బుడిద / వేంకట రమన బుడిద |  | {'సత్య': ['Satya'], 'నారాయణ': ['Narayana', 'Satyanarayana'], 'వేంకట': ['Venkata'], 'రమన': ['Ramana']}
+1258 | Madhu Sai Teja Budida | Father | Satyanarayana Budida | మధు సాయి తేజ బుడిడా | సత్యనారాయ్నా బుడిధా | Father | 1.00/0.88 | మధు సాయి తేజ బుడిడా / సత� నారాయా�  బుడిధా |  | {'సాయి': ['Sai'], 'తేజ': ['Teja']}
+1259 | Sridevi Budida | Husband | Satyanarayana Budida | శ్రీదేవి బూడిద | సత్యనారాయణ బూడిద | Husband | 0.92/0.93 | �శీదేవి బూడిద / సత� నారాయణ బూడిద |  | {'సత్యనారాయణ': ['Satyanarayana']}
+1260 | Madhuri Sai Priyanka Budida | Father | Satyanarayana Budida | మాధురి సాయి ప్రియంకా బుడిడా | సత్యనారాయణ బుడిడా | Father | 0.96/0.93 | మాధురి సాయి �పియంకా బుడిడా / సత� నారాయణ బుడిడా |  | {'సాయి': ['Sai'], 'సత్యనారాయణ': ['Satyanarayana']}
+1261 | Kumari Botta | Husband | Ramana | కుమారి బోట్టా | రమణ | Husband | 0.91/1.00 | కుమారి బోటా� / రమణ |  | {'కుమారి': ['Kumari'], 'బోట్టా': ['Botta'], 'రమణ': ['Ramana']}
+1262 | Srinu Bandam | Father | Konda | శ్రీను బందం | కోండ | Father | 0.89/1.00 | �శీను బందం / కోండ |  | {'శ్రీను': ['Srinu'], 'కోండ': ['Konda']}
+1263 | Madhu Sai Teja Budida | Mother | Sridevi | మధు సాయి తేజ బుడిధ | శ్రీదేవి | Mother | 1.00/0.86 | మధు సాయి తేజ బుడిధ / �శీదేవి |  | {'సాయి': ['Sai'], 'తేజ': ['Teja']}
+1264 | Lakshmi Bandham | Mother | Srinu Bandham | లక్ష్మీ బంధం | శృనూ బంధం | Mother | 0.90/1.00 | లక్షీ�  బంధం / శృనూ బంధం |  | {'లక్ష్మీ': ['Lakshmi']}
+1265 | Durga Bhavani Budida | Father | Satyanarayana Budida | దుర్గ భవనీ బుడిడా | సత్యనారాయణ బుడిడా | Father | 0.93/0.93 | దుర� భవనీ బుడిడా / సత� నారాయణ బుడిడా |  | {'దుర్గ': ['Durga'], 'భవనీ': ['Bhavanee', 'Bhavani'], 'సత్యనారాయణ': ['Satyanarayana']}
+1266 | Sravani Sankara | Father | Raju Sankara | శ్రావణి సంకర | రాజు సంకర | Father | 0.90/1.00 | �శావణి సంకర / రాజు సంకర |  | {'శ్రావణి': ['Shravani'], 'రాజు': ['Raju']}
+1267 | V. S. Narasimharaju Chintalapati | Father | Bangara Raju | వీ యస్ నరశింవారాజు చింతలపాటి | బంగారా రాజు | Father | 1.00/1.00 | వీ యస్ నరశింవారాజు చింతలపాటి / బంగారా రాజు |  | {'వీ': ['V.', 'Vee'], 'చింతలపాటి': ['Chintalapati'], 'రాజు': ['Raju']}
+1268 | Sudha Chintalapati | Husband | V. Surya Narasimharaju | సుధా చింతలపాటి | వీ సుర్య నరసింవారాజు | Husband | 1.00/0.94 | సుధా చింతలపాటి / వీ సుర�  నరసింవారాజు |  | {'చింతలపాటి': ['Chintalapati'], 'వీ': ['V.', 'Vee'], 'సుర్య': ['Surya']}
+1269 | Raghu Bangara Raju Chintalapati | Father | V. S. Narasimharaju | రఘు బంగారా రాజు చింతలపాటి | వీ యస్ నరసింవారాజు | Father | 1.00/1.00 | రఘు బంగారా రాజు చింతలపాటి / వీ యస్ నరసింవారాజు |  | {'రాజు': ['Raju'], 'చింతలపాటి': ['Chintalapati'], 'వీ': ['V.', 'Vee']}
+1270 | Syama Chintalapati | Husband | Lakshmi Narasimharaju | శ్యామ చింతలపాటి | లక్ష్మి నరసింహరాజు | Husband | 0.92/0.94 | శా� మ చింతలపాటి / లక్షి�  నరసింహరాజు |  | {'చింతలపాటి': ['Chintalapati'], 'లక్ష్మి': ['Lakshmi']}
+1271 | S. V. S. D. Prasad | Father | V. P. Raju | యస్.వీ.యస్.డీ.ప్రసాద్ | వి.పి.రాజు | Father | 0.94/1.00 | యస్.వీ.యస్.డీ.�పసాద్ / వి.పి.రాజు |  | {}
+1272 | Buchi Seethadevi Chintalapati | Husband | Bangaraju | బుచ్చి సీతాదేవి చింతలపాటి | బంగరాజు | Husband | 0.95/1.00 | బుచి�  సీతాదేవి చింతలపాటి / బంగరాజు |  | {'బుచ్చి': ['Buchchi'], 'చింతలపాటి': ['Chintalapati']}
+1273 | Sasimma Chintalapati | Husband | Venkatapathi Raju | శశిమ్మ చింతలపాటి | వెంకటపతి రాజు | Husband | 0.93/1.00 | శశిమ�  చింతలపాటి / వెంకటపతి రాజు |  | {'చింతలపాటి': ['Chintalapati'], 'రాజు': ['Raju']}
+1274 | Venkatapathiraju Chintalapati | Father | Buchivenkatapathiraju | వెంకటపతిరాజు చింతలపాటి | బుచ్చివెంకటపతిరాజు | Father | 1.00/0.94 | వెంకటపతిరాజు చింతలపాటి / బుచి� వెంకటపతిరాజు |  | {'చింతలపాటి': ['Chintalapati']}
+1275 | Ammaji Chintalapati | Husband | Buchivenkatapathiraju | అమ్మాజీ చింతలపాటి | బుచ్చివెంకటపతిరాజు | Husband | 0.93/0.94 | అమా� జీ చింతలపాటి / బుచి� వెంకటపతిరాజు |  | {'అమ్మాజీ': ['Ammaji'], 'చింతలపాటి': ['Chintalapati']}
+1276 | Adarsh Chintalapati | Father | Venkatapathi Raju Chintalapati | ఆదర్శ చింతలపాటి | వెంకటపతి రాజు చింతలపాటి వయస్సు : 32 లింగము : పు | Father | 0.92/0.47 | ఆదర�  చింతలపాటి / వెంకటపతి రాజు | TE-MISMATCH | {'చింతలపాటి': ['Chintalapati'], 'రాజు': ['Raju']}
+1277 | Adarsh Chintalapati | Mother | Sravanthi Chintalapati | ఆదర్శ్ చింతలపాటి | None | None | 0.93/0.00 | ఆదర్�  చింతలపాటి / �శావంతీ చింతలపాటి | REL draft Mother pdf None; TE-MISMATCH | {'చింతలపాటి': ['Chintalapati']}
+1278 | Durgabhavani Rayi | Husband | Siva Sankara Rao | దుర్గాభవాని రాయి | శివ శంకర రావు | Husband | 0.93/1.00 | దురా� భవాని రాయి / శివ శంకర రావు |  | {'రాయి': ['Rayi'], 'శివ': ['Siva'], 'శంకర': ['Shankara'], 'రావు': ['Rao']}
+1279 | Nookaratnam Rayi | Husband | Apparao | నూకరత్నం రాయి | అప్పారావు | Husband | 0.91/0.88 | నూకరత� ం రాయి / అపా� రావు |  | {'నూకరత్నం': ['Nookaratnam', 'Nukaarathnam'], 'రాయి': ['Rayi'], 'అప్పారావు': ['Apparao']}
+1280 | Sivasankararao Rayi | Father | Apparao | శివశంకరరావు రాయి | అప్పారావు | Father | 1.00/0.88 | శివశంకరరావు రాయి / అపా� రావు |  | {'రాయి': ['Rayi'], 'అప్పారావు': ['Apparao']}
+1281 | Nakkina Tarakeswararao | Father | Nakkina Apparao | నక్కిన తారకేస్వరారావ | నక్కిన అప్పారావు | Father | 0.88/0.85 | నకి� న తారకేస� రారావ / నకి� న అపా� రావు |  | {'నక్కిన': ['Nakkina'], 'అప్పారావు': ['Apparao']}
+1282 | Sanyasamma Kandipalli | Husband | Konda | సన్యాశమ్మ కండిపల్లి | కొండ | Husband | 0.80/1.00 | సనా� శమ�  కండిపలి� / కొండ |  | {'కొండ': ['Konda']}
+1283 | Nagamani Kandipalli | Husband | Sattibabu | నాగమణి కండపల్లి | సత్తిబాబు | Husband | 0.92/0.88 | నాగమణి కండపలి� / సతి�బాబు |  | {'నాగమణి': ['Nagamani'], 'సత్తిబాబు': ['Sattibabu']}
+1284 | Naveen Pedapati | Father | Brahmaji Pedapati | నవీన్ పెధపతి | బ్రహ్మాజీ పెధపతి | Father | 1.00/0.85 | నవీన్ పెధపతి / �బహా� జీ పెధపతి |  | {}
+1285 | Vanitha Pedapati | Father | Brahmaji Pedapati | వనిత పెదపాటి | బ్రహ్మజి పెదపాటి | Father | 1.00/0.85 | వనిత పెదపాటి / �బహ� జి పెదపాటి |  | {'పెదపాటి': ['Pedapati']}
+1286 | Paidithalli Rayudu | Husband | Apparao | పైడితల్లి రాయుడు | అప్పారావు | Husband | 0.93/0.88 | పైడితలి� రాయుడు / అపా� రావు |  | {'పైడితల్లి': ['Paidithalli'], 'అప్పారావు': ['Apparao']}
+1287 | Appalaraju Rayudu | Father | Apparao | అప్పలరాజు రాయడు | అప్పారావు | Father | 0.92/0.88 | అప� లరాజు రాయడు / అపా� రావు |  | {'అప్పలరాజు': ['Appalaraju'], 'అప్పారావు': ['Apparao']}
+1288 | Sankararao Rayudu | Mother | Apparao | శంకరరావు రాయుడు | అప్పారావు | Mother | 1.00/0.88 | శంకరరావు రాయుడు / అపా� రావు |  | {'శంకరరావు': ['Shankararavu'], 'అప్పారావు': ['Apparao']}
+1289 | Aparna Rayudu | Husband | Appala Raju | అపర్ణా రాయడూ | అప్పలా రాజు | Husband | 0.90/0.89 | అపరా�  రాయడూ / అప� లా రాజు |  | {'అప్పలా': ['Appala'], 'రాజు': ['Raju']}
+1290 | Varalakshmi Kandipalli | Husband | Sattibabu | వరలక్ష్మి కండిపల్లి | సత్తిబాబు | Husband | 0.88/0.88 | వరలక్షి�  కండిపలి� / సతి�బాబు |  | {'వరలక్ష్మి': ['Varalakshmi'], 'సత్తిబాబు': ['Sattibabu']}
+1291 | Chinnakonda Kandipalli | Father | Thalamma | చిన్నకొండ కండిపల్లి | తాళమ్మ | Father | 0.88/0.80 | చిన� కొండ కండిపలి� / తాళమ� |  | {}
+1292 | Sattibabu Kandipalli | Father | Konda | సత్తిబాబు కండిపల్లి | కొండ | Father | 0.88/1.00 | సతి�బాబు కండిపలి� / కొండ |  | {'సత్తిబాబు': ['Sattibabu'], 'కొండ': ['Konda']}
+1293 | Sattibabu Kandipalli | Father | China Konda | సత్తిబాబు కండిపల్లి | చిన కొండ | Father | 0.88/1.00 | సతి�బాబు కండిపలి� / చిన కొండ |  | {'సత్తిబాబు': ['Sattibabu'], 'చిన': ['China'], 'కొండ': ['Konda']}
+1294 | Seetha Polarapu | Husband | Hanumanthu | సీత పోలారపు | హనుమంతు | Husband | 1.00/1.00 | సీత పోలారపు / హనుమంతు |  | {}
+1295 | Uma Devi Polavarapu | Husband | Appala Konda | ఉమా దేవీ పోలవరపు | అప్పల కొండ | Husband | 1.00/0.88 | ఉమా దేవీ పోలవరపు / అప� ల కొండ |  | {'దేవీ': ['Devee'], 'పోలవరపు': ['Polavarapu'], 'అప్పల': ['Appala'], 'కొండ': ['Konda']}
+1296 | Lakshmi Polarapu | Husband | Bandayya | లక్ష్మి పోలారపు | బండియ్య | Husband | 0.92/0.83 | లక్షి�  పోలారపు / బండియ� |  | {'లక్ష్మి': ['Lakshmi'], 'బండియ్య': ['Bandayya']}
+1297 | Gangabhavani Polavarapu | Husband | Satyanarayana | గంగాభవాని పోలవరపు | సత్యనారాయణ | Husband | 1.00/0.89 | గంగాభవాని పోలవరపు / సత� నారాయణ |  | {'గంగాభవాని': ['Gangabhavani'], 'పోలవరపు': ['Polavarapu'], 'సత్యనారాయణ': ['Satyanarayana']}
+1298 | Seetha Devi Chintalapati | Father | Satyanarayana Raju Pusapati | సీత దేవి చింతలపాటి | సత్యనారాయణ రాజు పూసపాటి వయస్సు : 82 లింగము : స్త్రీ | Father | 1.00/0.44 | సీత దేవి చింతలపాటి / సత� నారాయణ రాజు | TE-MISMATCH | {'దేవి': ['Devi'], 'చింతలపాటి': ['Chintalapati'], 'సత్యనారాయణ': ['Satyanarayana'], 'రాజు': ['Raju']}
+1299 | Suryanarayana Raju Chintalapati | Father | Buchi Bangara Raju Chintalapati | సుర్యనారాయణ రాజు చింతలపాటి | బుచ్చి బంగర రాజు చింతలపాటి వయస్సు : 65 లింగము : పు | Father | 0.96/0.45 | సుర� నారాయణ రాజు చింతలపాటి / బుచి�  బంగర రాజు | TE-MISMATCH | {'రాజు': ['Raju'], 'చింతలపాటి': ['Chintalapati'], 'బుచ్చి': ['Buchchi']}
+1300 | Bandayya Polarapu | Father | Hanumanthu | బండియ్య పోలారపు | హానుమంతు | Father | 0.92/1.00 | బండియ�  పోలారపు / హానుమంతు |  | {'బండియ్య': ['Bandayya']}
+1301 | Satyanarayana Polarapu | Father | Hanumanthu | సత్యనారాయణ పాలారపు | హానుమంతు | Father | 0.94/1.00 | సత� నారాయణ పాలారపు / హానుమంతు |  | {'సత్యనారాయణ': ['Satyanarayana']}
+1302 | Usha Chintalapati | Husband | Visweswarabangaraju Chintalapati | ఉష చింతలపాటి | విశ్వాసరబంగరాజు చింతలపాటి వయస్సు : 74 లింగము : స్త్రీ | Husband | 1.00/0.44 | ఉష చింతలపాటి / విశా� సరబంగరాజు | TE-MISMATCH | {'చింతలపాటి': ['Chintalapati']}
+1303 | Venkata Satya Narayana Polavarapu | Mother | Polavarapu Lakshmi | వెంకట సత్య నారాయణ పోలవరపు | పోలవరపు లక్ష్మి | Mother | 0.95/0.92 | వెంకట సత�  నారాయణ పోలవరపు / పోలవరపు లక్షి� |  | {'వెంకట': ['Venkata'], 'సత్య': ['Satya'], 'నారాయణ': ['Narayana', 'Satyanarayana'], 'పోలవరపు': ['Polavarapu'], 'లక్ష్మి': ['Lakshmi']}
+1304 | Jayavardhan Polavarapu | Father | Appalakonda Polavarapu | జయవర్ధన్ పోలవరపు | అప్పలకొండ పోలవరపు | Father | 0.93/0.93 | జయవర�న్ పోలవరపు / అప� లకొండ పోలవరపు |  | {'పోలవరపు': ['Polavarapu'], 'అప్పలకొండ': ['Appalakonda']}
+1305 | Appalaraju Odaboyina | Husband | Nukaraju | అప్పలరాజు ఓడబోయిన | నూకరాజు | Husband | 0.93/1.00 | అప� లరాజు ఓడబోయిన / నూకరాజు |  | {'అప్పలరాజు': ['Appalaraju'], 'నూకరాజు': ['Nukaaraju', 'Nukaraju']}
+1306 | Durgalamma Nagaraboyina | Husband | Apparao Nagaraboyina | దుర్గాలమ్మ నగరబోయిన | అప్పారావు నగరబోయిన | Husband | 0.88/0.94 | దురా� లమ�  నగరబోయిన / అపా� రావు నగరబోయిన |  | {'అప్పారావు': ['Apparao']}
+1307 | Appalakonda Polarapu | Father | Hanumanthu | అప్పలకొండ పోలారపు | హనుమంతు | Father | 0.93/1.00 | అప� లకొండ పోలారపు / హనుమంతు |  | {'అప్పలకొండ': ['Appalakonda']}
+1308 | Chiranjeevi Polavarapu | Father | Bandayya Polavarapu | చిరంజీవి పోలవరపు | బండియ్య పోలవరపు | Father | 1.00/0.92 | చిరంజీవి పోలవరపు / బండియ�  పోలవరపు |  | {'చిరంజీవి': ['Chiranjeevi'], 'పోలవరపు': ['Polavarapu'], 'బండియ్య': ['Bandayya']}
+1309 | Kanakaratnam Odaboyina | Husband | Ramulu | కనకరత్నం ఓడబోయిన | రాములు | Husband | 0.93/1.00 | కనకరత� ం ఓడబోయిన / రాములు |  | {'కనకరత్నం': ['Kanakarathnam'], 'రాములు': ['Ramulu']}
+1310 | Simhachalam Kandipalli | Husband | Tatabbayi | సింహచలం కండిపల్లి | తాతబ్బాయి | Husband | 0.93/0.88 | సింహచలం కండిపలి� / తాతబా� యి |  | {'సింహచలం': ['Simhachalam'], 'తాతబ్బాయి': ['Tatabbayi']}
+1311 | Varalakshmi Kandipalli | Husband | Nukaraju | వరలక్ష్మి కండిపల్లి | నూకరాజు | Husband | 0.88/1.00 | వరలక్షి�  కండిపలి� / నూకరాజు |  | {'వరలక్ష్మి': ['Varalakshmi'], 'నూకరాజు': ['Nukaaraju', 'Nukaraju']}
+1312 | Durga Devi Vadaboyina | Husband | Sankar Rao Vadaboyina | దుర్గ దేవి వడబోయిన | శంకర్ రావు వడబోయిన | Husband | 0.93/1.00 | దుర� దేవి వడబోయిన / శంకర్ రావు వడబోయిన |  | {'దుర్గ': ['Durga'], 'దేవి': ['Devi'], 'శంకర్': ['Shankar'], 'రావు': ['Rao']}
+1313 | Odiboyina Sankararao | Father | Odiboyina Ramulu | ఒడిబోయిన శంకరరావు | ఒడిబోయిన రాములు | Father | 1.00/1.00 | ఒడిబోయిన శంకరరావు / ఒడిబోయిన రాములు |  | {'శంకరరావు': ['Shankararavu'], 'రాములు': ['Ramulu']}
+1314 | Appalanarsa Dara | Husband | Somunayudu | అప్పలనర్సదారా | సోమునాయుడు | Husband | 0.82/1.00 | అప� లనర� దారా / సోమునాయుడు |  | {}
+1315 | Yallamma Dara | Husband | Apparao | యల్లమ్మ దారా | అప్పారావు | Husband | 0.78/0.88 | యల�మ�  దారా / అపా� రావు |  | {'అప్పారావు': ['Apparao']}
+1316 | Naga Vara Prasad Dara | Father | Appa Rao Dara | నాగ వర ప్రసాద్ దార | అప్పా రావు దారా | Father | 0.93/0.92 | నాగ వర �పసాద్ దార / అపా�  రావు దారా |  | {'నాగ': ['Naga'], 'వర': ['Vara'], 'ప్రసాద్': ['Prasad'], 'అప్పా': ['Appa'], 'రావు': ['Rao']}
+1317 | Hemalatha Dara | Husband | Naga Vara Prasad Dara | హేమలత దార | నాగ వర ప్రసాద్ దార | Husband | 1.00/0.93 | హేమలత దార / నాగ వర �పసాద్ దార |  | {'నాగ': ['Naga'], 'వర': ['Vara'], 'ప్రసాద్': ['Prasad']}
+1318 | Mani Kantha Dara | Father | Apparao Dara | మణి కంట దార | అప్పరావు దార | Father | 1.00/0.90 | మణి కంట దార / అప� రావు దార |  | {'అప్పరావు': ['Apparao']}
+1319 | Apparao Dara | Father | Pedasanyasi | అప్పారావు దారా | పెదసన్యాసి | Father | 0.92/0.89 | అపా� రావు దారా / పెదసనా� సి |  | {'అప్పారావు': ['Apparao']}
+1320 | Prasad Rayidi | Father | Appalaraju | ప్రసాద్ రాయిడి | అప్పలరాజు | Father | 0.92/0.88 | �పసాద్ రాయిడి / అప� లరాజు |  | {'ప్రసాద్': ['Prasad'], 'అప్పలరాజు': ['Appalaraju']}
+1321 | Demullamma Dara | Husband | Apparao | దేముళ్ళమ్మ దారా | అప్పారావు | Husband | 0.83/0.88 | దేముళ� మ�  దారా / అపా� రావు |  | {'అప్పారావు': ['Apparao']}
+1322 | Apparao Dara | Father | Appanna | అప్పారావు దారా | అప్పన్న | Father | 0.92/0.60 | అపా� రావు దారా / అప� న� |  | {'అప్పారావు': ['Apparao'], 'అప్పన్న': ['Appanna']}
+1323 | Venkatalakshmi Dara | Husband | Arjuna | వెంకటలక్ష్మి దారా | అర్జున | Husband | 0.93/0.80 | వెంకటలక్షి�  దారా / అరు�న |  | {'వెంకటలక్ష్మి': ['Venkatalakshmi'], 'అర్జున': ['Arjuna']}
+1324 | Somunayudu Dara | Father | Venkanna | సోమునాయుడు దారా | వెంకన్న | Father | 1.00/0.83 | సోమునాయుడు దారా / వెంకన� |  | {'వెంకన్న': ['Venkanna']}
+1325 | Arjuna Dara | Father | Appanna | అర్జున దారా | అప్పన్న | Father | 0.89/0.60 | అరు�న దారా / అప� న� |  | {'అర్జున': ['Arjuna'], 'అప్పన్న': ['Appanna']}
+1326 | Papa Dara | Husband | Demullu | పాప దారా | దేముళ్ళు | Husband | 1.00/0.86 | పాప దారా / దేముళు� |  | {'దేముళ్ళు': ['Demullu']}
+1327 | Swetha Dara | Father | Arjuna Dara | శ్⌍వేతా దారా | అరాజున దారా | Father | 1.00/1.00 | శ్⌍వేతా దారా / అరాజున దారా |  | {}
+1328 | Bhavani Dara | Husband | Sanyasi Rao | భవానీ దారా | సన్యాసిరావు | Husband | 1.00/0.90 | భవానీ దారా / సనా� సిరావు |  | {'భవానీ': ['Bhavanee']}
+1329 | Appalaraju Dara | Father | Demudu Dara | అప్పలరాజు దారా | దేముడు దారా | Father | 0.92/1.00 | అప� లరాజు దారా / దేముడు దారా |  | {'అప్పలరాజు': ['Appalaraju']}
+1330 | Apparao Sudhakar Dara | Father | Sanyasi Rao Dara | అప్పారావు సుధాకర్ దార | సన్యాసి రావు దార | Father | 0.94/0.92 | అపా� రావు సుధాకర్ దార / సనా� సి రావు దార |  | {'అప్పారావు': ['Apparao'], 'సన్యాసి': ['Sanyasi'], 'రావు': ['Rao']}
+1331 | Chinasanyasi Dara | Father | Sanyasi | చినసన్యాశి దారా | సన్యాశి | Father | 0.92/0.83 | చినసనా� శి దారా / సనా� శి |  | {}
+1332 | Sanyasi Rao Dara | Father | Chinasanyasi | సన్యాసిరావు దారా | చినసన్యాసి | Father | 0.93/0.89 | సనా� సిరావు దారా / చినసనా� సి |  | {}
+1333 | Rajulamma Botta | Husband | Somulu | రాజులమ్మ బొట్టా | సోములు | Husband | 0.83/1.00 | రాజులమ�  బొటా� / సోములు |  | {'రాజులమ్మ': ['Rajulamma'], 'బొట్టా': ['Botta'], 'సోములు': ['Somulu']}
+1334 | Botta Ramanamma | Husband | Botta Eeswara Rao | బొట్ట రమణమ్మ | బొట్ట ఈశ్వరరావు | Husband | 0.78/0.83 | బొట� రమణమ� / బొట� ఈశ� రరావు |  | {'బొట్ట': ['Botta'], 'రమణమ్మ': ['Ramanamma']}
+1335 | Varalakshmi Botta | Father | Eeswara Rao Botta | వరలక్ష్మి బొట్ట | ఈశ్వరరావు బొట్ట | Father | 0.83/0.83 | వరలక్షి�  బొట� / ఈశ� రరావు బొట� |  | {'వరలక్ష్మి': ['Varalakshmi'], 'బొట్ట': ['Botta']}
+1336 | Srinu Botta | Father | Eeswar Rao Botta | శ్రీను బొట్ట | ఈశ్వర్ రావు బొట్ట | Father | 0.78/0.85 | �శీను బొట� / ఈశ� ర్ రావు బొట� |  | {'శ్రీను': ['Srinu'], 'బొట్ట': ['Botta'], 'రావు': ['Rao']}
+1337 | Eeswararao Botta | Father | Somulu | ఈశ్వరరావు బొట్టా | సోములు | Father | 0.85/1.00 | ఈశ� రరావు బొటా� / సోములు |  | {'బొట్టా': ['Botta'], 'సోములు': ['Somulu']}
+1338 | Rajeswari Chinni | Husband | Umamaheswararao Chinni | రాజేశ్వరి చిన్ని | ఉమమహేశ్వరరావు చిన్ని | Husband | 0.85/0.88 | రాజేశ� రి చిని� / ఉమమహేశ� రరావు చిని� |  | {'రాజేశ్వరి': ['Rajeswari']}
+1339 | Chintalli Chinni | Husband | Apparao | చింతల్లి చిన్ని | అప్పారావు | Husband | 0.83/0.88 | చింతలి� చిని� / అపా� రావు |  | {'చింతల్లి': ['Chintalli'], 'అప్పారావు': ['Apparao']}
+1340 | Appalanarsa Chinni | Husband | Bandayya | అప్పలనర్స చిన్ని | బండియ్య | Husband | 0.75/0.83 | అప� లనర�  చిని� / బండియ� |  | {'అప్పలనర్స': ['Appalanarsa'], 'బండియ్య': ['Bandayya']}
+1341 | Appalaraju Chinni | Father | Apparao Chinni | అప్పలరాజు చిన్ని | అప్పారావు చిన్ని | Father | 0.85/0.85 | అప� లరాజు చిని� / అపా� రావు చిని� |  | {'అప్పలరాజు': ['Appalaraju'], 'అప్పారావు': ['Apparao']}
+1342 | Grace Chinni | Husband | Chiranjeevi Chinni | గ్రాస్ చిన్ని | చిరంజీవి చిన్ని | Husband | 0.80/0.92 | �గాస్ చిని� / చిరంజీవి చిని� |  | {'చిరంజీవి': ['Chiranjeevi']}
+1343 | Appalaraju Chinni | Father | Appanna Chinni | అప్పలరాజు చిన్ని | అప్పన్న చిన్ని | Father | 0.85/0.70 | అప� లరాజు చిని� / అప� న�  చిని� |  | {'అప్పలరాజు': ['Appalaraju'], 'అప్పన్న': ['Appanna']}
+1344 | Bandayya Chinni | Father | Appanna | బండియ్య చిన్ని | అప్పన్న | Father | 0.82/0.60 | బండియ�  చిని� / అప� న� |  | {'బండియ్య': ['Bandayya'], 'అప్పన్న': ['Appanna']}
+1345 | Chilukamma Dara | Husband | Chinnarao | చిలుకమ్మ దారా | చిన్నారావు | Husband | 0.91/0.89 | చిలుకమ�  దారా / చినా� రావు |  | {}
+1346 | Chinnarao Dara | Father | Apparao | చిన్నారావు దారా | అప్పారావు | Father | 0.92/0.88 | చినా� రావు దారా / అపా� రావు |  | {'అప్పారావు': ['Apparao']}
+1347 | Ramulamma Yerramsetti | Husband | Chinakonda | రాములమ్మ యర్రంశెట్టి | చినకొండ | Husband | 0.81/1.00 | రాములమ�  య�రంశెటి� / చినకొండ |  | {'రాములమ్మ': ['Ramulamma'], 'యర్రంశెట్టి': ['Yerramsetti'], 'చినకొండ': ['Chinakomda']}
+1348 | Chinnikonda Yerramsetti | Father | Pedasanyasi | చిన్నికొండ యర్రంశెట్టి | పెదసన్యాశి | Father | 0.83/0.89 | చిని� కొండ య�రంశెటి� / పెదసనా� శి |  | {'యర్రంశెట్టి': ['Yerramsetti']}
+1349 | Srinu Bajantrila | Father | Ramu Bajantrila | శ్రీను బాజెంట్రీల | రాము బాజెంట్రీల | Father | 0.86/0.92 | �శీను బాజెం�టీల / రాము బాజెం�టీల |  | {'శ్రీను': ['Srinu'], 'రాము': ['Ramu']}
+1350 | Sanyasi Rao Yerramsetti | Father | Chinnakonda | సన్యాసిరావు యర్రంశెట్టి | చిన్నకొండ | Father | 0.84/0.88 | సనా� సిరావు య�రంశెటి� / చిన� కొండ |  | {'యర్రంశెట్టి': ['Yerramsetti']}
+1351 | Lakshmi Bajantrila | Husband | Ramu | లక్ష్మీ బజంత్రిలా | రాము | Husband | 0.86/1.00 | లక్షీ�  బజం�తిలా / రాము |  | {'లక్ష్మీ': ['Lakshmi'], 'రాము': ['Ramu']}
+1352 | Vadaboyina Arjuna | Father | Vadaboyina Nukaraju | వాడబోయిన అర్జున | వాడబోయిన నూకరాజు | Father | 0.92/1.00 | వాడబోయిన అరు�న / వాడబోయిన నూకరాజు |  | {'అర్జున': ['Arjuna'], 'నూకరాజు': ['Nukaaraju', 'Nukaraju']}
+1353 | Vasu Rayidi | Father | Sattibabu Rayidi | వశు రాయిడి | సత్తిబాబు రాయిడి | Father | 1.00/0.93 | వశు రాయిడి / సతి�బాబు రాయిడి |  | {'సత్తిబాబు': ['Sattibabu']}
+1354 | Satyavathi Rayudu | Husband | Sattibabu | సత్యవతి రాయుడు | సత్తిబాబు | Husband | 0.92/0.88 | సత� వతి రాయుడు / సతి�బాబు |  | {'సత్యవతి': ['Satyavathi'], 'సత్తిబాబు': ['Sattibabu']}
+1355 | Yellamma Rayidi | Husband | Konda Rayidi | ఏలమ్మ్మ రాయిడి | కొండ రాయిడి | Husband | 0.82/1.00 | ఏలమ� �  రాయిడి / కొండ రాయిడి |  | {'కొండ': ['Konda']}
+1356 | Sattibabu Rayudu | Father | Konda | సత్తిబాబు రాయుడు | కొండ | Father | 0.93/1.00 | సతి�బాబు రాయుడు / కొండ |  | {'సత్తిబాబు': ['Sattibabu'], 'కొండ': ['Konda']}
+1357 | Vasu Bhavirisetti | Father | Subbarao Bhavirisetti | వాసు భవిరిశెట్టి | సుబ్బారావు భవిరిశెట్టి | Father | 0.93/0.89 | వాసు భవిరిశెటి� / సుబా� రావు భవిరిశెటి� |  | {'వాసు': ['Vasu']}
+1358 | Venkata Rao Bhavirisetti | Father | Subbarao Bhavirisetti | వెంకట రావు భవిరిశెట్టి | సుబ్బారావు భవిరిశెట్టి | Father | 0.95/0.89 | వెంకట రావు భవిరిశెటి� / సుబా� రావు భవిరిశెటి� |  | {'వెంకట': ['Venkata'], 'రావు': ['Rao']}
+1359 | Kondalarao Kunduru | Father | Thalamma | కొండలరావు కుందూరు | తాళమ్మ | Father | 1.00/0.80 | కొండలరావు కుందూరు / తాళమ� |  | {'కొండలరావు': ['Kondalaravu']}
+1360 | Ramu Kunduru | Father | Thalamma | రాము కుందూరు | తాళమ్మ | Father | 1.00/0.80 | రాము కుందూరు / తాళమ� |  | {'రాము': ['Ramu']}
+1361 | Aparanji Dara | Husband | Dara Srinu | అపరంజి దార | దార శ్రీను | Husband | 1.00/0.88 | అపరంజి దార / దార �శీను |  | {'శ్రీను': ['Srinu']}
+1362 | Devudamma Kunduru | Husband | Kondalarao | దేవుడమ్మ కందూరి | కొండలరావు | Husband | 0.92/1.00 | దేవుడమ�  కందూరి / కొండలరావు |  | {'దేవుడమ్మ': ['Devudamma'], 'కొండలరావు': ['Kondalaravu']}
+1363 | Lakshmi Kunduru | Husband | Bandayya | లక్ష్మి కుందూరు | బండయ్య | Husband | 0.92/0.80 | లక్షి�  కుందూరు / బండయ� |  | {'లక్ష్మి': ['Lakshmi'], 'బండయ్య': ['Bandayya']}
+1364 | Siva Dara | Father | Somunayudu Dara | సివా దారా | సోమునాయుడు దారా | Father | 1.00/1.00 | సివా దారా / సోమునాయుడు దారా |  | {'సివా': ['Siva']}
+1365 | Sathyaveni Kunduru | Father | Satti Babu Kunduru | సత్యవేణి కుండూరు | సత్తి బాబు కుండూరు | Father | 0.93/0.93 | సత� వేణి కుండూరు / సతి� బాబు కుండూరు |  | {'సత్తి': ['Satti'], 'బాబు': ['Babu']}
+1366 | Srinu Dara | Father | Somu Nayudu Dara | శ్రీను దార | సోము నాయుడు దార | Father | 0.88/1.00 | �శీను దార / సోము నాయుడు దార |  | {'శ్రీను': ['Srinu'], 'నాయుడు': ['Naidu']}
+1367 | Ramakrishna Kunduru | Father | Satti Babu Kunduru | రామకృష్ణ కుండూరు | సట్టి బాబు కుండూరు | Father | 0.93/0.93 | రామకృష� కుండూరు / సటి� బాబు కుండూరు |  | {'బాబు': ['Babu']}
+1368 | Lakshmi Dara | Husband | Siva Dara | లక్ష్మి ధర | శివ ధర | Husband | 0.88/1.00 | లక్షి�  ధర / శివ ధర |  | {'లక్ష్మి': ['Lakshmi'], 'శివ': ['Siva']}
+1369 | Satyanarayana Kunduru | Father | Thalamma | సత్యనారాయణ కుందూరు | తాళమ్మ | Father | 0.94/0.80 | సత� నారాయణ కుందూరు / తాళమ� |  | {'సత్యనారాయణ': ['Satyanarayana']}
+1370 | Bandayya Kunduru | Father | Thallamma | బండియ్య కుందూరు | తాళ్లమ్మ | Father | 0.92/0.67 | బండియ�  కుందూరు / తాళ�మ� |  | {'బండియ్య': ['Bandayya']}
+1371 | Prasad | Father | Somunayudu | ప్రసాద్ | సోమునాయుడు | Father | 0.83/1.00 | �పసాద్ / సోమునాయుడు |  | {'ప్రసాద్': ['Prasad']}
+1372 | Lakshmi Polavarapu | Father | Siddayya | లక్ష్మీ పోలవరపు | సిద్దయ్య | Father | 0.92/0.67 | లక్షీ�  పోలవరపు / సిద�య� |  | {'లక్ష్మీ': ['Lakshmi'], 'పోలవరపు': ['Polavarapu']}
+1373 | Ammaji Shaik | Husband | Shaik Mukthar Ali | అమ్మాజీ షేక్ | షేక్ ముక్తార్ ఆలీ | Husband | 0.90/0.93 | అమా� జీ షేక్ / షేక్ ముకా�ర్ ఆలీ |  | {'అమ్మాజీ': ['Ammaji']}
+1374 | Muktharali Shaik | Father | Sattarali | ముక్తర్ఆలీ షేక్ | సత్తర్ఆలీ | Father | 0.92/0.88 | ముక �ర్ఆలీ షేక్ / సత�ర్ఆలీ |  | {}
+1375 | Dara Babaji | Father | Dara Apparao | దారా బాబాజీ | దారా అప్పారావు | Father | 1.00/0.92 | దారా బాబాజీ / దారా అపా� రావు |  | {'అప్పారావు': ['Apparao']}
+1376 | Dawood Sahidu Shaik | Father | Mukthar Shaik | దవుడ్ సహీదూ షేక్ | ముక్తర్ షేక్ | Father | 1.00/0.90 | దవుడ్ సహీదూ షేక్ / ముక �ర్ షేక్ |  | {}
+1377 | Nagadurga Yenukonti | Father | Bandayya Yenukonti | నాగదుర్గ యేనుకూంటీ | బండియ్య యేనుకూంటీ | Father | 0.94/0.93 | నాగదుర� యేనుకూంటీ / బండియ�  యేనుకూంటీ |  | {'నాగదుర్గ': ['Nagadurga'], 'బండియ్య': ['Bandayya']}
+1378 | Nagabhushanam Enukonti | Husband | Appala Nayudu | నాగభూషణం ఎనుకొంటి | అప్పలనాయుడు | Husband | 1.00/0.90 | నాగభూషణం ఎనుకొంటి / అప� లనాయుడు |  | {'నాగభూషణం': ['Nagabhooshanam']}
+1379 | Lakshmi Enukonti | Father | Mangayyamma | లక్ష్మీ ఎరుకొంటి | మంగయ్యమ్మ | Father | 0.93/0.71 | లక్షీ�  ఎరుకొంటి / మంగయ� మ� |  | {'లక్ష్మీ': ['Lakshmi']}
+1380 | Appalanayudu Enukonti | Father | Konda | అప్పలనాయుడు ఎనుకొంటి | కొండ | Father | 0.94/1.00 | అప� లనాయుడు ఎనుకొంటి / కొండ |  | {'కొండ': ['Konda']}
+1381 | Bandayya Enukonti | Father | Appala Nayudu | బండయ్య ఎనుకోన్టి | అప్పలనాయుడు | Father | 0.85/0.90 | బండయ�  ఎనుకోని� / అప� లనాయుడు |  | {'బండయ్య': ['Bandayya']}
+1382 | Nookaratnam Kunduru | Husband | Sattibabu Kunduru | నూకరత్నం కుండూరు | సత్తిబాబు కుండూరు | Husband | 0.93/0.93 | నూకరత� ం కుండూరు / సతి�బాబు కుండూరు |  | {'నూకరత్నం': ['Nookaratnam', 'Nukaarathnam'], 'సత్తిబాబు': ['Sattibabu']}
+1383 | Somulamma Polavarapu | Husband | Ramulu | సోములమ్మ పోలవరపు | రాములు | Husband | 0.93/1.00 | సోములమ�  పోలవరపు / రాములు |  | {'సోములమ్మ': ['Somulamma'], 'పోలవరపు': ['Polavarapu'], 'రాములు': ['Ramulu']}
+1384 | Ramu Polavarapu | Father | Chinathathalu Polavarapu | రాము పోలవరపు | చినాథాతిలు పోలవరపు | Father | 1.00/1.00 | రాము పోలవరపు / చినాథాతిలు పోలవరపు |  | {'రాము': ['Ramu'], 'పోలవరపు': ['Polavarapu']}
+1385 | Bandayya Polavarapu | Father | Chinatata Polavarapu | బండియ్య పోలవరపు | చీనాటాటా పోలవరపు | Father | 0.92/1.00 | బండియ�  పోలవరపు / చీనాటాటా పోలవరపు |  | {'బండియ్య': ['Bandayya'], 'పోలవరపు': ['Polavarapu']}
+1386 | Veeraraju Polavarapu | Father | Ramulu | వీరరాజు పోలవరపు | రాములు | Father | 1.00/1.00 | వీరరాజు పోలవరపు / రాములు |  | {'వీరరాజు': ['Veeraraju'], 'పోలవరపు': ['Polavarapu'], 'రాములు': ['Ramulu']}
+1387 | Varahalarao Polarapu | Mother | Chinathathalu | వరహాలరావు పోలారపూ | చీనతాతలు | Mother | 1.00/1.00 | వరహాలరావు పోలారపూ / చీనతాతలు |  | {}
+1388 | Sanyasamma Polarapu | Husband | Varahala Rao | సన్యాసమ్మా పోలా రావు | వరహాల రావు | Husband | 0.88/1.00 | సనా� సమా�  పోలా రావు / వరహాల రావు |  | {'పోలా': ['Pola'], 'రావు': ['Rao']}
+1389 | Suresh Laveti | Father | Ramana Laveti | సురేశ్ లావేటి | రమణ లావేటి | Father | 1.00/1.00 | సురేశ్ లావేటి / రమణ లావేటి |  | {'సురేశ్': ['Suresh'], 'రమణ': ['Ramana']}
+1390 | Ramprasad Kunduru | Father | Kondalarao Kunduru | రాంప్రసాద్ కుండూరు | కొండలరావు కుండూరు | Father | 0.94/1.00 | రాం�పసాద్ కుండూరు / కొండలరావు కుండూరు |  | {'కొండలరావు': ['Kondalaravu']}
+1391 | Lakshmi Devi Laveti | Husband | Suresh Laveti | లక్ష్మి దేవి లావేటి | సురేశ్ లావేటి | Husband | 0.94/1.00 | లక్షి�  దేవి లావేటి / సురేశ్ లావేటి |  | {'లక్ష్మి': ['Lakshmi'], 'దేవి': ['Devi'], 'సురేశ్': ['Suresh']}
+1392 | Chinni Chiranjeevi | Father | Chinni Apparao | చిన్ని చిరంజీవి | చిన్ని అప్పారావు | Father | 0.92/0.85 | చిని�  చిరంజీవి / చిని�  అపా� రావు |  | {'చిరంజీవి': ['Chiranjeevi'], 'అప్పారావు': ['Apparao']}
+1393 | Nookaratnam Routhu | Husband | Nageswara Rao | నూకరత్నం రౌతు | నాగేశ్వర రావు | Husband | 0.91/0.91 | నూకరత� ం రౌతు / నాగేశ� ర రావు |  | {'నూకరత్నం': ['Nookaratnam', 'Nukaarathnam'], 'నాగేశ్వర': ['Nageswara'], 'రావు': ['Rao']}
+1394 | Lakshmi Routhu | Husband | Srinu | లక్ష్మి రౌతు | శ్రీను | Husband | 0.90/0.80 | లక్షి�  రౌతు / �శీను |  | {'లక్ష్మి': ['Lakshmi'], 'శ్రీను': ['Srinu']}
+1395 | Chinni Uma Maheswararao | Father | Chinni Bandayya | చిన్ని ఉమ మహేశ్వరరావు | చిన్ని బన్డ్డియ | Father | 0.88/0.73 | చిని�  ఉమ మహేశ� రరావు / చిని�  బని��య |  | {}
+1396 | Mahesh Routhu | Father | Nageswara Rao Routhu | మహేశ్ రౌతు | నాగేశ్వర రావు రౌతు | Father | 1.00/0.93 | మహేశ్ రౌతు / నాగేశ� ర రావు రౌతు |  | {'మహేశ్': ['Mahesh'], 'నాగేశ్వర': ['Nageswara'], 'రావు': ['Rao']}
+1397 | Appanamurthy B. Jayachandra Dara | Father | Chinnarao Dara | అపనామూర్తీ బీ జయచంద్ర దార | చిన్నరావు దార | Father | 0.90/0.91 | అపనామూరీ� బీ జయచం�ద దార / చిన� రావు దార |  | {}
+1398 | Satyavathi Rayi | Husband | Satyanarayana | సత్యవతి రాయి | సత్యనారాయణ | Husband | 0.90/0.89 | సత� వతి రాయి / సత� నారాయణ |  | {'సత్యవతి': ['Satyavathi'], 'రాయి': ['Rayi'], 'సత్యనారాయణ': ['Satyanarayana']}
+1399 | Bhanuprasad Yerramsetti | Mother | Manga Yerramsetti | భానుప్రసాద్ ఎర్రంశెట్టి | మంగ ఎర్రంశెట్టి | Mother | 0.84/0.83 | భాను�పసాద్ ఎ�రంశెటి� / మంగ ఎ�రంశెటి� |  | {'ఎర్రంశెట్టి': ['Yerramsetti'], 'మంగ': ['Manga']}
+1400 | Naga Prasad Rayi | Father | Satyanarayana | నాగ ప్రసాద్ రాయి | సత్యనారాయణ | Father | 0.92/0.89 | నాగ �పసాద్ రాయి / సత� నారాయణ |  | {'నాగ': ['Naga'], 'ప్రసాద్': ['Prasad'], 'రాయి': ['Rayi'], 'సత్యనారాయణ': ['Satyanarayana']}
+1401 | Satish Kumar Rayi | Father | Satyanarayana | సతీష్ కుమార్ రాయి | సత్యనారాయణ | Father | 1.00/0.89 | సతీష్ కుమార్ రాయి / సత� నారాయణ |  | {'సతీష్': ['Satish'], 'కుమార్': ['Kumar'], 'రాయి': ['Rayi'], 'సత్యనారాయణ': ['Satyanarayana']}
+1402 | Susheela Mylaru | Father | Kasibabu Mylaru | సుశీల మైలారు | కాసీబాబు మైలారు | Father | 1.00/1.00 | సుశీల మైలారు / కాసీబాబు మైలారు |  | {'సుశీల': ['Susheela'], 'మైలారు': ['Mylaru']}
+1403 | Appalanarsa Nakka | Husband | Venkateswara Rao | అప్పలనర్స నక్కా | వెంకటేశ్వర రావు | Husband | 0.73/0.92 | అప� లనర�  నకా� / వెంకటేశ� ర రావు |  | {'అప్పలనర్స': ['Appalanarsa'], 'రావు': ['Rao']}
+1404 | Varalakshmi Nakka | Husband | Venkateswara Rao | వరలక్ష్మీ నక్క | వెంకటేశ్వర రావు | Husband | 0.82/0.92 | వరలక్షీ�  నక� / వెంకటేశ� ర రావు |  | {'వరలక్ష్మీ': ['Varalakshmee'], 'నక్క': ['Nakka'], 'రావు': ['Rao']}
+1405 | Lakshmi Nakka | Husband | Uma Maheswararao | లక్ష్మి నక్కా | ఉమా మహేశ్వరరావు | Husband | 0.80/0.92 | లక్షి�  నకా� / ఉమా మహేశ� రరావు |  | {'లక్ష్మి': ['Lakshmi']}
+1406 | Nagendra Mylaru | Father | Kasibabu Mylaru | నాగే౦ద్ర మైలారు | కాసీబాబు మైలారు | Father | 0.92/1.00 | నాగే౦�ద మైలారు / కాసీబాబు మైలారు |  | {'మైలారు': ['Mylaru']}
+1407 | Venkateswararao Nakka | Father | Mahalakshmi | వెంకటేశ్వరరావు నక్కా | మహాలక్ష్మి | Father | 0.88/0.89 | వెంకటేశ� రరావు నకా� / మహాలక్షి� |  | {'మహాలక్ష్మి': ['Mahalakshmi']}
+1408 | Uma Maheswara Rao Nakka | Father | Venkateswararao | ఉమామహేశ్వరరావు నక్కా | వెంకటేశ్వరరావు | Father | 0.88/0.92 | ఉమామహేశ� రరావు నకా� / వెంకటేశ� రరావు |  | {}
+1409 | Jhansi Lakshmi Rayi | Father | Satyanarayana | ఝాన్సి లక్ష్మీ రాయ | సత్య నారాయణ | Father | 0.86/0.89 | ఝాని�  లక్షీ�  రాయ / సత�  నారాయణ |  | {'లక్ష్మీ': ['Lakshmi'], 'రాయ': ['Raya'], 'సత్య': ['Satya'], 'నారాయణ': ['Narayana', 'Satyanarayana']}
+1410 | Mashamma Shaik | Husband | Shan Shareef | మాషమ్మ షేక్ | షాన్ షరీఫ్ | Husband | 0.89/1.00 | మాషమ�  షేక్ / షాన్ షరీఫ్ |  | {}
+1411 | Chan Shaik | Father | Hussain | చాన్ చేక్ | హుస్సేన్ | Father | 1.00/0.86 | చాన్ చేక్ / హుసే� న్ |  | {}
+1412 | Noor Shaik | Father | Shareef Shaik | నూర్ శేక | షరీప్ షేక్ | Father | 1.00/1.00 | నూర్ శేక / షరీప్ షేక్ |  | {}
+1413 | Farhana Begum Shaik | Father | Noor | ర్ానా బేగం షేక్ | నూర్ | Father | 0.96/1.00 | �ర్�◌ానా బేగం షేక్ / నూర్ |  | {}
+1414 | Sankararaju Chekuri | Father | Thammiraju | శంకరరాజు చేకూరి | తమ్మిరాజు | Father | 1.00/0.88 | శంకరరాజు చేకూరి / తమి� రాజు |  | {}
+1415 | Nageswara Rao Routhu | Father | Chiluku | నాగేశ్వరరావు రౌతు | చిలుకు | Father | 0.93/1.00 | నాగేశ� రరావు రౌతు / చిలుకు |  | {'చిలుకు': ['Chiluku']}
+1416 | Srinu Routhu | Father | Chiluku | శ్రీను రౌతు | చిలుకు | Father | 0.89/1.00 | �శీను రౌతు / చిలుకు |  | {'శ్రీను': ['Srinu'], 'చిలుకు': ['Chiluku']}
+1417 | Siddayya Polavarapu | Father | Thathalu Polavarapu | సిద్దయ్య పోలవరపు | తా తా లూ పోలవరపు | Father | 0.85/1.00 | సిద�య�  పోలవరపు / తా తా లూ పోలవరపు |  | {'పోలవరపు': ['Polavarapu']}
+1418 | Balaji Routhu | Father | Srinivasa Rao Routhu | బాలాజీ రౌత్ | శ్రీనివాసరావు రౌత్ | Father | 1.00/0.94 | బాలాజీ రౌత్ / �శీనివాసరావు రౌత్ |  | {}
+1419 | Nookaratnam Polavarapu | Husband | Veeraraju Polavarapu | నూకరత్నం పోలవరపు | వీరాజు పోలవరపు | Husband | 0.93/1.00 | నూకరత� ం పోలవరపు / వీరాజు పోలవరపు |  | {'నూకరత్నం': ['Nookaratnam', 'Nukaarathnam'], 'పోలవరపు': ['Polavarapu']}
+1420 | Ganapathi Venkata Rao Panduri | Father | Appa Lakonda | గణపతి వెంకట రావు పండూరి | అప్ప లకోంద | Father | 1.00/0.88 | గణపతి వెంకట రావు పండూరి / అప�  లకోంద |  | {'వెంకట': ['Venkata'], 'రావు': ['Rao'], 'పండూరి': ['Panduri'], 'అప్ప': ['Appa']}
+1421 | Nookaratnam Polavarapu | Husband | Veeraraju | నూకరఠ్నమ పోలవరపు | వీరరాజు | Husband | 0.93/1.00 | నూకరఠ� మ పోలవరపు / వీరరాజు |  | {'పోలవరపు': ['Polavarapu'], 'వీరరాజు': ['Veeraraju']}
+1422 | Parvathi Polavarapu | Father | Ramulu | పార్వతీ పోలవరపు | రాములు | Father | 0.92/1.00 | పార� తీ పోలవరపు / రాములు |  | {'పార్వతీ': ['Parvathi'], 'పోలవరపు': ['Polavarapu'], 'రాములు': ['Ramulu']}
+1423 | Srinu Nagireddi | Father | Ramu Nagireddi | శ్రీను నగిరెడ్డి | రాము నగిరెడ్డి | Father | 0.85/0.92 | �శీను నగిరెడి� / రాము నగిరెడి� |  | {'శ్రీను': ['Srinu'], 'నగిరెడ్డి': ['Nagireddi'], 'రాము': ['Ramu']}
+1424 | Mahalakshmi Illapu | Husband | Simhachalam | మహాలక్ష్మీ ఇల్లపు | సింహాచలం | Husband | 0.86/1.00 | మహాలక్షీ�  ఇల�పు / సింహాచలం |  | {'మహాలక్ష్మీ': ['Mahalakshmee'], 'సింహాచలం': ['Simhachalam']}
+1425 | Apparao Bangari | Father | Nukalu | అప్పారావు బంగారీ | నుకాలూ | Father | 0.93/1.00 | అపా� రావు బంగారీ / నుకాలూ |  | {'అప్పారావు': ['Apparao']}
+1426 | Nageswara Rao Gangala | Father | Ramunayudu | నాగేశ్వరరావు గంగల | రామునాయుడు | Father | 0.93/1.00 | నాగేశ� రరావు గంగల / రామునాయుడు |  | {'రామునాయుడు': ['Ramunayudu']}
+1427 | Rajulamma Gangala | Husband | Ramunayudu | రాజులమ్మ గంగల | రామునాయుడు | Husband | 0.91/1.00 | రాజులమ�  గంగల / రామునాయుడు |  | {'రాజులమ్మ': ['Rajulamma'], 'రామునాయుడు': ['Ramunayudu']}
+1428 | Ramunayudu Gangala | Father | Nookalamma | రామునాయుడు గంగల | నూకాలమ్మ | Father | 1.00/0.86 | రామునాయుడు గంగల / నూకాలమ� |  | {'రామునాయుడు': ['Ramunayudu']}
+1429 | Srinu Gangala | Father | Ramunayudu | శ్రీను గంగల | రామునాయుడు | Father | 0.89/1.00 | �శీను గంగల / రామునాయుడు |  | {'శ్రీను': ['Srinu'], 'రామునాయుడు': ['Ramunayudu']}
+1430 | Lova Bharathi Gangala | Husband | Nageswara Rao | లోవా భారతి గంగల | నాగేశ్వర రావు | Husband | 1.00/0.91 | లోవా భారతి గంగల / నాగేశ� ర రావు |  | {'లోవా': ['Lova'], 'నాగేశ్వర': ['Nageswara'], 'రావు': ['Rao']}
+1431 | Mathayya Chandanada | Father | Appanna Chandanada | మాతయ్య చందనదా | అప్పన్న చందనదా | Father | 0.91/0.82 | మాతయ�  చందనదా / అప� న�  చందనదా |  | {'అప్పన్న': ['Appanna']}
+1432 | Lakshmi Chandanada | Husband | Mathayya Chandanada | లక్ష్మి చందనాడ | మాతయ్య చందనదా | Husband | 0.92/0.91 | లక్షి�  చందనాడ / మాతయ�  చందనదా |  | {'లక్ష్మి': ['Lakshmi']}
+1433 | Ramu Chandanada | Father | Mathayya Chandanada | రాము చందనదా | మాతయ్య చందనదా | Father | 1.00/0.91 | రాము చందనదా / మాతయ�  చందనదా |  | {'రాము': ['Ramu']}
+1434 | Sravani Gangala | Husband | Srinu Gangala | శ్రావణి గంగాళ | శ్రీను గంగాళ | Husband | 0.91/0.90 | �శావణి గంగాళ / �శీను గంగాళ |  | {'శ్రావణి': ['Shravani'], 'శ్రీను': ['Srinu']}
+1435 | Udaya Nageswari Gangala | Mother | Lovabharathi Gangala | ఉదయ నాగేశవారి గంగాళ | లొవాభారథీ గంగాళ | Mother | 1.00/1.00 | ఉదయ నాగేశవారి గంగాళ / లొవాభారథీ గంగాళ |  | {}
+1436 | Ashok Naga Sai Gangala | Mother | Lova Bharathi Gangala | అశోక్ నాగ సాయి గంగాళ | లోవ భారతి గంగాళ | Mother | 1.00/1.00 | అశోక్ నాగ సాయి గంగాళ / లోవ భారతి గంగాళ |  | {'నాగ': ['Naga'], 'సాయి': ['Sai'], 'లోవ': ['Lova']}
+1437 | Venkati Jagu | Father | Appalakonda Jagu | వెంకటి జగూ | అప్పలకొండ జగూ | Father | 1.00/0.91 | వెంకటి జగూ / అప� లకొండ జగూ |  | {'జగూ': ['Jagu'], 'అప్పలకొండ': ['Appalakonda']}
+1438 | Kunduru Kiran Kumar | Father | Kunduru | కుండూరు కిరణ్ కుమార్ | కుండూరు | Father | 1.00/1.00 | కుండూరు కిరణ్ కుమార్ / కుండూరు |  | {'కిరణ్': ['Kiran'], 'కుమార్': ['Kumar']}
+1439 | Veeralakshmi Panduri | Husband | Appala Konda | వీరలక్ష్మి పండూరి | అప్పల కొండ | Husband | 0.93/0.88 | వీరలక్షి�  పండూరి / అప� ల కొండ |  | {'పండూరి': ['Panduri'], 'అప్పల': ['Appala'], 'కొండ': ['Konda']}
+1440 | Suresh Kunduru | Father | Bandayya Kunduru | సురేశ్ కుండూరు | బండియ్య కుండూరు | Father | 1.00/0.92 | సురేశ్ కుండూరు / బండియ�  కుండూరు |  | {'సురేశ్': ['Suresh'], 'బండియ్య': ['Bandayya']}
+1441 | Veerunayudu Panduri | Father | Appalakonda | వీరునాయుడు పండూరి | అప్పలకొండ | Father | 1.00/0.88 | వీరునాయుడు పండూరి / అప� లకొండ |  | {'పండూరి': ['Panduri'], 'అప్పలకొండ': ['Appalakonda']}
+1442 | Venkata Rama Krishna Panduri | Mother | Appala Konda | వేంకట రామ కృష్ణ పండూరి | అప్పల కోండ | Mother | 0.94/0.88 | వేంకట రామ కృష� పండూరి / అప� ల కోండ |  | {'వేంకట': ['Venkata'], 'రామ': ['Rama'], 'కృష్ణ': ['Krishna', 'Murali'], 'పండూరి': ['Panduri'], 'అప్పల': ['Appala'], 'కోండ': ['Konda']}
+1443 | Lakshmi Panduri | Husband | Gajapathi Venkata Rao | లక్ష్మీ పండూరి | గజపతి వేంకట రావు | Husband | 0.92/1.00 | లక్షీ�  పండూరి / గజపతి వేంకట రావు |  | {'లక్ష్మీ': ['Lakshmi'], 'పండూరి': ['Panduri'], 'వేంకట': ['Venkata'], 'రావు': ['Rao']}
+1444 | Chilukamma Bangari | Husband | Apparao | చిలుకమ్మ బంగారి | అప్పారావు | Husband | 0.92/0.88 | చిలుకమ�  బంగారి / అపా� రావు |  | {'బంగారి': ['Bangari'], 'అప్పారావు': ['Apparao']}
+1445 | Govindamma Annam | Husband | Venkunayudu | గోవిందమ్మ అన్నం | వెంకునాయుడు | Husband | 0.83/1.00 | గోవిందమ�  అన� ం / వెంకునాయుడు |  | {'గోవిందమ్మ': ['Govimdamma'], 'అన్నం': ['Annam']}
+1446 | Venkunayudu Annam | Father | Bulliyya | వెంకునాయుడు అన్నం | బుల్లియ్య | Father | 0.93/0.71 | వెంకునాయుడు అన� ం / బులి�య� |  | {'అన్నం': ['Annam']}
+1447 | Appalanayudu Annam | Father | Venkunayudu | అప్పలనాయుడు అన్నం | వెంకునాయుడు | Father | 0.86/1.00 | అప� లనాయుడు అన� ం / వెంకునాయుడు |  | {'అన్నం': ['Annam']}
+1448 | Appalanayudu Annam | Father | Venki Nayudu Annam | అప్పలనాయుడు అన్నం | వెంకి నాయుడు అన్నం | Father | 0.86/0.93 | అప� లనాయుడు అన� ం / వెంకి నాయుడు అన� ం |  | {'అన్నం': ['Annam'], 'నాయుడు': ['Naidu']}
+1449 | Bhavani Annam | Husband | Appala Nayudu Annam | భవాని అన్నం | అప్పాల నాయుడు అన్నం | Husband | 0.89/0.87 | భవాని అన� ం / అపా� ల నాయుడు అన� ం |  | {'భవాని': ['Bhavani'], 'అన్నం': ['Annam'], 'నాయుడు': ['Naidu']}
+1450 | Satyavathi Jagu | Husband | Ramana | సత్యవతి జాగు | రమణ | Husband | 0.90/1.00 | సత� వతి జాగు / రమణ |  | {'సత్యవతి': ['Satyavathi'], 'జాగు': ['Jagu'], 'రమణ': ['Ramana']}
+1451 | Jagadeeswara Rao Devarapu | Father | Appala Raju Devarapu | జగదీశ్వర రావు దేవరపు | అప్పల రాజు దేవరపు | Father | 0.94/0.93 | జగదీశ� ర రావు దేవరపు / అప� ల రాజు దేవరపు |  | {'రావు': ['Rao'], 'అప్పల': ['Appala'], 'రాజు': ['Raju']}
+1452 | Jagu Eeswaramma | Husband | Jagu Venkati | జగూ ఈశ్వరమ్మ | జగూ వెంకటి | Husband | 0.78/1.00 | జగూ ఈశ� రమ� / జగూ వెంకటి |  | {'జగూ': ['Jagu'], 'ఈశ్వరమ్మ': ['Eswaramma']}
+1453 | Ravi Vaddadi | Mother | Soma Raju Vaddadi | రవి వడ్డాది | సోమ రాజు వడ్డాది | Mother | 0.89/0.92 | రవి వడా� ది / సోమ రాజు వడా� ది |  | {'రవి': ['Ravi'], 'రాజు': ['Raju']}
+1454 | Venkataramana Devarapu | Father | Somulu | వెంకటరమణ దేవారపు | సోములు | Father | 1.00/1.00 | వెంకటరమణ దేవారపు / సోములు |  | {'వెంకటరమణ': ['Venkataramana'], 'సోములు': ['Somulu']}
+1455 | Sandhya Nakka | Father | Nakka Uma Maheswara Rao | సంధ్య నక్క | నక్క ఉమ మహేశ్వర రావు | Father | 0.71/0.87 | సంధ�  నక� / నక�  ఉమ మహేశ� ర రావు |  | {'సంధ్య': ['Samdhya'], 'నక్క': ['Nakka'], 'రావు': ['Rao']}
+1456 | Naga Lakshmi Vaddadi | Husband | Vaddadi Vara Prasad | నాగ లక్ష్మి వడ్డాది | వడ్డాది వర ప్రసాద్ | Husband | 0.87/0.86 | నాగ లక్షి�  వడా� ది / వడా� ది వర �పసాద్ |  | {'నాగ': ['Naga'], 'లక్ష్మి': ['Lakshmi'], 'వర': ['Vara'], 'ప్రసాద్': ['Prasad']}
+1457 | Venkataramana Mylaru | Father | Bandayya | వెంకటరమణ మైలారు | బండియ్య | Father | 1.00/0.83 | వెంకటరమణ మైలారు / బండియ� |  | {'వెంకటరమణ': ['Venkataramana'], 'మైలారు': ['Mylaru'], 'బండియ్య': ['Bandayya']}
+1458 | Govindu Mylaru | Father | Bandayya | గోవిందు మైలారు | బండియ్య | Father | 1.00/0.83 | గోవిందు మైలారు / బండియ� |  | {'గోవిందు': ['Govindu'], 'మైలారు': ['Mylaru'], 'బండియ్య': ['Bandayya']}
+1459 | Chinna Varalakshmi Mylaru | Husband | Govindu | చిన్న వరలక్ష్మీ మైలారు | గోవింద | Husband | 0.89/1.00 | చిన�  వరలక్షీ�  మైలారు / గోవింద |  | {'చిన్న': ['Chinna'], 'వరలక్ష్మీ': ['Varalakshmee'], 'మైలారు': ['Mylaru'], 'గోవింద': ['Govinda']}
+1460 | Monika Kandrakota | Father | Satyanarayana Kandrakota | మొనుకా కండ్రకోట | సత్యనారాయణ కండ్రకోట | Father | 0.92/0.88 | మొనుకా కం�డకోట / సత� నారాయణ కం�డకోట |  | {'సత్యనారాయణ': ['Satyanarayana']}
+1461 | Yaswanika Kandrakota | Father | Satyanarayana Kandrakota | యాస్వాణీకా కండ్రకోట | సత్యనారాయణ కండ్రకోట | Father | 0.88/0.88 | యాసా� ణీకా కం�డకోట / సత� నారాయణ కం�డకోట |  | {'సత్యనారాయణ': ['Satyanarayana']}
+1462 | Eeswararao Devarapu | Father | Venkataramana | ఈశ్వరరావు దేవారపు | వెంకటరమణ | Father | 0.93/1.00 | ఈశ� రరావు దేవారపు / వెంకటరమణ |  | {'వెంకటరమణ': ['Venkataramana']}
+1463 | Parvathi Devarapu | Husband | Venkataramana | పార్వతి దేవారపు | వెంకటరమణ | Husband | 0.92/1.00 | పార� తి దేవారపు / వెంకటరమణ |  | {'పార్వతి': ['Parvathi'], 'వెంకటరమణ': ['Venkataramana']}
+1464 | Appalaratnam Devarapu | Husband | Venkataramana | అప్పలరత్నం దేవారపు | వెంకటరమణ | Husband | 0.87/1.00 | అప� లరత� ం దేవారపు / వెంకటరమణ |  | {'వెంకటరమణ': ['Venkataramana']}
+1465 | Bavirisetti Venkataramana | Father | Apparao Bavirisetti | బవిరిశెట్టి వెంకటరమణ | అప్పారావు బవిరిశెట్టి | Father | 0.94/0.89 | బవిరిశెటి� వెంకటరమణ / అపా� రావు బవిరిశెటి� |  | {'వెంకటరమణ': ['Venkataramana'], 'అప్పారావు': ['Apparao']}
+1466 | Mohanarao Devarapu | Father | Venkata Rao | మోహనరావు దేవరపు | వెంకటరావు | Father | 1.00/1.00 | మోహనరావు దేవరపు / వెంకటరావు |  | {'మోహనరావు': ['Mohanaravu']}
+1467 | Manga Devarapu | Husband | Appalaraju | మంగ దేవారపు | అప్పలరాజు | Husband | 1.00/0.88 | మంగ దేవారపు / అప� లరాజు |  | {'మంగ': ['Manga'], 'అప్పలరాజు': ['Appalaraju']}
+1468 | Appalaraju Devarapu | Father | Venkatrao | అప్పలరాజుదేవారపు | వెంకట్రావు | Father | 0.93/0.89 | అప� లరాజుదేవారపు / వెంక�టావు |  | {}
+1469 | Srinu Devarapu | Father | Venkatrao | శ్రీను దేవారపు | వెంకట్రావు | Father | 0.92/0.89 | �శీను దేవారపు / వెంక�టావు |  | {'శ్రీను': ['Srinu']}
+1470 | Padma Bagudu | Husband | Gopalakrishna Bagudu | పద్మ బగుడు | గోపాలకృష్ణ బగుడు | Husband | 0.88/0.93 | పద�  బగుడు / గోపాలకృష� బగుడు |  | {'పద్మ': ['Padma']}
+1471 | Ramu Vaddadi | Father | Kamaraju | రాము వడ్డాది | కామరాజు | Father | 0.90/1.00 | రాము వడా� ది / కామరాజు |  | {'రాము': ['Ramu'], 'కామరాజు': ['Kamaraju']}
+1472 | Somaraju Vaddadi | Husband | Ramu | సోమరాజు వడ్డాది | రాము | Husband | 0.92/1.00 | సోమరాజు వడా� ది / రాము |  | {'రాము': ['Ramu']}
+1473 | Vara Prasad Vaddadi | Father | Ramu Vaddadi | వర ప్రసాద్ వడ్డాది | రాము వడ్డాది | Father | 0.86/0.90 | వర �పసాద్ వడా� ది / రాము వడా� ది |  | {'వర': ['Vara'], 'ప్రసాద్': ['Prasad'], 'రాము': ['Ramu']}
+1474 | Ramana Nagireddi | Father | Ramaswamy | రమణ నగిరెడ్డి | రామాస్వామి | Father | 0.91/0.89 | రమణ నగిరెడి� / రామాసా� మి |  | {'రమణ': ['Ramana'], 'నగిరెడ్డి': ['Nagireddi']}
+1475 | Lakshmi Illapu | Husband | Gangaraju | లక్ష్మీ ఇల్లపు | గంగరాజు | Husband | 0.82/1.00 | లక్షీ�  ఇల�పు / గంగరాజు |  | {'లక్ష్మీ': ['Lakshmi'], 'గంగరాజు': ['Gangaraju']}
+1476 | Ganga Raju Illapu | Father | Simhachalam Illapu | గంగా రాజు ఇలాపూ | సిమ్హాచలమ ఇలాపూ | Father | 1.00/0.92 | గంగా రాజు ఇలాపూ / సిమా� చలమ ఇలాపూ |  | {'రాజు': ['Raju']}

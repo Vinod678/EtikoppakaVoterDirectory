@@ -1,0 +1,511 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "f83b2d1358ac999aa7de17d24f72e450",
+    "entities": [
+      {
+        "tableName": "voters",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`voter_id` INTEGER NOT NULL, `gp_serial_no` INTEGER NOT NULL, `ward_no` INTEGER NOT NULL, `name_en` TEXT, `name_te` TEXT, `relationship` TEXT, `relative_name_en` TEXT, `relative_name_te` TEXT, `age` INTEGER, `gender` TEXT, `house_no` TEXT, `assembly_serial` TEXT, `epic_no` TEXT, `photo_filename` TEXT, `photo_width_px` INTEGER, `photo_height_px` INTEGER, `pdf_page` INTEGER, `pdf_relation_label` TEXT, `excel_review_status` TEXT, `needs_review` INTEGER NOT NULL, `review_issue_codes` TEXT NOT NULL, `search_text` TEXT NOT NULL, PRIMARY KEY(`voter_id`))",
+        "fields": [
+          {
+            "fieldPath": "voterId",
+            "columnName": "voter_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gpSerialNo",
+            "columnName": "gp_serial_no",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wardNo",
+            "columnName": "ward_no",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nameEn",
+            "columnName": "name_en",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "nameTe",
+            "columnName": "name_te",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "relationship",
+            "columnName": "relationship",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "relativeNameEn",
+            "columnName": "relative_name_en",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "relativeNameTe",
+            "columnName": "relative_name_te",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "houseNo",
+            "columnName": "house_no",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "assemblySerial",
+            "columnName": "assembly_serial",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "epicNo",
+            "columnName": "epic_no",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "photoFilename",
+            "columnName": "photo_filename",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "photoWidthPx",
+            "columnName": "photo_width_px",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "photoHeightPx",
+            "columnName": "photo_height_px",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "pdfPage",
+            "columnName": "pdf_page",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "pdfRelationLabel",
+            "columnName": "pdf_relation_label",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "excelReviewStatus",
+            "columnName": "excel_review_status",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "needsReview",
+            "columnName": "needs_review",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reviewIssueCodes",
+            "columnName": "review_issue_codes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "searchText",
+            "columnName": "search_text",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "voter_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_voters_house_no",
+            "unique": false,
+            "columnNames": [
+              "house_no"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_voters_house_no` ON `${TABLE_NAME}` (`house_no`)"
+          },
+          {
+            "name": "index_voters_ward_no_gp_serial_no",
+            "unique": true,
+            "columnNames": [
+              "ward_no",
+              "gp_serial_no"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_voters_ward_no_gp_serial_no` ON `${TABLE_NAME}` (`ward_no`, `gp_serial_no`)"
+          }
+        ]
+      },
+      {
+        "tableName": "dataset_info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ward_no` INTEGER NOT NULL, `generated_at` TEXT NOT NULL, `record_count` INTEGER NOT NULL, `needs_review_count` INTEGER NOT NULL, `imported_at` INTEGER NOT NULL, `grouping_key` TEXT, PRIMARY KEY(`ward_no`))",
+        "fields": [
+          {
+            "fieldPath": "wardNo",
+            "columnName": "ward_no",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "generatedAt",
+            "columnName": "generated_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recordCount",
+            "columnName": "record_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "needsReviewCount",
+            "columnName": "needs_review_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importedAt",
+            "columnName": "imported_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "groupingKey",
+            "columnName": "grouping_key",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "ward_no"
+          ]
+        }
+      },
+      {
+        "tableName": "voter_user_data",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`voter_id` INTEGER NOT NULL, `favourite` INTEGER NOT NULL DEFAULT 0, `visited` INTEGER NOT NULL DEFAULT 0, `visited_at` INTEGER, `block` TEXT, `note` TEXT, `updated_at` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`voter_id`))",
+        "fields": [
+          {
+            "fieldPath": "voterId",
+            "columnName": "voter_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "favourite",
+            "columnName": "favourite",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "visited",
+            "columnName": "visited",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "visitedAt",
+            "columnName": "visited_at",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "block",
+            "columnName": "block",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "voter_id"
+          ]
+        }
+      },
+      {
+        "tableName": "tags",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL COLLATE NOCASE, `created_at` INTEGER NOT NULL DEFAULT 0)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_tags_name",
+            "unique": true,
+            "columnNames": [
+              "name"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_tags_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ]
+      },
+      {
+        "tableName": "voter_tags",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`voter_id` INTEGER NOT NULL, `tag_id` INTEGER NOT NULL, PRIMARY KEY(`voter_id`, `tag_id`), FOREIGN KEY(`tag_id`) REFERENCES `tags`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "voterId",
+            "columnName": "voter_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tagId",
+            "columnName": "tag_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "voter_id",
+            "tag_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_voter_tags_tag_id",
+            "unique": false,
+            "columnNames": [
+              "tag_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_voter_tags_tag_id` ON `${TABLE_NAME}` (`tag_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "tags",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "tag_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "households",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ward_no` INTEGER NOT NULL, `name` TEXT NOT NULL, `house_no` TEXT, `created_at` INTEGER NOT NULL DEFAULT 0, `updated_at` INTEGER NOT NULL DEFAULT 0, `auto_key` TEXT, `locked` INTEGER NOT NULL DEFAULT 0, `needs_review` INTEGER NOT NULL DEFAULT 0, `review_note` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wardNo",
+            "columnName": "ward_no",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "houseNo",
+            "columnName": "house_no",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "autoKey",
+            "columnName": "auto_key",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "locked",
+            "columnName": "locked",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "needsReview",
+            "columnName": "needs_review",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "reviewNote",
+            "columnName": "review_note",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_households_ward_no",
+            "unique": false,
+            "columnNames": [
+              "ward_no"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_households_ward_no` ON `${TABLE_NAME}` (`ward_no`)"
+          }
+        ]
+      },
+      {
+        "tableName": "household_members",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`voter_id` INTEGER NOT NULL, `household_id` INTEGER NOT NULL, PRIMARY KEY(`voter_id`), FOREIGN KEY(`household_id`) REFERENCES `households`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "voterId",
+            "columnName": "voter_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "householdId",
+            "columnName": "household_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "voter_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_household_members_household_id",
+            "unique": false,
+            "columnNames": [
+              "household_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_household_members_household_id` ON `${TABLE_NAME}` (`household_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "households",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "household_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "household_locks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`voter_id` INTEGER NOT NULL, `locked_at` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`voter_id`))",
+        "fields": [
+          {
+            "fieldPath": "voterId",
+            "columnName": "voter_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lockedAt",
+            "columnName": "locked_at",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "voter_id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f83b2d1358ac999aa7de17d24f72e450')"
+    ]
+  }
+}

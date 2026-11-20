@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Only the temporary PDF export folder can be shared (read-only, one file at a time, via the share sheet). -->
+<paths>
+    <cache-path name="exports" path="exports/" />
+</paths>
