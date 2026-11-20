@@ -86,8 +86,9 @@ private sealed interface Route {
     data class Household(val id: Long) : Route {
         override fun encode() = listOf("H", id.toString()).joinToString(SEP)
     }
-    data class Export(val presetLabel: String?, val ids: List<Int>) : Route {
-        override fun encode() = listOf("E", presetLabel ?: "", ids.joinToString(",")).joinToString(SEP)
+    /** [allHouseholds]: opened from the Households menu, every household of the ward preselected. */
+    data class Export(val presetLabel: String?, val ids: List<Int>, val allHouseholds: Boolean = false) : Route {
+        override fun encode() = listOf("E", presetLabel ?: "", ids.joinToString(","), if (allHouseholds) "H" else "").joinToString(SEP)
     }
     data class Image(val householdId: Long, val share: Boolean) : Route {
         override fun encode() = listOf("I", householdId.toString(), if (share) "1" else "0").joinToString(SEP)
@@ -112,7 +113,7 @@ private sealed interface Route {
             return when (p.firstOrNull()) {
                 "V" -> if (p.size >= 4) Voter(p[1], p[2].toInt(), ints(p[3]), p.getOrNull(4) == "1") else null
                 "H" -> p.getOrNull(1)?.toLongOrNull()?.let { Household(it) }
-                "E" -> if (p.size == 3) Export(p[1].ifEmpty { null }, ints(p[2])) else null
+                "E" -> if (p.size in 3..4) Export(p[1].ifEmpty { null }, ints(p[2]), p.getOrNull(3) == "H") else null
                 "I" -> p.getOrNull(1)?.toLongOrNull()?.let { Image(it, p.getOrNull(2) == "1") }
                 "U" -> p.getOrNull(1)?.toIntOrNull()?.let { Unassigned(it) }
                 "S" -> Settings
@@ -310,6 +311,7 @@ fun AppRoot(role: Role, session: Long) {
                         households = households,
                         blockCounts = blockCounts,
                         blockLabels = blockLabels,
+                        allHouseholds = top.allHouseholds,
                         onBack = { exportVm.discard(); pop() },
                     )
                 }
@@ -459,6 +461,7 @@ fun AppRoot(role: Role, session: Long) {
                                 if (n > 0) push(Route.Unassigned(w))
                                 else app.messages.show("All voters are assigned to households.")
                             },
+                            onExportPdf = { push(Route.Export(null, emptyList(), allHouseholds = true)) },
                         )
                         Tab.Blocks -> BlocksScreen(
                             ward = w,

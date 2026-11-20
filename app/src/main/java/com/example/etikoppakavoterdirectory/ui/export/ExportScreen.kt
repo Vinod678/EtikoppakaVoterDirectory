@@ -110,6 +110,8 @@ fun ExportScreen(
     households: List<HouseholdSummary>,
     blockCounts: List<BlockCount>,
     blockLabels: Map<String, String> = emptyMap(),
+    /** Opened from the Households menu: start with every household of the ward selected. */
+    allHouseholds: Boolean = false,
     onBack: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -120,7 +122,9 @@ fun ExportScreen(
     var pickedBlocks by rememberSaveable { mutableStateOf(ArrayList<String>()) }
     var pickedHouseholds by rememberSaveable { mutableStateOf(ArrayList<Long>()) }
     var blocksOpen by rememberSaveable { mutableStateOf(true) }
-    var householdsOpen by rememberSaveable { mutableStateOf(false) }
+    var householdsOpen by rememberSaveable { mutableStateOf(allHouseholds) }
+    // The household list may arrive after the first frame: select them once, when it is there.
+    var householdsPrefilled by rememberSaveable { mutableStateOf(!allHouseholds) }
     var householdQuery by rememberSaveable { mutableStateOf("") }
     var layoutName by rememberSaveable { mutableStateOf(PdfLayout.COMPACT.name) }
     var opts by rememberSaveable { mutableStateOf(BooleanArray(DEFAULTS.size).also { d -> DEFAULTS.forEachIndexed { i, v -> d[i] = v } }) }
@@ -151,6 +155,12 @@ fun ExportScreen(
     fun select(blocks: List<String> = pickedBlocks, hh: List<Long> = pickedHouseholds) {
         pickedBlocks = ArrayList(blocks); pickedHouseholds = ArrayList(hh)
         scopeKey = if (blocks.isEmpty() && hh.isEmpty()) (if (preset != null) "preset" else "all") else "selection"
+    }
+    LaunchedEffect(households, householdsPrefilled) {
+        if (!householdsPrefilled && ward != null && households.isNotEmpty()) {
+            select(blocks = emptyList(), hh = households.map { it.id })
+            householdsPrefilled = true
+        }
     }
 
     Scaffold(

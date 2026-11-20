@@ -244,6 +244,8 @@ fun HouseholdsScreen(
     onHome: () -> Unit,
     /** Tap on the "Unassigned Voters" tile; receives the current number of unassigned voters. */
     onShowUnassigned: (Int) -> Unit,
+    /** Opens the Export PDF screen with this ward's households selected (Admin only; null hides it). */
+    onExportPdf: (() -> Unit)? = null,
 ) {
     val repo = edit.repository
     val brand = AppTheme.brand
@@ -311,6 +313,13 @@ fun HouseholdsScreen(
                         Box {
                             IconButton(onClick = { moreMenu = true }) { Icon(Icons.Filled.MoreVert, contentDescription = "More options", tint = brand.onHeader) }
                             DropdownMenu(expanded = moreMenu, onDismissRequest = { moreMenu = false }) {
+                                if (onExportPdf != null) {
+                                    DropdownMenuItem(
+                                        text = { Text("Export PDF") },
+                                        onClick = { moreMenu = false; onExportPdf() },
+                                        modifier = Modifier.testTag("householdsExportPdf"),
+                                    )
+                                }
                                 DropdownMenuItem(text = { Text("Re-run automatic grouping") }, onClick = { moreMenu = false; confirmRegroup = true })
                             }
                         }

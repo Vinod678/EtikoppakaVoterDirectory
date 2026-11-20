@@ -3,6 +3,8 @@ package com.example.etikoppakavoterdirectory
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsSelected
+import kotlinx.coroutines.flow.first
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.hasClickAction
@@ -60,6 +62,34 @@ class HouseholdBrowseTest {
         rule.onNodeWithTag("householdSortLabel").performClick()
         rule.waitUntilAtLeastOneExists(hasTestTag("sort-$name"), 5_000)
         rule.onNodeWithTag("sort-$name").performClick()
+    }
+
+    /**
+     * Households menu -> Export PDF: the export screen opens with every household of the ward
+     * selected; Back returns to Households with the search unchanged. (Nothing is exported and
+     * "Re-run automatic grouping" is only looked at, never tapped.)
+     */
+    @Test
+    fun menuExportPdf_preselectsAllHouseholds_andBackKeepsTheSearch() {
+        val app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as VoterDirectoryApp
+        val total = kotlinx.coroutines.runBlocking { app.repository.householdSummaries(11).first().size }
+        openHouseholds()
+        search("Pedapati")
+        val before = matchCount()
+        Espresso.closeSoftKeyboard()
+        rule.onNodeWithContentDescription("More options").performClick()
+        rule.waitUntilAtLeastOneExists(hasTestTag("householdsExportPdf"), 5_000)
+        val exportTop = rule.onNodeWithTag("householdsExportPdf").fetchSemanticsNode().boundsInRoot.top
+        val regroupTop = rule.onNode(hasText("Re-run automatic grouping")).fetchSemanticsNode().boundsInRoot.top
+        assertTrue("Export PDF is above Re-run automatic grouping", exportTop < regroupTop)
+        rule.onNodeWithTag("householdsExportPdf").performClick()
+        rule.waitUntilAtLeastOneExists(hasText("Selected blocks and households (below)"), 10_000)
+        rule.onNode(hasText("Selected blocks and households (below)") and androidx.compose.ui.test.isSelectable()).assertIsSelected()
+        rule.waitUntilAtLeastOneExists(hasText("$total selected"), 10_000)
+        Espresso.pressBack()
+        rule.waitUntilAtLeastOneExists(hasTestTag("householdSearch"), 10_000)
+        rule.onNodeWithTag("householdSearch").assertTextContains("Pedapati")
+        assertEquals(before, matchCount())
     }
 
     /** Opens the first household card on screen and comes back with the system Back button. */

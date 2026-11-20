@@ -46,8 +46,9 @@ data class PdfOptions(
  * A part of the PDF with an optional heading, e.g. "Block A — 85 Voters" or a household.
  *
  * @param startNewPage the section begins on a new page
- * @param keepTogether a short section (up to two card rows) moves to the next page instead of being
- *        split; a longer section continues on the next page with a "(continued)" heading
+ * @param keepTogether near the bottom of a page the section starts there only if it fits completely
+ *        or at least two complete card rows fit; otherwise it starts on the next page. The rest of a
+ *        long section continues on the next page with a "(continued)" heading
  * @param references members already printed in an earlier section (one short line each), listed
  *        under the heading instead of repeating their full record
  * @param household a household section: two consecutive single-member households are printed side
@@ -90,7 +91,6 @@ class PdfExporter(private val context: Context) {
     private val muted = Color.rgb(0x55, 0x60, 0x60)
     private val hairline = Color.rgb(0xC4, 0xCD, 0xCC)
     private val cardFill = Color.rgb(0xF6, 0xF9, 0xF9)
-    private val badgeFill = Color.rgb(0xD5, 0xEC, 0xEB)
 
     private val regular = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL)
     private val bold = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
@@ -189,8 +189,10 @@ class PdfExporter(private val context: Context) {
             val total = headH + rowHeights.sum() + rowGap * max(0, rows.size - 1)
             when {
                 s.startNewPage && hasContent() -> newPage()
-                // Short sections are not split; longer ones simply continue on the next page.
-                s.keepTogether && rows.size <= 2 && hasContent() && y + total > bottom && total <= bottom - nextTop -> newPage()
+                // Households near the bottom of a page: start here only if the whole household fits,
+                // or at least two complete card rows (with the heading) fit; otherwise start on the
+                // next page. A heading is never left alone at the bottom.
+                s.keepTogether && hasContent() && y + total > bottom && fittingRows(y + headH, rowHeights, bottom) < 2 -> newPage()
             }
             if (heading != null) {
                 if (y + headH + (rowHeights.firstOrNull() ?: 0f) > bottom && hasContent()) newPage()
@@ -230,6 +232,18 @@ class PdfExporter(private val context: Context) {
             doc.close()
         }
         return pages.size
+    }
+
+    /** How many complete card rows (from the first) fit between [from] and [bottom]. */
+    private fun fittingRows(from: Float, rowHeights: List<Float>, bottom: Float): Int {
+        var y = from
+        var n = 0
+        for (h in rowHeights) {
+            if (y + h > bottom) break
+            y += h + rowGap
+            n++
+        }
+        return n
     }
 
     /** One single-member household in half the page width: compact heading and its voter card. */
@@ -318,22 +332,24 @@ class PdfExporter(private val context: Context) {
         val textW = w - photoW - pad * 3
         val v = r.voter
 
-        // Serial number: small highlighted box at the top right, beside the name.
+        // Serial number in a small box directly above the English name: bold black text on white
+        // with a thin dark border, so it stays sharp in black-and-white prints and photocopies.
         val badgeText = if (showWard) "Ward ${v.wardNo} · ${v.gpSerialNo}" else "${v.gpSerialNo}"
-        val badgePaint = paint(8.5f, teal, true)
-        val badgeW = badgePaint.measureText(badgeText) + 8f
-        val badgeH = 13f
+        val badgePaint = paint(8.5f, Color.BLACK, true)
+        val badgeW = min(badgePaint.measureText(badgeText) + 7f, textW)
+        val badgeH = 12f
 
         val nameSize = if (detailed) 11f else 10f
         val small = if (detailed) 8.2f else 7.8f
-        val nameEn = layout(v.nameEn ?: NA, paint(nameSize, ink, true), textW - badgeW - 4f)
+        val nameEn = layout(v.nameEn ?: NA, paint(nameSize, ink, true), textW)
         val lines = ArrayList<Pair<StaticLayout, Float>>() // layout, space after
         lines += layout(v.nameTe ?: NA, paint(nameSize, ink), textW, spacing = 1.05f) to 1f
         val status = statusText(r, o)
         if (status.isNotEmpty()) lines += layout(status, paint(small, teal, true), textW) to 0f
         if (o.relativeNames) {
-            lines += layout(relativeLine(r), paint(small, muted), textW) to 0f
-            v.relativeNameTe?.let { lines += layout(it, paint(small, muted), textW) to 0f }
+            // English and Telugu relative name on one line (wraps when long).
+            val rel = relativeLine(r) + (v.relativeNameTe?.let { " · $it" } ?: "")
+            lines += layout(rel, paint(small, muted), textW) to 0f
         }
         if (detailed) {
             detailLines(r, o).forEach { lines += layout(it, paint(small, ink), textW) to 0f }
@@ -344,18 +360,20 @@ class PdfExporter(private val context: Context) {
         if (o.tags && r.tags.isNotEmpty()) lines += layout("Tags: " + r.tags.joinToString(", "), paint(7.5f, ink), textW) to 0f
         if (o.notes && !r.note.isNullOrBlank()) lines += layout("Note: " + r.note.trim(), paint(7.5f, ink), textW) to 0f
 
-        val headH = max(nameEn.height.toFloat(), badgeH)
+        val headH = badgeH + 1.5f + nameEn.height
         val textH = headH + lines.sumOf { (it.first.height + it.second).toDouble() }.toFloat()
         val h = max(photoH, textH) + pad * 2
         return Card(h) { c, x, y ->
             drawCardBackground(c, x, y, w, h)
             drawPhoto(c, v.photoFilename, RectF(x + pad, y + pad, x + pad + photoW, y + pad + photoH))
-            val bx = x + w - pad - badgeW
+            val bx = x + textX
             val by = y + pad
-            c.drawRoundRect(RectF(bx, by, bx + badgeW, by + badgeH), 3f, 3f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = badgeFill })
+            val box = RectF(bx, by, bx + badgeW, by + badgeH)
+            c.drawRoundRect(box, 2.5f, 2.5f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE })
+            c.drawRoundRect(box, 2.5f, 2.5f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = ink; style = Paint.Style.STROKE; strokeWidth = 0.8f })
             val fm = badgePaint.fontMetrics
-            c.drawText(badgeText, bx + 4f, by + badgeH / 2 - (fm.ascent + fm.descent) / 2, badgePaint)
-            c.save(); c.translate(x + textX, y + pad); nameEn.draw(c); c.restore()
+            c.drawText(badgeText, bx + 3.5f, by + badgeH / 2 - (fm.ascent + fm.descent) / 2, badgePaint)
+            c.save(); c.translate(x + textX, by + badgeH + 1.5f); nameEn.draw(c); c.restore()
             var ty = y + pad + headH
             lines.forEach { (l, after) ->
                 c.save(); c.translate(x + textX, ty); l.draw(c); c.restore()
