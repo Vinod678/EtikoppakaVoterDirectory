@@ -18,7 +18,7 @@ values are copied verbatim, and problems are only *flagged* for manual review.
 | `xlsx_dump.py` | Reads a workbook (standard library only) into a JSON dump | e.g. `build/xlsx_ward5.json` |
 | `extract_photos.py` | Extracts each voter's original embedded photo from the PDF, matched to its card | `output/…/voter_photos/`, `voter_photos_manifest.csv` |
 | `build_dataset.py` | Combines workbook + PDF card fields + photo manifest, validates, writes review workbook | `output/…/voters_*.json`, `voters_review*.xlsx` |
-| `sync_assets.py` | Copies a ward's dataset and photos into the app assets (resizes only photos > 800 px; `--no-optimize` for exact copies) | `app/src/main/assets/` |
+| `sync_assets.py` | Copies a ward's dataset and photos into the app assets (compresses photos to JPEG, max 480 px, quality 85, same file names; `--no-optimize` for exact copies) | `app/src/main/assets/` |
 
 ## One-time setup
 

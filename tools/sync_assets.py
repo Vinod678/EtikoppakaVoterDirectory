@@ -3,13 +3,14 @@
 Usage (from the project root):
     python tools/sync_assets.py                 # Ward 11 (original dataset)
     python tools/sync_assets.py 2               # Ward 2 -> assets/wards/voters_ward_2.json + assets/voter_photos/ward_2/
-    python tools/sync_assets.py 2 --no-optimize # exact byte copies of every photo (no resizing at all)
+    python tools/sync_assets.py 2 --no-optimize # exact byte copies of every photo (no compression at all)
 
-The dataset JSON is copied byte for byte. Photos are copied byte for byte, EXCEPT photos whose
-longest side is larger than MAX_SIDE pixels (a few scanned photos are up to 1764 x 2215 px and
-4 MB): those are resized proportionally to MAX_SIDE in the SAME format and under the SAME file
-name, so the voter -> photo mapping, the JSON and the database never change. 800 px is still
-2-3x the size of a typical voter photo (240 x 320) and sharp in the app's largest photo view.
+The dataset JSON is copied byte for byte. Each photo is re-encoded as a JPEG (quality JPEG_QUALITY,
+longest side at most MAX_SIDE pixels, proportional) when that makes it at least MIN_SAVING smaller;
+otherwise it is copied byte for byte. The file keeps its name - even a ".png" - because the app
+decodes photos by their content, so the voter -> photo mapping, the JSON and the database never
+change. 480 px is still twice a typical voter photo (240 x 320) and sharp in the app's largest
+photo view; most original photos are 320 px or less and keep their size.
 
 The originals in output/ are never modified (they remain the source of truth); every resized file
 is listed in <ward output folder>/asset_photo_optimization.csv with both checksums.
@@ -31,7 +32,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'tools', '.pylib'))  # optional private library folder (see README)
 ARGS = [a for a in sys.argv[1:] if not a.startswith('--')]
 OPTIMIZE = '--no-optimize' not in sys.argv
-MAX_SIDE = 800
+MAX_SIDE = 480
+JPEG_QUALITY = 85
+MIN_SAVING = 0.10  # re-encode only when it saves at least 10 %
 W = ward_config.ward(int(ARGS[0]) if ARGS else 11)
 SRC_JSON = os.path.join(ROOT, W['json'])
 SRC_PHOTOS = os.path.join(ROOT, W['photos'])
@@ -51,22 +54,19 @@ def sha(path):
 
 
 def optimized(src):
-    """Resized bytes for an oversized photo, or None when the original is copied unchanged."""
+    """Compressed JPEG bytes for a photo, or None when the original is copied unchanged."""
     from PIL import Image
     im = Image.open(src)
     w, h = im.size
-    if max(w, h) <= MAX_SIDE:
-        return None
     im.load()
-    k = MAX_SIDE / max(w, h)
-    small = im.resize((max(1, round(w * k)), max(1, round(h * k))), Image.LANCZOS)
+    small = im
+    if max(w, h) > MAX_SIDE:
+        k = MAX_SIDE / max(w, h)
+        small = im.resize((max(1, round(w * k)), max(1, round(h * k))), Image.LANCZOS)
     out = io.BytesIO()
-    if src.lower().endswith('.png'):
-        small.save(out, 'PNG', optimize=True)
-    else:
-        small.convert('RGB').save(out, 'JPEG', quality=90, optimize=True)
+    small.convert('RGB').save(out, 'JPEG', quality=JPEG_QUALITY, optimize=True, progressive=True)
     data = out.getvalue()
-    return (data, (w, h), small.size) if len(data) < os.path.getsize(src) else None
+    return (data, (w, h), small.size) if len(data) <= os.path.getsize(src) * (1 - MIN_SAVING) else None
 
 
 def main():
@@ -104,7 +104,7 @@ def main():
     if bad:
         sys.exit('Copy verification FAILED for: %s' % bad)
     saved = sum(r[3] - r[7] for r in log)
-    print('Copied %s and %d photos to %s (verified); %d oversized photo(s) resized to max %d px, %.1f MB saved; log: %s'
+    print('Copied %s and %d photos to %s (verified); %d photo(s) compressed (JPEG, max %d px), %.1f MB saved; log: %s'
           % (W['asset_json'], len(src_files), DST_PHOTOS, len(log), MAX_SIDE, saved / 1e6, os.path.relpath(OPT_LOG, ROOT)))
 
 
