@@ -29,6 +29,26 @@ for _n, _first, _counts in ((3, 739, (179, 190)), (4, 1108, (186, 183))):
                      official_counts=_counts)
 
 
+# Wards 1 and 5-14 (same summary table). Several wards share one PDF; the card finder only takes
+# serials of the ward's own range, so a combined PDF works unchanged. Ward 14 has 373 voters.
+_PDF = {1: 'input/ward1_voters.pdf', 5: 'input/ward_5_6_7_voters.pdf', 6: 'input/ward_5_6_7_voters.pdf',
+        7: 'input/ward_5_6_7_voters.pdf', 8: 'input/ward8_9_10_voters.pdf', 9: 'input/ward8_9_10_voters.pdf',
+        10: 'input/ward8_9_10_voters.pdf', 12: 'input/ward11,1,2,13,14_voters.pdf',
+        13: 'input/ward11,1,2,13,14_voters.pdf', 14: 'input/ward11,1,2,13,14_voters.pdf'}
+for _n, _first, _last, _counts in ((1, 1, 369, (180, 189)), (5, 1477, 1845, (176, 193)), (6, 1846, 2214, (183, 186)),
+                                   (7, 2215, 2583, (176, 193)), (8, 2584, 2952, (183, 186)), (9, 2953, 3321, (182, 187)),
+                                   (10, 3322, 3690, (170, 199)), (12, 4060, 4428, (186, 183)), (13, 4429, 4797, (171, 198)),
+                                   (14, 4798, 5170, (188, 185))):
+    WARDS[_n] = dict(first=_first, last=_last, pdf=_PDF[_n],
+                     xlsx='input/Etikoppaka_Ward_%d_Corrected_English.xlsx' % _n, sheet='Ward %d - English' % _n,
+                     photos='output/ward_%d/voter_photos' % _n, manifest='output/ward_%d/voter_photos_manifest.csv' % _n,
+                     json='output/ward_%d/voters_ward_%d.json' % (_n, _n), review='output/ward_%d/voters_review_ward_%d.xlsx' % (_n, _n),
+                     asset_json='wards/voters_ward_%d.json' % _n, asset_photos='voter_photos/ward_%d' % _n,
+                     official_counts=_counts)
+for _w in WARDS.values():
+    _w['count'] = _w['last'] - _w['first'] + 1
+
+
 def ward(n):
     if n not in WARDS:
         raise SystemExit('Unknown ward %s; add it to tools/ward_config.py' % n)
@@ -42,7 +62,7 @@ def card_serials(words, first, last):
     labels = [w for w in words if 'పం.ఓ.జా.వ.సం' in w[4]]
     out = []
     for w in words:
-        if not re.fullmatch(r'\d{3,4}', w[4]) or not first <= int(w[4]) <= last:
+        if not re.fullmatch(r'\d{1,4}', w[4]) or not first <= int(w[4]) <= last:
             continue
         if any(abs(l[1] - w[1]) < 3 and 0 < w[0] - l[0] < 75 for l in labels):
             out.append(w)

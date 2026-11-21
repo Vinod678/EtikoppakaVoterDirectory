@@ -20,7 +20,8 @@ import org.robolectric.RobolectricTestRunner
 import java.io.File
 
 /**
- * Upgrade from the installed state (Wards 2 + 11 with user data) to the bundle with Wards 3 and 4:
+ * Upgrade from the installed state (Wards 2 + 11 with user data) to the v3.3 bundle with Wards 3 and 4
+ * (the later wards are left out here; FullRollImportTest covers the upgrade to all 14 wards):
  * new wards import once, existing wards (voters, user data, households) stay byte-for-byte the same.
  */
 @RunWith(RobolectricTestRunner::class)
@@ -66,7 +67,7 @@ class AllWardsImportTest {
         val snap = snapshot()
 
         // Update installed: all four ward datasets bundled.
-        wardFiles = context.assets.list("wards")!!.toList()
+        wardFiles = context.assets.list("wards")!!.filter { it in setOf("voters_ward_2.json", "voters_ward_3.json", "voters_ward_4.json") }
         assertTrue(wardFiles.containsAll(listOf("voters_ward_2.json", "voters_ward_3.json", "voters_ward_4.json")))
         val r = repo().ensureImported()
         assertTrue(r.importedNow)

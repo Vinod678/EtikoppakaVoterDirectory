@@ -17,17 +17,19 @@ import java.util.Locale
  *     "Alugolu Varahalu"), with spelling normalisation (case, punctuation, spacing, doubled letters,
  *     th/t, ee/i, oo/u, w/v ...) and the Telugu surname as a second spelling. Same surname = same
  *     household. Common given names ("Rao", "Babu", "Lakshmi" ...) are never treated as surnames.
+ *     A voter printed with another surname than the father / husband / mother at the same house (a
+ *     wife printed with her maiden name) belongs to that relative's family.
  *  2. Initials ("C. Saibabu") join a family when a printed relationship or the house confirms it.
  *  3. Fallback for voters without an identifiable surname: a printed Father / Husband / Mother
  *     name that matches a voter at the same house (with age / gender checks).
  * A house number alone never links anyone; voters are never grouped across wards (the caller
- * passes one ward). A surname is used as the heading only when it is printed at least twice in
- * the ward; otherwise the household gets a neutral title instead of a guess.
+ * passes one ward). The heading is the family's surname; a one-voter household without a surname is
+ * named after the voter, and only several voters without a common surname get "Household - House x".
  */
 object HouseholdGrouper {
 
     /** Bump when the rules change: wards are re-grouped once (manual corrections are kept). */
-    const val VERSION = "g3"
+    const val VERSION = "g6"
 
     data class Group(
         /** Stable key: the smallest voter id of the group. */
@@ -63,7 +65,13 @@ object HouseholdGrouper {
     }
 
     /** Surname chosen per voter: end of name by default, start of name when that is the known surname. */
-    private class Person(val p: P, val surname: String?, val surnameDisplay: String?, val firstNames: Set<String>)
+    private class Person(
+        val p: P,
+        val surname: String?,
+        val surnameDisplay: String?,
+        val firstNames: Set<String>,
+        val teSurname: String? = p.teSurname,
+    )
 
     fun group(voters: List<VoterEntity>): List<Group> {
         if (voters.isEmpty()) return emptyList()
@@ -72,16 +80,33 @@ object HouseholdGrouper {
         // Ward-wide surname frequency (last word of multi-word names) to recognise surname-first names.
         val lastFreq = HashMap<String, Int>()
         ps.forEach { p -> if (p.phon.size >= 2) p.phon.last().let { if (it !in NOT_SURNAMES) lastFreq.merge(it, 1, Int::plus) } }
+        // How often each word starts a multi-word name: a word printed first far more often than last
+        // is a given name ("Chiranjeevi"), even if one card prints it last ("Pedapalli Chiranjeevi").
+        val firstFreq = HashMap<String, Int>()
+        ps.forEach { p -> if (p.phon.size >= 2) firstFreq.merge(p.phon.first(), 1, Int::plus) }
+        // A relative printed with one word only ("Father: Govindu") is a given name.
+        val soloRelative = HashMap<String, Int>()
+        ps.forEach { p -> if (p.rel.size == 1 && tokens(p.v.relativeNameEn).size == 1) soloRelative.merge(p.rel[0], 1, Int::plus) }
 
-        val people = ps.map { p ->
+        val chosen = ps.map { p ->
             var idx = -1
             if (p.phon.size >= 2) {
                 val last = p.phon.last(); val first = p.phon.first()
+                // Frequencies of OTHER voters (this voter's own words are not counted).
+                fun asLast(w: String) = (lastFreq[w] ?: 0) - (if (w == last) 1 else 0)
+                fun asFirst(w: String) = (firstFreq[w] ?: 0) - (if (w == first) 1 else 0)
+                fun given(w: String) = (asFirst(w) >= 2 && asFirst(w) > 2 * asLast(w)) ||
+                    ((soloRelative[w] ?: 0) >= 1 && (soloRelative[w] ?: 0) >= asLast(w))
+                val okLast = last !in NOT_SURNAMES; val okFirst = first !in NOT_SURNAMES
                 idx = when {
-                    // Frequencies of OTHER voters (this voter's own last word is not counted).
-                    last !in NOT_SURNAMES && ((lastFreq[last] ?: 0) - 1) >= (lastFreq[first] ?: 0) -> p.phon.lastIndex
-                    first !in NOT_SURNAMES && (lastFreq[first] ?: 0) > ((lastFreq[last] ?: 0) - 1) -> 0
-                    last !in NOT_SURNAMES -> p.phon.lastIndex
+                    // The family name is usually printed in the relative's name too ("Father: Apparao Eerla",
+                    // "Nagireddi Bhargava" - father "Nagireddi Rama Krishna").
+                    okLast && last in p.rel && first !in p.rel -> p.phon.lastIndex
+                    okFirst && first in p.rel && last !in p.rel && asLast(first) >= asLast(last) && !given(first) -> 0
+                    okLast && !given(last) && (asLast(last) >= asLast(first) || given(first) || !okFirst) -> p.phon.lastIndex
+                    okFirst && !given(first) -> 0
+                    okLast -> p.phon.lastIndex
+                    okFirst -> 0
                     else -> -1
                 }
             }
@@ -91,11 +116,20 @@ object HouseholdGrouper {
             Person(p, sn, display, firsts)
         }
 
-        // How often each surname is printed in the ward (as a voter's surname or inside a relative name).
-        // A family title needs at least two such appearances, so a lone guessed word never names a family.
-        val support = HashMap<String, Int>()
-        people.forEach { p -> p.surname?.let { support.merge(it, 1, Int::plus) } }
-        people.forEach { p -> p.p.rel.toSet().forEach { w -> if (w in support) support.merge(w, 1, Int::plus) } }
+        // A voter whose father / husband / mother at the same house is printed with another family name
+        // (a wife printed with her maiden name: "Pola Vijaya Durga Karri", husband "Nageswara Rao Kalla")
+        // belongs to that relative's family; her own surname must not join the two families. Only a
+        // surname that at least two voters of the ward carry counts ("Father: Pothu Raju" is a given name).
+        val surnameCount = chosen.mapNotNull { it.surname }.groupingBy { it }.eachCount()
+        val byHouse = chosen.filter { it.p.house != null }.groupBy { it.p.house }
+        val people = chosen.map { a ->
+            if (a.surname == null) return@map a
+            val q = byHouse[a.p.house].orEmpty().firstOrNull { q ->
+                q !== a && q.surname != null && q.surname != a.surname && (surnameCount[q.surname] ?: 0) >= 2 &&
+                    q.surname in a.p.rel && relationLink(a, q) && !sameSurname(a, q)
+            } ?: return@map a
+            Person(a.p, q.surname, q.surnameDisplay, a.p.phon.filter { it != q.surname }.toSet(), q.teSurname)
+        }
 
         val n = people.size
         val parent = IntArray(n) { it }
@@ -134,13 +168,15 @@ object HouseholdGrouper {
             val counts = keyOf.values.groupingBy { it }.eachCount()
             val top = counts.entries.sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value }.thenBy { it.key }).firstOrNull()
             val tie = top != null && counts.values.count { it == top.value } > 1
-            // A surname is only used as the heading when it is established (printed at least twice in
-            // the ward); otherwise a neutral title is used instead of guessing.
-            val corroborated = top != null && (top.value >= 2 || (support[top.key] ?: 0) >= 2)
-            val family = if (top != null && !tie && corroborated) {
+            // Heading: the family's surname, even when it is printed only once in the ward. A household of
+            // one voter without a surname is named after that voter; only several voters without one
+            // common surname get the neutral "Household - House x" title.
+            val family = if (top != null && !tie) {
                 members.filter { it.surname == top.key }.mapNotNull { it.surnameDisplay }
                     .groupingBy { it }.eachCount().entries.sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value }.thenBy { it.key })
                     .first().key
+            } else if (members.size == 1) {
+                members[0].p.v.nameEn?.trim()?.replace(Regex("\\s+"), " ")?.takeIf { it.isNotEmpty() }
             } else null
 
             val house = members.mapNotNull { it.p.house }.groupingBy { it }.eachCount()
@@ -170,7 +206,7 @@ object HouseholdGrouper {
         if (ca.length >= 6 && (ca == sb || ca == cb)) return true
         if (cb.length >= 6 && cb == sa) return true
         // ... or the same Telugu surname with an English spelling that differs by one letter.
-        val ta = a.p.teSurname; val tb = b.p.teSurname
+        val ta = a.teSurname; val tb = b.teSurname
         return ta != null && ta == tb && closeSpelling(sa, sb)
     }
 

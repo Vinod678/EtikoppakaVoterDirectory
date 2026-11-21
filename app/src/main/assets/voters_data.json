@@ -9,7 +9,7 @@
     "roll_qualifying_date": "2026-01-01",
     "roll_publication_date": "2026-04-15",
     "record_count": 369,
-    "records_needing_review": 143,
+    "records_needing_review": 140,
     "photo_folder": "output/voter_photos",
     "sources": {
       "excel": "input/Etikoppaka_Ward_11_Corrected_English.xlsx",
@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-19T03:14:19"
+    "generated_at": "2026-11-21T13:02:15"
   },
   "voters": [
     {
@@ -98,11 +98,11 @@
     {
       "gp_serial_no": 3694,
       "ward_no": 11,
-      "name_en": "Hemani Yelapu",
-      "name_te": "హేమాణీ యేలాపూ",
+      "name_en": "Hemani Yallapu",
+      "name_te": "హేమాణీ యల్లపు",
       "relationship": "Husband",
-      "relative_name_en": "Abbayi Yelapu",
-      "relative_name_te": "అబ్బా యి యేలాపూ",
+      "relative_name_en": "Abbayi Yallapu",
+      "relative_name_te": "అబ్బా యి యల్లపు",
       "age": 27,
       "gender": "Female",
       "house_no": "8-139",
@@ -167,7 +167,7 @@
       "gp_serial_no": 3697,
       "ward_no": 11,
       "name_en": "Nukaarathnam Gonnabattula",
-      "name_te": "నూకరత్నం గోన్నా బతుల",
+      "name_te": "నూకరత్నం గొన్నాబత్తుల",
       "relationship": "Husband",
       "relative_name_en": "Nageswara Rao",
       "relative_name_te": "నాగేశ్వ రరావు",
@@ -182,19 +182,17 @@
       "pdf_page": 1,
       "pdf_relation_label": "Husband",
       "excel_review_status": "Automated normalization — verify spelling",
-      "needs_review": true,
-      "review_issue_codes": [
-        "TELUGU_WORD_SPLIT_SUSPECTED"
-      ]
+      "needs_review": false,
+      "review_issue_codes": []
     },
     {
       "gp_serial_no": 3698,
       "ward_no": 11,
-      "name_en": "Nageswara Rao Gonna Battula",
-      "name_te": "నాగేశ్వ రరావు గొన్నా బత్తుల",
+      "name_en": "Nageswara Rao Gonnabattula",
+      "name_te": "నాగేశ్వ రరావు గొన్నాబత్తుల",
       "relationship": "Father",
-      "relative_name_en": "Ramana Gonna Battula",
-      "relative_name_te": "రమణ గొన్నా బత్తుల",
+      "relative_name_en": "Ramana Gonnabattula",
+      "relative_name_te": "రమణ గొన్నాబత్తుల",
       "age": 38,
       "gender": "Male",
       "house_no": "8-142",
@@ -1491,11 +1489,11 @@
     {
       "gp_serial_no": 3755,
       "ward_no": 11,
-      "name_en": "Nagamani Kedari",
-      "name_te": "నాగమణి కేడారి",
+      "name_en": "Nagamani Kadari",
+      "name_te": "నాగమణి కడారి",
       "relationship": "Husband",
-      "relative_name_en": "Srinu Kedari",
-      "relative_name_te": "శ్రీను కేడారి",
+      "relative_name_en": "Srinu Kadari",
+      "relative_name_te": "శ్రీను కడారి",
       "age": 37,
       "gender": "Female",
       "house_no": "8-159",
@@ -2218,10 +2216,10 @@
     {
       "gp_serial_no": 3786,
       "ward_no": 11,
-      "name_en": "Eswara Rao Lamka",
+      "name_en": "Eswara Rao Lanka",
       "name_te": "ఈశ్వ ర రావు లంకా",
       "relationship": "Father",
-      "relative_name_en": "Bandayya Charyulu Lamka",
+      "relative_name_en": "Bandayya Charyulu Lanka",
       "relative_name_te": "బండియ్యా చార్యు లూ లంకా",
       "age": 40,
       "gender": "Male",
@@ -2243,10 +2241,10 @@
     {
       "gp_serial_no": 3787,
       "ward_no": 11,
-      "name_en": "Srivalli Himabimdu Lamka",
+      "name_en": "Srivalli Himabimdu Lanka",
       "name_te": "శ్రీవల్లి హిమబిందు లంకా",
       "relationship": "Husband",
-      "relative_name_en": "Eswara Rao Lamka",
+      "relative_name_en": "Eswara Rao Lanka",
       "relative_name_te": "ఈశ్వ ర రావు లంకా",
       "age": 34,
       "gender": "Female",
@@ -2476,11 +2474,11 @@
     {
       "gp_serial_no": 3797,
       "ward_no": 11,
-      "name_en": "Ganga Raju Dorabula",
-      "name_te": "గంగ రాజు దొరబుల",
+      "name_en": "Ganga Raju Darabala",
+      "name_te": "గంగ రాజు దారాబాల",
       "relationship": "Father",
-      "relative_name_en": "Venkataswamy Dorabula",
-      "relative_name_te": "వెంకటస్వా మి దొరబుల",
+      "relative_name_en": "Venkataswamy Darabala",
+      "relative_name_te": "వెంకటస్వా మి దారాబాల",
       "age": 59,
       "gender": "Male",
       "house_no": "9-15/1",
@@ -2500,11 +2498,11 @@
     {
       "gp_serial_no": 3798,
       "ward_no": 11,
-      "name_en": "Sanya Samma Dorabula",
-      "name_te": "సన్యా సమ్మ దొరబుల",
+      "name_en": "Sanya Samma Darabala",
+      "name_te": "సన్యా సమ్మ దారాబాల",
       "relationship": "Husband",
-      "relative_name_en": "Gangaraju Dorabula",
-      "relative_name_te": "గంగరాజు దొరబుల",
+      "relative_name_en": "Gangaraju Darabala",
+      "relative_name_te": "గంగరాజు దారాబాల",
       "age": 49,
       "gender": "Female",
       "house_no": "9-15/1",
@@ -2522,11 +2520,11 @@
     {
       "gp_serial_no": 3799,
       "ward_no": 11,
-      "name_en": "Varahalu Dorabula",
-      "name_te": "వరహాలు దొరబుల",
+      "name_en": "Varahalu Darabala",
+      "name_te": "వరహాలు దారాబాల",
       "relationship": "Father",
-      "relative_name_en": "Ganga Raju Dorabula",
-      "relative_name_te": "గంగ రాజు దొరబుల",
+      "relative_name_en": "Ganga Raju Darabala",
+      "relative_name_te": "గంగ రాజు దారాబాల",
       "age": 31,
       "gender": "Male",
       "house_no": "9-15/1",
@@ -2885,11 +2883,11 @@
     {
       "gp_serial_no": 3815,
       "ward_no": 11,
-      "name_en": "Mahalakshmee Giduturu",
-      "name_te": "మహాలక్ష్మీ గిడుతూరు",
+      "name_en": "Mahalakshmee Giduturi",
+      "name_te": "మహాలక్ష్మీ గిడుతూరి",
       "relationship": "Husband",
-      "relative_name_en": "Sattibabu Giduturu",
-      "relative_name_te": "సత్తీబాబు గిడుతూరు",
+      "relative_name_en": "Sattibabu Giduturi",
+      "relative_name_te": "సత్తీబాబు గిడుతూరి",
       "age": 47,
       "gender": "Female",
       "house_no": "9-26/1",
@@ -4460,11 +4458,11 @@
     {
       "gp_serial_no": 3883,
       "ward_no": 11,
-      "name_en": "Anna Poorna Kottala",
-      "name_te": "అన్న పూర్ణ కొత్తా ల",
+      "name_en": "Anna Poorna Kottali",
+      "name_te": "అన్న పూర్ణ కొత్తలి",
       "relationship": "Father",
-      "relative_name_en": "Nageswara Rao Kottala",
-      "relative_name_te": "నాగేశ్వ రరావు కొత్తా ల",
+      "relative_name_en": "Nageswara Rao Kottali",
+      "relative_name_te": "నాగేశ్వ రరావు కొత్తలి",
       "age": 32,
       "gender": "Female",
       "house_no": "9-45",
@@ -4476,11 +4474,8 @@
       "pdf_page": 8,
       "pdf_relation_label": "Father",
       "excel_review_status": "Automated normalization — verify spelling",
-      "needs_review": true,
-      "review_issue_codes": [
-        "TELUGU_WORD_SPLIT_SUSPECTED",
-        "TELUGU_WORD_SPLIT_SUSPECTED"
-      ]
+      "needs_review": false,
+      "review_issue_codes": []
     },
     {
       "gp_serial_no": 3884,
@@ -5660,8 +5655,8 @@
       "name_en": "Revathi Kodooru",
       "name_te": "రేవతి కొడూరు",
       "relationship": "Father",
-      "relative_name_en": "Apalacharee Kodoori",
-      "relative_name_te": "అపాలాచారీ కోడూరి",
+      "relative_name_en": "Apalacharee Kodooru",
+      "relative_name_te": "అపాలాచారీ కోడూరు",
       "age": 33,
       "gender": "Female",
       "house_no": "9-55",
@@ -5723,8 +5718,8 @@
     {
       "gp_serial_no": 3938,
       "ward_no": 11,
-      "name_en": "Rajeswari Kodoori",
-      "name_te": "రాజ్శ్వ రి కొడూరి",
+      "name_en": "Rajeswari Kodooru",
+      "name_te": "రాజ్శ్వ రి కోడూరు",
       "relationship": "Husband",
       "relative_name_en": "Appa Lacharyu Lu",
       "relative_name_te": "అప్ప లాచార్యు లు",
@@ -6194,11 +6189,11 @@
     {
       "gp_serial_no": 3959,
       "ward_no": 11,
-      "name_en": "Harika Polamuri",
-      "name_te": "హరిక పొలమూరీ",
+      "name_en": "Harika Polumuri",
+      "name_te": "హరిక పొలుమూరి",
       "relationship": "Mother",
-      "relative_name_en": "Lalitha Polamuri",
-      "relative_name_te": "లలిత పొలమూరీ",
+      "relative_name_en": "Lalitha Polumuri",
+      "relative_name_te": "లలిత పొలుమూరి",
       "age": 20,
       "gender": "Female",
       "house_no": "9-61",
@@ -6260,8 +6255,8 @@
     {
       "gp_serial_no": 3962,
       "ward_no": 11,
-      "name_en": "Nageswara Rao Polimuri",
-      "name_te": "నాగేశ్వ రరావు పొలిమూరి",
+      "name_en": "Nageswara Rao Polumuri",
+      "name_te": "నాగేశ్వ రరావు పొలుమూరి",
       "relationship": "Father",
       "relative_name_en": "Balachari",
       "relative_name_te": "బాలాచారి",
@@ -6580,8 +6575,8 @@
     {
       "gp_serial_no": 3976,
       "ward_no": 11,
-      "name_en": "Nanaji Kottala",
-      "name_te": "నానాజి కొట్టా ల",
+      "name_en": "Nanaji Kottali",
+      "name_te": "నానాజి కొత్తలి",
       "relationship": "Not specified",
       "relative_name_en": null,
       "relative_name_te": null,
@@ -6599,8 +6594,7 @@
       "needs_review": true,
       "review_issue_codes": [
         "EXCEL_FLAG_CHECK_PDF",
-        "RELATIVE_MISSING_RELATION_UNKNOWN",
-        "TELUGU_WORD_SPLIT_SUSPECTED"
+        "RELATIVE_MISSING_RELATION_UNKNOWN"
       ]
     },
     {
@@ -6631,11 +6625,11 @@
     {
       "gp_serial_no": 3978,
       "ward_no": 11,
-      "name_en": "Sharva Lakshmi Kottala",
-      "name_te": "శర్వ లక్ష్మి కొట్టా ల",
+      "name_en": "Sharva Lakshmi Kottali",
+      "name_te": "శర్వ లక్ష్మి కొత్తలి",
       "relationship": "Husband",
-      "relative_name_en": "Nanaji Kottala",
-      "relative_name_te": "నానాజి కొట్టా ల",
+      "relative_name_en": "Nanaji Kottali",
+      "relative_name_te": "నానాజి కొత్తలి",
       "age": 38,
       "gender": "Female",
       "house_no": "9-64",
@@ -6647,11 +6641,8 @@
       "pdf_page": 11,
       "pdf_relation_label": "Husband",
       "excel_review_status": "Automated normalization — verify spelling",
-      "needs_review": true,
-      "review_issue_codes": [
-        "TELUGU_WORD_SPLIT_SUSPECTED",
-        "TELUGU_WORD_SPLIT_SUSPECTED"
-      ]
+      "needs_review": false,
+      "review_issue_codes": []
     },
     {
       "gp_serial_no": 3979,
@@ -7544,11 +7535,11 @@
     {
       "gp_serial_no": 4018,
       "ward_no": 11,
-      "name_en": "Sai Kumar Madetee",
-      "name_te": "సాయి కుమార్ మడేటీ",
+      "name_en": "Sai Kumar Medeti",
+      "name_te": "సాయి కుమార్ మెదేటి",
       "relationship": "Father",
-      "relative_name_en": "Srinu Madetee",
-      "relative_name_te": "శ్రీను మడేటీ",
+      "relative_name_en": "Srinu Medeti",
+      "relative_name_te": "శ్రీను మెదేటి",
       "age": 27,
       "gender": "Male",
       "house_no": "9-79",
@@ -7566,8 +7557,8 @@
     {
       "gp_serial_no": 4019,
       "ward_no": 11,
-      "name_en": "Mahalakshmi Madetee",
-      "name_te": "మహాలక్ష్మి మడేటీ",
+      "name_en": "Mahalakshmi Medeti",
+      "name_te": "మహాలక్ష్మి మెదేటి",
       "relationship": "Mother",
       "relative_name_en": "Varalakshmi Lakshmi",
       "relative_name_te": "వరలక్ష్మి లక్ష్మి",
@@ -8018,8 +8009,8 @@
     {
       "gp_serial_no": 4039,
       "ward_no": 11,
-      "name_en": "Sivashamkar Matturthi",
-      "name_te": "శివశంకర్ మత్తుర్తి",
+      "name_en": "Sivashamkar Mathurthi",
+      "name_te": "శివశంకర్ మాథుర్తి",
       "relationship": "Father",
       "relative_name_en": "Appalachari",
       "relative_name_te": "అప్ప లాచారి",
@@ -8042,8 +8033,8 @@
     {
       "gp_serial_no": 4040,
       "ward_no": 11,
-      "name_en": "Bhavani Matturi",
-      "name_te": "భవాని మత్తురి",
+      "name_en": "Bhavani Mathurthi",
+      "name_te": "భవాని మాథుర్తి",
       "relationship": "Husband",
       "relative_name_en": "Sivashamkarravu",
       "relative_name_te": "శివశంకర్రావు",

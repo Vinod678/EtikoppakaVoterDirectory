@@ -49,10 +49,13 @@ for pno, p in enumerate(doc):
                 if t:
                     lines.append((round(l['bbox'][1]), round(l['bbox'][0]), t))
         lines = [t for _, _, t in sorted(lines)]
-        latin = [ww[4] for ww in words
-                 if card.contains(fitz.Point((ww[0] + ww[2]) / 2, (ww[1] + ww[3]) / 2))
-                 and re.search(r'[A-Za-z0-9]', ww[4]) and ww[4] not in WATERMARK]
-        m = re.fullmatch(r'(\d{3,4}) \.?(\d+) (\d+) (\d+) (\d+) (\S+) ([A-Z]{3}\d{7})', ' '.join(latin))
+        inside = [ww for ww in words if card.contains(fitz.Point((ww[0] + ww[2]) / 2, (ww[1] + ww[3]) / 2))
+                  and re.search(r'[A-Za-z0-9]', ww[4]) and ww[4] not in WATERMARK
+                  and not re.search('[ఀ-౿]', ww[4])]          # digits glued to a Telugu name
+        # single watermark letters ("S", "E", "C" ...) stand on a line of their own; "4-154 A" keeps its A
+        latin = [ww[4] for ww in inside if not re.fullmatch('[A-Z]', ww[4])
+                 or any(o is not ww and abs(o[1] - ww[1]) < 3 for o in inside)]
+        m = re.fullmatch(r'(\d{1,4}) \.?(\d+) (\d+) (\d+) (\d+) (.+?) ([A-Z]{3}\d{7})', ' '.join(latin))
         assert m and int(m.group(1)) == s, (s, latin)
         gl = [l for l in lines if l.startswith('లింగము')]; assert len(gl) == 1, (s, gl)
         g = gl[0].split(':', 1)[1].strip()
@@ -142,15 +145,15 @@ def check(name, ok, detail=''):
 
 
 ser = [r['gp_serial_no'] for r in records]
-check('369 records', len(records) == 369, str(len(records)))
-check('Serials %d-%d each exactly once' % (W['first'], W['last']), ser == EXPECTED and len(set(ser)) == 369)
+check('%d records' % W['count'], len(records) == W['count'], str(len(records)))
+check('Serials %d-%d each exactly once' % (W['first'], W['last']), ser == EXPECTED and len(set(ser)) == W['count'])
 check('Every photo file exists', all(os.path.isfile(os.path.join(PHOTOS, r['photo_filename'])) for r in records))
 check('Photo filename = serial', all(r['photo_filename'].split('.')[0] == str(r['gp_serial_no']) for r in records))
 check('Photo files match manifest checksums',
       all(sha(os.path.join(PHOTOS, man[s]['photo_filename'])) == man[s]['sha256'] for s in EXPECTED))
-check('No extra files in voter_photos', len(os.listdir(PHOTOS)) == 369, str(len(os.listdir(PHOTOS))))
-check('EPIC numbers unique', len({r['epic_no'] for r in records}) == 369)
-check('Assembly serials unique', len({r['assembly_serial'] for r in records}) == 369)
+check('No extra files in voter_photos', len(os.listdir(PHOTOS)) == W['count'], str(len(os.listdir(PHOTOS))))
+check('EPIC numbers unique', len({r['epic_no'] for r in records}) == W['count'])
+check('Assembly serials unique', len({r['assembly_serial'] for r in records}) == W['count'])
 check('Every record has age, gender, house no, EPIC',
       all(r['age'] and r['gender'] and r['house_no'] and r['epic_no'] for r in records))
 check('Names/relationship copied verbatim from Excel',
@@ -245,11 +248,11 @@ srows = [[k, sv[k], v, len({x[0] for x in review if x[2] == k}), desc[k]]
          for k, v in sorted(cnt.items(), key=lambda kv: (order[sv[kv[0]]], kv[0]))]
 sheet(ws3, ['Issue code', 'Priority', 'Issues', 'Records', 'Meaning'], srows, [34, 9, 8, 9, 80])
 r0 = ws3.max_row + 2
-summary = [('Total voters', 369), ('Records needing review', len(rows)),
+summary = [('Total voters', W['count']), ('Records needing review', len(rows)),
            ('  High priority', sum(1 for x in rows if x[1] == 'High')),
            ('  Medium priority', sum(1 for x in rows if x[1] == 'Medium')),
            ('  Low priority', sum(1 for x in rows if x[1] == 'Low')),
-           ('General note', 'Every Excel name is marked "automated normalization - verify spelling"; a full spelling check of all 369 is still advisable.'),
+           ('General note', 'Every Excel name is marked "automated normalization - verify spelling"; a full spelling check of all %d is still advisable' % W['count'] + '.'),
            ('Not corrected', 'No value has been changed or filled in. Record corrections in column "Verified value / correction" on the first sheet.')]
 for i, (k, v) in enumerate(summary):
     ws3.cell(r0 + i, 1, k).font = Font(bold=True); ws3.cell(r0 + i, 2, v)

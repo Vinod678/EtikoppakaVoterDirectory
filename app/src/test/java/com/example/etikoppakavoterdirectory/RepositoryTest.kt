@@ -156,7 +156,7 @@ class RepositoryTest {
         assertEquals(367, serials(VoterFilter(block = Blocks.UNASSIGNED)).size)
         assertEquals(listOf(3700), serials(VoterFilter(block = "A", visited = false)))
         assertEquals(listOf(3691), serials(VoterFilter(query = "varaha", block = "A")))
-        assertEquals(143, serials(VoterFilter(reviewOnly = true)).size)
+        assertEquals(140, serials(VoterFilter(reviewOnly = true)).size)
     }
 
     @Test
@@ -171,7 +171,7 @@ class RepositoryTest {
         val stats = repo.stats().first()
         assertEquals(369, stats.total)
         assertEquals(1, stats.visited)
-        assertEquals(143, stats.needsReview)
+        assertEquals(140, stats.needsReview)
     }
 
     @Test

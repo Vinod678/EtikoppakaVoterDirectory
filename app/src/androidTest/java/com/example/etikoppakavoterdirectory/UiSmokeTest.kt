@@ -58,7 +58,7 @@ class UiSmokeTest {
         rule.unlock()
         rule.waitUntilAtLeastOneExists(hasTestTag("homeGrid"), 30_000)
         rule.onNodeWithText("Total Wards").assertIsDisplayed()
-        rule.waitUntilAtLeastOneExists(hasText("1,476"), 10_000) // total voters from the database (Wards 2, 3, 4, 11)
+        rule.waitUntilAtLeastOneExists(hasText("5,170"), 10_000) // total voters from the database (Wards 1-14)
         for (w in 1..14) {
             rule.onNodeWithTag("homeGrid").performScrollToNode(hasTestTag("ward-$w"))
             rule.onNodeWithTag("ward-$w").assertIsDisplayed()

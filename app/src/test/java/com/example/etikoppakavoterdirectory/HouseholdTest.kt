@@ -168,8 +168,8 @@ class HouseholdTest {
         assertTrue(membersOf(3697).containsAll(listOf(3697, 3698)))
         // Surname-first name ("Alugolu Varahalu") with "Nageswara Rao Alugolu".
         assertTrue(membersOf(3972).contains(3970))
-        // No identifiable surname: fallback, neutral title (no guess, no "Family" suffix anywhere).
-        assertTrue(repo.household(householdOf(3691)!!).first()!!.name.startsWith("Household — House"))
+        // No identifiable surname, alone: the household is named after the voter (no "Family" suffix anywhere).
+        assertEquals("Varahalamma", repo.household(householdOf(3691)!!).first()!!.name)
         assertTrue(repo.householdSummaries().first().none { it.name.endsWith(" Family") || it.needsReview })
     }
 
