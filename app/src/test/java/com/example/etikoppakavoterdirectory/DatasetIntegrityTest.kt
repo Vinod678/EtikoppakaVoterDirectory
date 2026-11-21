@@ -49,9 +49,9 @@ class DatasetIntegrityTest {
 
     /**
      * Every bundled photo is either byte-identical to the extracted original (output/.../voter_photos),
-     * or - for the few oversized scans - a resized copy listed in asset_photo_optimization.csv
-     * (written by tools/sync_assets.py) whose original checksum matches the manifest, whose bundled
-     * checksum matches the log, which is at most 800 px and keeps the original aspect ratio.
+     * or a compressed JPEG copy listed in asset_photo_optimization.csv (written by
+     * tools/sync_assets.py) whose original checksum matches the manifest, whose bundled checksum
+     * matches the log, which is at most 480 px and keeps the original aspect ratio.
      */
     private fun checkPhotosAgainstManifest(outputDir: File, dir: File, count: Int = 369) {
         val manifest = File(outputDir, "voter_photos_manifest.csv")
@@ -76,7 +76,8 @@ class DatasetIntegrityTest {
                 assertEquals("bundled resized $name", opt.getValue("asset_sha256"), bundled)
                 val ow = opt.getValue("original_width_px").toDouble(); val oh = opt.getValue("original_height_px").toDouble()
                 val aw = opt.getValue("asset_width_px").toDouble(); val ah = opt.getValue("asset_height_px").toDouble()
-                assertTrue("size of $name", maxOf(aw, ah) <= 800 && maxOf(ow, oh) > 800)
+                // Compressed to JPEG: at most 480 px, or the original size when that was already smaller.
+                assertTrue("size of $name", if (maxOf(ow, oh) > 480) maxOf(aw, ah) <= 480 else aw == ow && ah == oh)
                 assertEquals("aspect ratio of $name", ow / oh, aw / ah, 0.01)
             }
         }
@@ -86,12 +87,11 @@ class DatasetIntegrityTest {
     @Test
     fun photosHaveValidImageSignatures() {
         dataset.voters.forEach { v ->
+            // The app decodes by content: a compressed ".png" photo holds JPEG data (tools/sync_assets.py).
             val bytes = File(photosDir, v.photoFilename!!).readBytes()
-            if (v.photoFilename!!.endsWith(".jpg")) {
-                assertTrue(bytes[0] == 0xFF.toByte() && bytes[1] == 0xD8.toByte())
-            } else {
-                assertTrue(bytes[1] == 'P'.code.toByte() && bytes[2] == 'N'.code.toByte() && bytes[3] == 'G'.code.toByte())
-            }
+            val jpeg = bytes[0] == 0xFF.toByte() && bytes[1] == 0xD8.toByte()
+            val png = bytes[1] == 'P'.code.toByte() && bytes[2] == 'N'.code.toByte() && bytes[3] == 'G'.code.toByte()
+            assertTrue("image data of ${v.photoFilename}", jpeg || png)
         }
     }
 
