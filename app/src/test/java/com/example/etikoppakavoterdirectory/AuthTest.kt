@@ -63,29 +63,30 @@ class AuthTest {
 
     @Test
     fun untilDec2_adminAndViewerFormulas() {
-        // Day x 9 for Admin, day x 19 for Viewer.
+        // Day x 9 for Admin, "111" + day x 19 for Viewer.
         assertEquals("180", PasswordPolicy.adminSuffix(nov20))
-        assertEquals("380", PasswordPolicy.viewerSuffix(nov20))
+        assertEquals("111380", PasswordPolicy.viewerSuffix(nov20))
         assertTrue(ok(adminBase + "180", Role.ADMIN, nov20))
-        assertTrue(ok(viewerBase + "380", Role.VIEWER, nov20))
+        assertTrue(ok(viewerBase + "111380", Role.VIEWER, nov20))
+        assertFalse(ok(viewerBase + "380", Role.VIEWER, nov20)) // the old rule without "111"
         assertTrue(ok(adminBase + "18", Role.ADMIN, dec2))
-        assertTrue(ok(viewerBase + "38", Role.VIEWER, dec2))
+        assertTrue(ok(viewerBase + "11138", Role.VIEWER, dec2))
         assertTrue(ok(adminBase + "279", Role.ADMIN, LocalDate.of(2026, 10, 31)))  // 31 x 9
-        assertTrue(ok(viewerBase + "589", Role.VIEWER, LocalDate.of(2026, 10, 31))) // 31 x 19
+        assertTrue(ok(viewerBase + "111589", Role.VIEWER, LocalDate.of(2026, 10, 31))) // 111 + 31 x 19
     }
 
     @Test
     fun onlyTheSelectedRolesCredentialIsChecked() {
         // The correct password for the other role is refused.
         assertFalse(ok(adminBase + "180", Role.VIEWER, nov20))
-        assertFalse(ok(viewerBase + "380", Role.ADMIN, nov20))
+        assertFalse(ok(viewerBase + "111380", Role.ADMIN, nov20))
         assertFalse(ok(viewerFixed, Role.ADMIN, dec3, rulesWithAdmin))
         assertFalse(ok(adminFixed, Role.VIEWER, dec3, rulesWithAdmin))
     }
 
     @Test
     fun untilDec2_wrongCombinationsAreRefused() {
-        assertFalse(ok(adminBase + "380", Role.ADMIN, nov20))   // Admin base with the Viewer digits
+        assertFalse(ok(adminBase + "111380", Role.ADMIN, nov20))   // Admin base with the Viewer digits
         assertFalse(ok(viewerBase + "180", Role.VIEWER, nov20)) // Viewer base with the Admin digits
         assertFalse(ok(adminBase + "189", Role.ADMIN, nov20))   // another day's digits
         assertFalse(ok(adminBase, Role.ADMIN, nov20))
@@ -146,7 +147,7 @@ class AuthTest {
     @Test
     fun selectedRoleIsTheRoleThatOpens_withNewSessionEachTime() = runBlocking<Unit> {
         val auth = manager(elapsed = { 0L }, wall = { at(2026, 11, 20) })
-        assertEquals(AttemptResult.Success, auth.attempt((viewerBase + "380").toCharArray(), Role.VIEWER))
+        assertEquals(AttemptResult.Success, auth.attempt((viewerBase + "111380").toCharArray(), Role.VIEWER))
         val first = auth.state.value as AuthState.Unlocked
         assertEquals(Role.VIEWER, first.role)
         assertFalse(auth.canEdit)
@@ -213,12 +214,12 @@ class AuthTest {
         // 2 Dec: both daily passwords work.
         assertEquals(AttemptResult.Success, auth.attempt((adminBase + "18").toCharArray(), Role.ADMIN))
         auth.logout()
-        assertEquals(AttemptResult.Success, auth.attempt((viewerBase + "38").toCharArray(), Role.VIEWER))
+        assertEquals(AttemptResult.Success, auth.attempt((viewerBase + "11138").toCharArray(), Role.VIEWER))
         // Midnight IST: the session ends, the formulas stop.
         elapsed += 10 * 60 * 1000L; wall += 10 * 60 * 1000L
         auth.check()
         assertEquals(AuthState.Locked(LockReason.NEW_DAY), auth.state.value)
-        assertTrue(auth.attempt((viewerBase + "57").toCharArray(), Role.VIEWER) is AttemptResult.Wrong)
+        assertTrue(auth.attempt((viewerBase + "11157").toCharArray(), Role.VIEWER) is AttemptResult.Wrong)
         assertEquals(AttemptResult.RoleUnavailable, auth.attempt((adminBase + "27").toCharArray(), Role.ADMIN))
         assertEquals(AttemptResult.Success, auth.attempt(viewerFixed.toCharArray(), Role.VIEWER))
         assertEquals(Role.VIEWER, auth.role)
@@ -278,13 +279,13 @@ class AuthTest {
         for (day in 1..30) {
             val d = LocalDate.of(2026, 11, day)
             assertTrue(v(admin + day * 9, Role.ADMIN, d))
-            assertTrue(v(viewer + day * 19, Role.VIEWER, d))
+            assertTrue(v(viewer + "111" + day * 19, Role.VIEWER, d))
             assertFalse(v(admin + day * 9, Role.VIEWER, d))
-            assertFalse(v(viewer + day * 19, Role.ADMIN, d))
+            assertFalse(v(viewer + "111" + day * 19, Role.ADMIN, d))
             assertFalse(v(viewerFixedPw!!, Role.VIEWER, d))
         }
         assertTrue(v(admin + 18, Role.ADMIN, dec2))
-        assertTrue(v(viewer + 38, Role.VIEWER, dec2))
+        assertTrue(v(viewer + "11138", Role.VIEWER, dec2))
         assertTrue(v(viewerFixedPw!!, Role.VIEWER, dec3))
         assertFalse(v(viewerFixedPw, Role.ADMIN, dec3))
         assertFalse(v(admin + 27, Role.ADMIN, dec3))

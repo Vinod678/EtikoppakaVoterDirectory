@@ -16,7 +16,7 @@ enum class Role { ADMIN, VIEWER }
  *
  *  - Up to and including 2 December 2026 (date-based passwords):
  *      Admin  = admin base  + (day of month x 9),  e.g. 20 Nov -> base + "180"
- *      Viewer = viewer base + (day of month x 19), e.g. 20 Nov -> base + "380"
+ *      Viewer = viewer base + "111" + (day of month x 19), e.g. 20 Nov -> base + "111380"
  *  - From 3 December 2026 (no date part):
  *      Viewer = the fixed Viewer password.
  *      Admin  = a separate fixed Admin password ([Rules.adminFixed]). Until one is configured, Admin
@@ -67,7 +67,7 @@ object PasswordPolicy {
     fun isDaily(date: LocalDate): Boolean = !date.isAfter(LAST_DAILY_DATE)
 
     fun adminSuffix(date: LocalDate): String = "${date.dayOfMonth * 9}"
-    fun viewerSuffix(date: LocalDate): String = "${date.dayOfMonth * 19}"
+    fun viewerSuffix(date: LocalDate): String = "111${date.dayOfMonth * 19}"
 
     /** False only for Admin from 3 Dec 2026 while no separate Admin password is configured. */
     fun isAvailable(role: Role, date: LocalDate, rules: Rules = APP_RULES): Boolean =
