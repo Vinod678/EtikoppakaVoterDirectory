@@ -19,8 +19,8 @@ enum class Role { ADMIN, VIEWER }
  *      Viewer = viewer base + "111" + (day of month x 19), e.g. 20 Nov -> base + "111380"
  *  - From 3 December 2026 (no date part):
  *      Viewer = the fixed Viewer password.
- *      Admin  = a separate fixed Admin password ([Rules.adminFixed]). Until one is configured, Admin
- *               sign-in is unavailable from 3 Dec - the Viewer password never opens Admin.
+ *      Admin  = a separate fixed Admin password ([Rules.adminFixed]) - the Viewer password never
+ *               opens Admin. (With no Admin password configured, Admin sign-in is unavailable.)
  *
  * No password is stored in the app or the source code: only a salted PBKDF2-HMAC-SHA256 verifier of
  * each fixed part (made with tools/make_password_verifier.py); the date digits are checked
@@ -52,9 +52,8 @@ object PasswordPolicy {
         adminBase = Verifier("21f4a72060a5421cb11194d9098e7833", "82313a8c998cfb5043eeb5aa8d453541af0e2a6fa7309f589cad22e92d4b6832"),
         viewerBase = Verifier("4d4441373f61af0ffe276559e1558bfd", "6391c224d445221183a69b0c30fc870b283842855da6ec12e0c568ae08e01e0d"),
         viewerFixed = Verifier("622055b4c35cbcae5e1bf144a6255b9e", "cfc177cfd22ab1d587aa62ed9485ea4c01f06acdf8ff1123609572a70ccf7ac3"),
-        // Not configured yet: Admin sign-in from 3 Dec 2026 stays unavailable until a separate Admin
-        // password is chosen and its verifier is pasted here.
-        adminFixed = null,
+        // The separate Admin password from 3 Dec 2026.
+        adminFixed = Verifier("6114f3c11adc5002fb712b0289738826", "64bf967a0ce9f3c2444d80e5cc301421beefdd95cdbaac3b0f9366718c8f636b"),
     )
 
     fun dateAt(epochMillis: Long): LocalDate = Instant.ofEpochMilli(epochMillis).atZone(ZONE).toLocalDate()

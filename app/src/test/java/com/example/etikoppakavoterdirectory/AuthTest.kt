@@ -289,6 +289,14 @@ class AuthTest {
         assertTrue(v(viewerFixedPw!!, Role.VIEWER, dec3))
         assertFalse(v(viewerFixedPw, Role.ADMIN, dec3))
         assertFalse(v(admin + 27, Role.ADMIN, dec3))
-        assertFalse("no Admin password is configured after 2 Dec yet", PasswordPolicy.isAvailable(Role.ADMIN, dec3, app))
+        // From 3 Dec the separate Admin password (given locally as ETK_ADMIN_FIXED) opens Admin only.
+        assertTrue(PasswordPolicy.isAvailable(Role.ADMIN, dec3, app))
+        System.getenv("ETK_ADMIN_FIXED")?.let { adminFixedPw ->
+            assertTrue(v(adminFixedPw, Role.ADMIN, dec3))
+            assertTrue(v(adminFixedPw, Role.ADMIN, LocalDate.of(2027, 6, 15)))
+            assertFalse(v(adminFixedPw, Role.VIEWER, dec3))
+            assertFalse(v(adminFixedPw, Role.ADMIN, dec2)) // not before 3 Dec
+            assertFalse(v(viewerFixedPw, Role.ADMIN, dec3))
+        }
     }
 }
