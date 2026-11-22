@@ -21,7 +21,7 @@ android {
         applicationId = "com.example.etikoppakavoterdirectory"
         minSdk = 26
         targetSdk = 37
-        versionCode = 7
+        versionCode = 8
         versionName = "3.4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
