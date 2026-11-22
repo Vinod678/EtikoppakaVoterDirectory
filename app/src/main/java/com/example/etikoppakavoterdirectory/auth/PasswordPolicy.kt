@@ -14,7 +14,7 @@ enum class Role { ADMIN, VIEWER }
  * Which password opens which role on a given day (Asia/Kolkata calendar date). The person picks
  * Admin or Viewer on the lock screen and only that role's credential is checked.
  *
- *  - Up to and including 26 November 2026 ([TEMP_VIEWER_LAST_DATE]): the Viewer ("Member") password
+ *  - Up to and including 30 November 2026 ([TEMP_VIEWER_LAST_DATE]): the Viewer ("Member") password
  *      is the temporary fixed password [Rules.viewerTemp] (no date digits) - it replaces the daily
  *      Viewer password on those days. Admin is unchanged.
  *  - Up to and including 2 December 2026 (date-based passwords):
@@ -36,7 +36,7 @@ object PasswordPolicy {
     /** Last day of the date-based passwords. */
     val LAST_DAILY_DATE: LocalDate = LocalDate.of(2026, 12, 2)
     /** Last day the temporary Viewer password ([Rules.viewerTemp]) is used instead of the daily one. */
-    val TEMP_VIEWER_LAST_DATE: LocalDate = LocalDate.of(2026, 11, 26)
+    val TEMP_VIEWER_LAST_DATE: LocalDate = LocalDate.of(2026, 11, 30)
 
     const val ITERATIONS = 20_000
 
@@ -66,8 +66,8 @@ object PasswordPolicy {
         viewerFixed = Verifier("622055b4c35cbcae5e1bf144a6255b9e", "cfc177cfd22ab1d587aa62ed9485ea4c01f06acdf8ff1123609572a70ccf7ac3"),
         // The separate Admin password from 3 Dec 2026.
         adminFixed = Verifier("6114f3c11adc5002fb712b0289738826", "64bf967a0ce9f3c2444d80e5cc301421beefdd95cdbaac3b0f9366718c8f636b"),
-        // The temporary Viewer password up to 26 Nov 2026.
-        viewerTemp = Verifier("c4ae4e50d82ec79fac353fa04cf65b41", "fb412f4daa27618767ae4b25c06d5ea31a59e5eaac351dc122e4392db814580b"),
+        // The temporary Viewer password up to 30 Nov 2026.
+        viewerTemp = Verifier("30e90abc4ee0b91335dbff1f15cbe44d", "6b5efa81f26e95cd45ed58e5e59357d3f9238f2702332606b5d7e944a8036ffb"),
     )
 
     fun dateAt(epochMillis: Long): LocalDate = Instant.ofEpochMilli(epochMillis).atZone(ZONE).toLocalDate()

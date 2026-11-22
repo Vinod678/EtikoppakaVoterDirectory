@@ -62,35 +62,39 @@ class AuthTest {
     private val dec3 = LocalDate.of(2026, 12, 3)
 
     @Test
-    fun untilNov26_temporaryViewerPassword_thenDailyRule() {
+    fun untilNov30_temporaryViewerPassword_thenDailyRule() {
         val viewerTemp = "TestViewerTemp"
         val r = PasswordPolicy.Rules(verifier(adminBase), verifier(viewerBase), verifier(viewerFixed), adminFixed = null, viewerTemp = verifier(viewerTemp))
         val nov22 = LocalDate.of(2026, 11, 22)
-        val nov26 = LocalDate.of(2026, 11, 26)
-        val nov27 = LocalDate.of(2026, 11, 27)
-        // Up to and including 26 Nov: only the temporary password opens Viewer.
+        val nov30 = LocalDate.of(2026, 11, 30)
+        val dec1 = LocalDate.of(2026, 12, 1)
+        // Up to and including 30 Nov: only the temporary password opens Viewer.
         assertTrue(ok(viewerTemp, Role.VIEWER, nov22, r))
-        assertTrue(ok(viewerTemp, Role.VIEWER, nov26, r))
+        assertTrue(ok(viewerTemp, Role.VIEWER, nov30, r))
         assertFalse(ok(viewerBase + PasswordPolicy.viewerSuffix(nov22), Role.VIEWER, nov22, r))
+        assertFalse(ok(viewerBase + PasswordPolicy.viewerSuffix(nov30), Role.VIEWER, nov30, r))
         assertFalse(ok("testviewertemp", Role.VIEWER, nov22, r)) // case-sensitive
         // It never opens Admin, and Admin keeps its daily rule.
         assertFalse(ok(viewerTemp, Role.ADMIN, nov22, r))
         assertTrue(ok(adminBase + "198", Role.ADMIN, nov22, r))
-        // From 27 Nov: back to the daily Viewer rule, then the fixed one from 3 Dec.
-        assertFalse(ok(viewerTemp, Role.VIEWER, nov27, r))
-        assertTrue(ok(viewerBase + "111513", Role.VIEWER, nov27, r))
+        // 1-2 Dec: back to the daily Viewer rule, then the fixed one from 3 Dec.
+        assertFalse(ok(viewerTemp, Role.VIEWER, dec1, r))
+        assertTrue(ok(viewerBase + "11119", Role.VIEWER, dec1, r))
+        assertTrue(ok(viewerBase + "11138", Role.VIEWER, dec2, r))
         assertFalse(ok(viewerTemp, Role.VIEWER, dec3, r))
         assertTrue(ok(viewerFixed, Role.VIEWER, dec3, r))
     }
 
     @Test
-    fun appRules_temporaryViewerPasswordIsEtikoppaka() {
+    fun appRules_temporaryViewerPasswordIsVinodYedla() {
         val nov22 = LocalDate.of(2026, 11, 22)
-        assertTrue(PasswordPolicy.verify("etikoppaka".toCharArray(), Role.VIEWER, nov22))
-        assertTrue(PasswordPolicy.verify("etikoppaka".toCharArray(), Role.VIEWER, LocalDate.of(2026, 11, 26)))
-        assertFalse(PasswordPolicy.verify("etikoppaka".toCharArray(), Role.VIEWER, LocalDate.of(2026, 11, 27)))
-        assertFalse(PasswordPolicy.verify("Etikoppaka".toCharArray(), Role.VIEWER, nov22))
-        assertFalse(PasswordPolicy.verify("etikoppaka".toCharArray(), Role.ADMIN, nov22))
+        assertTrue(PasswordPolicy.verify("@vinod_yedla".toCharArray(), Role.VIEWER, nov22))
+        assertTrue(PasswordPolicy.verify("@vinod_yedla".toCharArray(), Role.VIEWER, LocalDate.of(2026, 11, 30)))
+        assertFalse(PasswordPolicy.verify("@vinod_yedla".toCharArray(), Role.VIEWER, LocalDate.of(2026, 12, 1)))
+        assertFalse(PasswordPolicy.verify("etikoppaka".toCharArray(), Role.VIEWER, nov22))
+        assertFalse(PasswordPolicy.verify("vinod_yedla".toCharArray(), Role.VIEWER, nov22))
+        assertFalse(PasswordPolicy.verify("@Vinod_Yedla".toCharArray(), Role.VIEWER, nov22))
+        assertFalse(PasswordPolicy.verify("@vinod_yedla".toCharArray(), Role.ADMIN, nov22))
     }
 
     @Test
@@ -311,9 +315,9 @@ class AuthTest {
         for (day in 1..30) {
             val d = LocalDate.of(2026, 11, day)
             assertTrue(v(admin + day * 9, Role.ADMIN, d))
-            // Up to 26 Nov the temporary "etikoppaka" replaces the daily Viewer password.
-            assertEquals(day >= 27, v(viewer + "111" + day * 19, Role.VIEWER, d))
-            assertEquals(day <= 26, v("etikoppaka", Role.VIEWER, d))
+            // Through 30 Nov the temporary "@vinod_yedla" replaces the daily Viewer password.
+            assertFalse(v(viewer + "111" + day * 19, Role.VIEWER, d))
+            assertTrue(v("@vinod_yedla", Role.VIEWER, d))
             assertFalse(v(admin + day * 9, Role.VIEWER, d))
             assertFalse(v(viewer + "111" + day * 19, Role.ADMIN, d))
             assertFalse(v(viewerFixedPw!!, Role.VIEWER, d))
