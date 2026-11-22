@@ -65,7 +65,7 @@ class RolesTest {
         rule.waitUntilAtLeastOneExists(hasTestTag("passwordField"), 30_000)
         rule.onNodeWithTag("roleViewer").assertIsSelected()
         rule.onNodeWithTag("roleAdmin").assertIsNotSelected()
-        rule.onNodeWithText("Unlock as Viewer").assertExists()
+        rule.onNodeWithText("Unlock as Member").assertExists()
         rule.onNodeWithTag("passwordField").performTextInput("something")
         rule.onNodeWithTag("roleAdmin").performClick()
         rule.onNodeWithTag("roleAdmin").assertIsSelected()
@@ -73,7 +73,7 @@ class RolesTest {
         rule.onNodeWithText("Unlock as Admin").assertExists()
         assertEquals("password cleared on role change", "", text("passwordField"))
         rule.onNodeWithTag("roleViewer").performClick()
-        rule.onNodeWithText("Unlock as Viewer").assertExists()
+        rule.onNodeWithText("Unlock as Member").assertExists()
     }
 
     @Test
@@ -139,7 +139,7 @@ class RolesTest {
         rule.waitUntilAtLeastOneExists(hasText("Vinod Yedla"), 10_000)
         assertTrue(none(hasText("Vinod Dadla")))
         rule.onNodeWithText("Terms & Conditions").performScrollTo().performClick()
-        rule.waitUntilAtLeastOneExists(hasText("not an official government", substring = true), 10_000)
+        rule.waitUntilAtLeastOneExists(hasText("neither affiliated with nor endorsed", substring = true), 10_000)
         rule.onNodeWithTag("footerCredit").assertExists()
         Espresso.pressBack()
         rule.waitUntilAtLeastOneExists(hasText("Vinod Yedla"), 10_000)

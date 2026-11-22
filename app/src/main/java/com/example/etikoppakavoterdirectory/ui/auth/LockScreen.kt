@@ -19,7 +19,13 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.material3.Button
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -53,6 +59,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -73,14 +80,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /** Shown instead of the whole app until the password is entered. No voter data is composed behind it. */
-const val LOGIN_HELP = "For any information regarding login, please contact: 938one0638eight"
+const val LOGIN_HELP = "For any information regarding login, please contact: 938one06338eight"
 
 /** Shown when Admin is chosen from 3 Dec 2026 while no separate Admin password is configured. */
 const val ADMIN_UNAVAILABLE =
     "Admin sign-in is not available yet: a separate Admin password has to be set up first. Please contact the developer."
 
 /**
- * Sign-in: pick Admin or Viewer (Viewer by default), then enter that role's password. Only the
+ * Sign-in: pick Member (the Viewer role, shown first and selected by default) or Admin, then enter that role's password. Only the
  * chosen role's credential is checked, and a correct password opens exactly that role.
  */
 @OptIn(ExperimentalLayoutApi::class)
@@ -134,52 +141,72 @@ fun LockScreen(auth: AuthManager, reason: LockReason) {
         }
     }
 
+    val scheme = MaterialTheme.colorScheme
+    val fieldShape = RoundedCornerShape(14.dp)
+    val roleLabel = if (role == Role.ADMIN) "Admin" else "Member"
+
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
       Column(Modifier.fillMaxSize().safeDrawingPadding().imePadding()) {
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
             Column(
                 Modifier.widthIn(max = 420.dp).fillMaxWidth().verticalScroll(rememberScrollState()).padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                Icon(Icons.Filled.Lock, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(48.dp))
-                Text("Etikoppaka Voter Directory", style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)
+                // Lock badge: outlined lock in a soft teal rounded square.
+                Surface(
+                    shape = RoundedCornerShape(18.dp),
+                    color = scheme.primaryContainer.copy(alpha = 0.45f),
+                    border = BorderStroke(1.dp, scheme.primary.copy(alpha = 0.15f)),
+                    modifier = Modifier.size(64.dp),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(AppIcons.LockOutline, contentDescription = null, tint = scheme.primary, modifier = Modifier.size(30.dp))
+                    }
+                }
                 Text(
-                    "Choose your access and enter the password",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    "Etikoppaka Voter Directory",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
                 )
                 reason.message?.let {
-                    Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.tertiary, textAlign = TextAlign.Center)
+                    Text(it, style = MaterialTheme.typography.bodySmall, color = scheme.tertiary, textAlign = TextAlign.Center)
                 }
-                Spacer(Modifier.height(4.dp))
                 Row(
-                    Modifier.fillMaxWidth().height(IntrinsicSize.Min).selectableGroup(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    Modifier.fillMaxWidth().height(IntrinsicSize.Min).padding(top = 4.dp).selectableGroup(),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp),
                 ) {
-                    RoleCard(AppIcons.Shield, "Admin", "Full Access", role == Role.ADMIN, "roleAdmin", Modifier.weight(1f)) { selectRole(Role.ADMIN) }
-                    RoleCard(AppIcons.Visibility, "Viewer", "Read-Only Access", role == Role.VIEWER, "roleViewer", Modifier.weight(1f)) { selectRole(Role.VIEWER) }
+                    RoleCard(AppIcons.PersonSearch, "Member", "Search & View", role == Role.VIEWER, "roleViewer", Modifier.weight(1f)) { selectRole(Role.VIEWER) }
+                    RoleCard(AppIcons.Shield, "Admin", null, role == Role.ADMIN, "roleAdmin", Modifier.weight(1f)) { selectRole(Role.ADMIN) }
                 }
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it.take(128); error = null },
-                    label = { Text(if (role == Role.ADMIN) "Admin password" else "Viewer password") },
+                    placeholder = { Text("$roleLabel password") },
                     singleLine = true,
+                    shape = fieldShape,
                     enabled = !busy && wait == 0L && roleAvailable,
                     isError = error != null,
                     visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false, imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(onDone = { submit() }),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        unfocusedContainerColor = scheme.surfaceContainerLowest,
+                        focusedContainerColor = scheme.surfaceContainerLowest,
+                        disabledContainerColor = scheme.surfaceContainerLowest,
+                        unfocusedBorderColor = scheme.outlineVariant,
+                    ),
                     trailingIcon = {
                         IconButton(onClick = { visible = !visible }) {
                             Icon(
-                                if (visible) AppIcons.VisibilityOff else AppIcons.Visibility,
+                                if (visible) AppIcons.VisibilityOff else AppIcons.VisibilityOutlined,
                                 contentDescription = if (visible) "Hide password" else "Show password",
+                                tint = scheme.onSurfaceVariant,
                             )
                         }
                     },
-                    modifier = Modifier.fillMaxWidth().testTag("passwordField"),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("passwordField"),
                 )
                 val message = when {
                     !roleAvailable -> ADMIN_UNAVAILABLE
@@ -197,59 +224,116 @@ fun LockScreen(auth: AuthManager, reason: LockReason) {
                 Button(
                     onClick = ::submit,
                     enabled = !busy && password.isNotEmpty() && wait == 0L && roleAvailable,
-                    modifier = Modifier.fillMaxWidth().heightIn(min = 50.dp).testTag("unlockButton"),
+                    shape = fieldShape,
+                    colors = ButtonDefaults.buttonColors(
+                        disabledContainerColor = scheme.surfaceContainerHigh,
+                        disabledContentColor = scheme.onSurfaceVariant.copy(alpha = 0.6f),
+                    ),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("unlockButton"),
                 ) {
                     if (busy) {
                         CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp)
                     } else {
-                        Text(if (role == Role.ADMIN) "Unlock as Admin" else "Unlock as Viewer", fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
+                        Text("Unlock as $roleLabel", fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
                     }
                 }
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    LOGIN_HELP,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                )
+                LoginHelpCard()
+                // The credit sits just under the help card (part of the scrolling content, so it
+                // never pushes the Unlock button out of view while the keyboard is open).
+                com.example.etikoppakavoterdirectory.ui.components.FooterCredit()
             }
         }
-        // The credit steps aside while the keyboard is open, so it never pushes the Unlock button
-        // out of view on small screens.
-        if (!WindowInsets.isImeVisible) com.example.etikoppakavoterdirectory.ui.components.FooterCredit()
       }
     }
 }
 
-/** One of the two role choices: teal border and a light teal background when selected. */
+/** "For any information regarding login..." in a soft card with a phone icon; the number is bold. */
+@Composable
+private fun LoginHelpCard() {
+    val scheme = MaterialTheme.colorScheme
+    val split = LOGIN_HELP.lastIndexOf(": ") + 2
+    val text = buildAnnotatedString {
+        append(LOGIN_HELP.substring(0, split))
+        withStyle(SpanStyle(fontWeight = FontWeight.Bold, color = scheme.onSurface)) { append(LOGIN_HELP.substring(split)) }
+    }
+    Surface(
+        shape = RoundedCornerShape(14.dp),
+        color = scheme.surfaceContainerLow,
+        border = BorderStroke(1.dp, scheme.outlineVariant.copy(alpha = 0.6f)),
+        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+    ) {
+        Row(Modifier.padding(horizontal = 16.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(AppIcons.PhoneOutline, contentDescription = null, tint = scheme.primary, modifier = Modifier.size(18.dp))
+            Text(
+                text,
+                style = MaterialTheme.typography.bodySmall,
+                color = scheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.weight(1f).padding(start = 8.dp),
+            )
+        }
+    }
+}
+
+/**
+ * One of the two role choices. Selected: teal border, light teal background, a tinted icon tile and a
+ * check badge in the corner. Unselected: white card with a thin grey border.
+ */
 @Composable
 private fun RoleCard(
     icon: ImageVector,
     label: String,
-    subtitle: String,
+    subtitle: String?,
     selected: Boolean,
     tag: String,
     modifier: Modifier,
     onSelect: () -> Unit,
 ) {
     val scheme = MaterialTheme.colorScheme
+    val shape = RoundedCornerShape(18.dp)
     Surface(
-        shape = RoundedCornerShape(16.dp),
-        color = if (selected) scheme.primaryContainer.copy(alpha = 0.45f) else scheme.surfaceContainerLowest,
-        border = BorderStroke(if (selected) 2.dp else 1.dp, if (selected) scheme.primary else scheme.outlineVariant),
+        shape = shape,
+        color = if (selected) scheme.primaryContainer.copy(alpha = 0.35f) else scheme.surfaceContainerLowest,
+        border = BorderStroke(if (selected) 2.dp else 1.5.dp, if (selected) scheme.primary else scheme.outlineVariant),
         modifier = modifier
             .fillMaxHeight()
+            .heightIn(min = 120.dp)
             .testTag(tag)
+            // Keeps the press highlight inside the rounded card.
+            .clip(shape)
             .selectable(selected = selected, role = SemanticsRole.RadioButton, onClick = onSelect),
     ) {
-        Column(
-            Modifier.padding(horizontal = 10.dp, vertical = 14.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
-            Icon(icon, contentDescription = null, tint = if (selected) scheme.primary else scheme.onSurfaceVariant, modifier = Modifier.size(28.dp))
-            Text(label, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
-            Text(subtitle, style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant, textAlign = TextAlign.Center)
+        Box(Modifier.fillMaxSize()) {
+            if (selected) {
+                Surface(shape = CircleShape, color = scheme.primary, modifier = Modifier.align(Alignment.TopEnd).padding(8.dp).size(18.dp)) {
+                    Icon(Icons.Filled.Check, contentDescription = null, tint = scheme.onPrimary, modifier = Modifier.padding(3.dp))
+                }
+            }
+            Column(
+                Modifier.align(Alignment.Center).padding(horizontal = 10.dp, vertical = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = if (selected) scheme.primary.copy(alpha = 0.15f) else scheme.surfaceContainerHigh,
+                    modifier = Modifier.size(40.dp),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(icon, contentDescription = null, tint = if (selected) scheme.primary else scheme.onSurfaceVariant, modifier = Modifier.size(22.dp))
+                    }
+                }
+                Text(
+                    label,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = if (selected) scheme.primary else scheme.onSurface,
+                    textAlign = TextAlign.Center,
+                )
+                if (subtitle != null) {
+                    Text(subtitle, style = MaterialTheme.typography.bodySmall, color = if (selected) scheme.primary else scheme.onSurfaceVariant, textAlign = TextAlign.Center)
+                }
+            }
         }
     }
 }

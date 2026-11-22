@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T11:49:08"
+    "generated_at": "2026-11-22T16:27:11"
   },
   "voters": [
     {
@@ -8175,10 +8175,10 @@
     {
       "gp_serial_no": 5165,
       "ward_no": 14,
-      "name_en": "Dhana Lakshmi Visam",
+      "name_en": "Dhana Lakshmi Veesam",
       "name_te": "ధన లక్ష్మి వీసం",
       "relationship": "Father",
-      "relative_name_en": "Kasu Babu Visam",
+      "relative_name_en": "Kasu Babu Veesam",
       "relative_name_te": "కాసు బాబు వీసం",
       "age": 36,
       "gender": "Female",

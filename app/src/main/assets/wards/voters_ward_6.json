@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T13:12:00"
+    "generated_at": "2026-11-22T16:46:18"
   },
   "voters": [
     {
@@ -2226,8 +2226,8 @@
     {
       "gp_serial_no": 1945,
       "ward_no": 6,
-      "name_en": "Ravitheja Gontahamaurthi",
-      "name_te": "రవితేజ గొన్తహమఉర్ఠి",
+      "name_en": "Raviteja Gonthumurthy",
+      "name_te": "రవితేజ గొంతుమూర్తి",
       "relationship": "Father",
       "relative_name_en": "Venkata Ramana",
       "relative_name_te": "వెంకట రమణ",
@@ -3464,10 +3464,10 @@
       "gp_serial_no": 2001,
       "ward_no": 6,
       "name_en": "Kothali Vasavi Sri Naga Sai Divya",
-      "name_te": "కొథళి వాసవి శ్రి నాగ సాయి దివ్య",
+      "name_te": "కొత్తలి వాసవి శ్రి నాగ సాయి దివ్య",
       "relationship": "Father",
-      "relative_name_en": "Ramana Kottali",
-      "relative_name_te": "రమణ కొథళి",
+      "relative_name_en": "Ramana Kothali",
+      "relative_name_te": "రమణ కొత్తలి",
       "age": 21,
       "gender": "Female",
       "house_no": "4-133",
@@ -3529,10 +3529,10 @@
     {
       "gp_serial_no": 2004,
       "ward_no": 6,
-      "name_en": "Ramana Kottali",
+      "name_en": "Ramana Kothali",
       "name_te": "రమణ కొత్తలి",
       "relationship": "Father",
-      "relative_name_en": "Bhooloka Kottali",
+      "relative_name_en": "Bhooloka Kothali",
       "relative_name_te": "భూలోక కొత్తలి",
       "age": 55,
       "gender": "Male",
@@ -3574,10 +3574,10 @@
       "gp_serial_no": 2006,
       "ward_no": 6,
       "name_en": "Narayanamma Kothali",
-      "name_te": "నరాయణమ్మ కొథఅలి",
+      "name_te": "నరాయణమ్మ కొత్తలి",
       "relationship": "Husband",
       "relative_name_en": "Bhuleka Kothali",
-      "relative_name_te": "భూలేకా కొథఅలి",
+      "relative_name_te": "భూలేకా కొత్తలి",
       "age": 64,
       "gender": "Female",
       "house_no": "4-133",
@@ -3595,11 +3595,11 @@
     {
       "gp_serial_no": 2007,
       "ward_no": 6,
-      "name_en": "Balaji Sai Kishor Kottali",
-      "name_te": "బాలాజీ సాయి కిశోర్ కొట్టాలి",
+      "name_en": "Balaji Sai Kishor Kothali",
+      "name_te": "బాలాజీ సాయి కిశోర్ కొత్తలి",
       "relationship": "Father",
-      "relative_name_en": "Ramana Kottali",
-      "relative_name_te": "రమణ కొట్టాలి",
+      "relative_name_en": "Ramana Kothali",
+      "relative_name_te": "రమణ కొత్తలి",
       "age": 24,
       "gender": "Male",
       "house_no": "4-133",
@@ -3883,7 +3883,7 @@
     {
       "gp_serial_no": 2020,
       "ward_no": 6,
-      "name_en": "Yerramsetti Durgatheja",
+      "name_en": "Yerramsetti Durgateja",
       "name_te": "ఎర్రంశెట్టి దుర్గతేజ",
       "relationship": "Father",
       "relative_name_en": "Yerramsetti Ganga Govinda Rao",
@@ -5638,7 +5638,7 @@
     {
       "gp_serial_no": 2099,
       "ward_no": 6,
-      "name_en": "Ravitheja",
+      "name_en": "Raviteja",
       "name_te": "రవితేజ",
       "relationship": "Father",
       "relative_name_en": "Ramana",

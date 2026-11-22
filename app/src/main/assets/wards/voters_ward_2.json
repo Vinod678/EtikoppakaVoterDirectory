@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T13:25:35"
+    "generated_at": "2026-11-22T16:20:46"
   },
   "voters": [
     {
@@ -498,8 +498,8 @@
     {
       "gp_serial_no": 391,
       "ward_no": 2,
-      "name_en": "Narasimha Murthy Veejjupu",
-      "name_te": "నారా సింహ మూర్తి వీజ్జుపూ",
+      "name_en": "Narasimha Murthy Vijjapu",
+      "name_te": "నారా సింహ మూర్తి విజ్జపు",
       "relationship": "Father",
       "relative_name_en": "Appalakonda",
       "relative_name_te": "అప్పలకొండ",
@@ -522,8 +522,8 @@
     {
       "gp_serial_no": 392,
       "ward_no": 2,
-      "name_en": "Satyavathi Veejjupu",
-      "name_te": "సత్యవతి వీజ్జుపూ",
+      "name_en": "Satyavathi Vijjapu",
+      "name_te": "సత్యవతి విజ్జపు",
       "relationship": "Husband",
       "relative_name_en": "Narasimha Murthy",
       "relative_name_te": "నరసింహమూర్తి",
@@ -544,8 +544,8 @@
     {
       "gp_serial_no": 393,
       "ward_no": 2,
-      "name_en": "Srinu Veejjupu",
-      "name_te": "శ్రీను వీజ్జుపూ",
+      "name_en": "Srinu Vijjapu",
+      "name_te": "శ్రీను విజ్జపు",
       "relationship": "Father",
       "relative_name_en": "Narasimha Murthy",
       "relative_name_te": "నర్సింహమూర్తి",

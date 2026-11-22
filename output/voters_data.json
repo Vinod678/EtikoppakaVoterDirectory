@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T13:02:15"
+    "generated_at": "2026-11-22T16:11:40"
   },
   "voters": [
     {
@@ -1194,7 +1194,7 @@
     {
       "gp_serial_no": 3742,
       "ward_no": 11,
-      "name_en": "Ammaji Chintala",
+      "name_en": "Ammaji Chinthala",
       "name_te": "అమ్మా జీ చింతల",
       "relationship": "Husband",
       "relative_name_en": "Ramulu",
@@ -1218,7 +1218,7 @@
     {
       "gp_serial_no": 3743,
       "ward_no": 11,
-      "name_en": "Srinu Chintala",
+      "name_en": "Srinu Chinthala",
       "name_te": "శ్రీను చింతల",
       "relationship": "Father",
       "relative_name_en": "Ramulu",
@@ -1397,10 +1397,10 @@
       "gp_serial_no": 3751,
       "ward_no": 11,
       "name_en": "Sharoon Roja Kasi",
-      "name_te": "శరూన్ రోజ కాసి",
+      "name_te": "శరూన్ రోజ కాశి",
       "relationship": "Father",
       "relative_name_en": "Rama Krishna Kasi",
-      "relative_name_te": "రామ కృష్ణ కాసి",
+      "relative_name_te": "రామ కృష్ణ కాశి",
       "age": 19,
       "gender": "Female",
       "house_no": "8-158",
@@ -4316,8 +4316,8 @@
     {
       "gp_serial_no": 3877,
       "ward_no": 11,
-      "name_en": "Samthosh Kottali",
-      "name_te": "సంతోష్ కోత్తలి",
+      "name_en": "Samthosh Kothali",
+      "name_te": "సంతోష్ కొత్తలి",
       "relationship": "Father",
       "relative_name_en": "Nageswara Rao",
       "relative_name_te": "నాగేశ్వ రరావు",
@@ -4458,10 +4458,10 @@
     {
       "gp_serial_no": 3883,
       "ward_no": 11,
-      "name_en": "Anna Poorna Kottali",
+      "name_en": "Anna Poorna Kothali",
       "name_te": "అన్న పూర్ణ కొత్తలి",
       "relationship": "Father",
-      "relative_name_en": "Nageswara Rao Kottali",
+      "relative_name_en": "Nageswara Rao Kothali",
       "relative_name_te": "నాగేశ్వ రరావు కొత్తలి",
       "age": 32,
       "gender": "Female",
@@ -4907,7 +4907,7 @@
     {
       "gp_serial_no": 3902,
       "ward_no": 11,
-      "name_en": "Nageswara Rao Kottali",
+      "name_en": "Nageswara Rao Kothali",
       "name_te": "నాగేశ్వ రరావు కొత్తలి",
       "relationship": "Father",
       "relative_name_en": "Narasimhulu",
@@ -4929,7 +4929,7 @@
     {
       "gp_serial_no": 3903,
       "ward_no": 11,
-      "name_en": "Sarojini Kottali",
+      "name_en": "Sarojini Kothali",
       "name_te": "సరోజిని కొత్తలి",
       "relationship": "Husband",
       "relative_name_en": "Nageswara Rao",
@@ -5852,8 +5852,8 @@
     {
       "gp_serial_no": 3944,
       "ward_no": 11,
-      "name_en": "Shesu Kashee",
-      "name_te": "శేసు కాశీ",
+      "name_en": "Shesu Kasi",
+      "name_te": "శేసు కాశి",
       "relationship": "Father",
       "relative_name_en": "Someswara Rao",
       "relative_name_te": "సోమేశ్వ రరావు",
@@ -6074,11 +6074,11 @@
     {
       "gp_serial_no": 3954,
       "ward_no": 11,
-      "name_en": "Chiranjeevi Kasee",
-      "name_te": "చిరంజీవి కాసీ",
+      "name_en": "Chiranjeevi Kasi",
+      "name_te": "చిరంజీవి కాశి",
       "relationship": "Father",
-      "relative_name_en": "Prasad Kasee",
-      "relative_name_te": "ప్రసాద్ కాసీ",
+      "relative_name_en": "Prasad Kasi",
+      "relative_name_te": "ప్రసాద్ కాశి",
       "age": 32,
       "gender": "Male",
       "house_no": "9-60",
@@ -6096,11 +6096,11 @@
     {
       "gp_serial_no": 3955,
       "ward_no": 11,
-      "name_en": "Bhavani Kasee",
-      "name_te": "భవాని కాసీ",
+      "name_en": "Bhavani Kasi",
+      "name_te": "భవాని కాశి",
       "relationship": "Father",
-      "relative_name_en": "Someswara Rao Kasee",
-      "relative_name_te": "సోమేస్వా రావ కాసీ",
+      "relative_name_en": "Someswara Rao Kasi",
+      "relative_name_te": "సోమేస్వా రావ కాశి",
       "age": 31,
       "gender": "Female",
       "house_no": "9-60",
@@ -6118,7 +6118,7 @@
     {
       "gp_serial_no": 3956,
       "ward_no": 11,
-      "name_en": "Someswara Rao Kashi",
+      "name_en": "Someswara Rao Kasi",
       "name_te": "సోమేశ్వ రరావు కాశి",
       "relationship": "Not specified",
       "relative_name_en": null,
@@ -6143,7 +6143,7 @@
     {
       "gp_serial_no": 3957,
       "ward_no": 11,
-      "name_en": "Padmavathi Kashi",
+      "name_en": "Padmavathi Kasi",
       "name_te": "పద్మ వతి కాశి",
       "relationship": "Husband",
       "relative_name_en": "Someswara Rao",
@@ -6167,7 +6167,7 @@
     {
       "gp_serial_no": 3958,
       "ward_no": 11,
-      "name_en": "Venkata Rao Kashi",
+      "name_en": "Venkata Rao Kasi",
       "name_te": "వెంకటరావు కాశి",
       "relationship": "Father",
       "relative_name_en": "Kanakam",
@@ -6347,11 +6347,11 @@
     {
       "gp_serial_no": 3966,
       "ward_no": 11,
-      "name_en": "Hema Kashee",
-      "name_te": "హేమ కాశీ",
+      "name_en": "Hema Kasi",
+      "name_te": "హేమ కాశి",
       "relationship": "Father",
-      "relative_name_en": "Prasadaravu Kashee",
-      "relative_name_te": "ప్రసాదరావు కాశీ",
+      "relative_name_en": "Prasadaravu Kasi",
+      "relative_name_te": "ప్రసాదరావు కాశి",
       "age": 26,
       "gender": "Female",
       "house_no": "9-63",
@@ -6463,8 +6463,8 @@
     {
       "gp_serial_no": 3971,
       "ward_no": 11,
-      "name_en": "Mohanaravu Kasee",
-      "name_te": "మోహనరావు కాసీ",
+      "name_en": "Mohanaravu Kasi",
+      "name_te": "మోహనరావు కాశి",
       "relationship": "Father",
       "relative_name_en": "Nagaraju",
       "relative_name_te": "నాగరాజు",
@@ -6553,7 +6553,7 @@
     {
       "gp_serial_no": 3975,
       "ward_no": 11,
-      "name_en": "Ramalakshmi Kottali",
+      "name_en": "Ramalakshmi Kothali",
       "name_te": "రామలక్ష్మి కొత్తలి",
       "relationship": "Husband",
       "relative_name_en": "Gangachari",
@@ -6575,7 +6575,7 @@
     {
       "gp_serial_no": 3976,
       "ward_no": 11,
-      "name_en": "Nanaji Kottali",
+      "name_en": "Nanaji Kothali",
       "name_te": "నానాజి కొత్తలి",
       "relationship": "Not specified",
       "relative_name_en": null,
@@ -6600,7 +6600,7 @@
     {
       "gp_serial_no": 3977,
       "ward_no": 11,
-      "name_en": "Srinu Kottali",
+      "name_en": "Srinu Kothali",
       "name_te": "శ్రీను కొత్తలి",
       "relationship": "Not specified",
       "relative_name_en": null,
@@ -6625,10 +6625,10 @@
     {
       "gp_serial_no": 3978,
       "ward_no": 11,
-      "name_en": "Sharva Lakshmi Kottali",
+      "name_en": "Sharva Lakshmi Kothali",
       "name_te": "శర్వ లక్ష్మి కొత్తలి",
       "relationship": "Husband",
-      "relative_name_en": "Nanaji Kottali",
+      "relative_name_en": "Nanaji Kothali",
       "relative_name_te": "నానాజి కొత్తలి",
       "age": 38,
       "gender": "Female",
@@ -7305,7 +7305,7 @@
     {
       "gp_serial_no": 4008,
       "ward_no": 11,
-      "name_en": "Chandramma Chintala",
+      "name_en": "Chandramma Chinthala",
       "name_te": "చంద్రమ్మ చింతల",
       "relationship": "Husband",
       "relative_name_en": "Sambayya",
@@ -7351,7 +7351,7 @@
     {
       "gp_serial_no": 4010,
       "ward_no": 11,
-      "name_en": "Sattibabu Chintala",
+      "name_en": "Sattibabu Chinthala",
       "name_te": "సత్తీబాబు చింతల",
       "relationship": "Father",
       "relative_name_en": "Sambayya",
@@ -7604,10 +7604,10 @@
     {
       "gp_serial_no": 4021,
       "ward_no": 11,
-      "name_en": "Prabhakar Rao Chintala",
+      "name_en": "Prabhakar Rao Chinthala",
       "name_te": "ప్రభాకర్ రావు చింతల చింతల",
       "relationship": "Father",
-      "relative_name_en": "Narayanamoorthi Chintala",
+      "relative_name_en": "Narayanamoorthi Chinthala",
       "relative_name_te": "నారాయణమూర్తి చింతల",
       "age": 23,
       "gender": "Male",
@@ -7628,7 +7628,7 @@
     {
       "gp_serial_no": 4022,
       "ward_no": 11,
-      "name_en": "Narayanamoorthi Chintala",
+      "name_en": "Narayanamoorthi Chinthala",
       "name_te": "నారాయణమూర్తి చింతల",
       "relationship": "Father",
       "relative_name_en": "Sambayya",
@@ -7650,7 +7650,7 @@
     {
       "gp_serial_no": 4023,
       "ward_no": 11,
-      "name_en": "Subba Lakshmi Chintala",
+      "name_en": "Subba Lakshmi Chinthala",
       "name_te": "సుబ్బ లక్ష్మి చింతల",
       "relationship": "Husband",
       "relative_name_en": "Sattibabu",
@@ -7672,7 +7672,7 @@
     {
       "gp_serial_no": 4024,
       "ward_no": 11,
-      "name_en": "Nukaarathnam Chintala",
+      "name_en": "Nukaarathnam Chinthala",
       "name_te": "నూకరత్నం చింతల",
       "relationship": "Husband",
       "relative_name_en": "Narayanamoorthi",
@@ -8393,7 +8393,7 @@
     {
       "gp_serial_no": 4056,
       "ward_no": 11,
-      "name_en": "Kumari Kashi",
+      "name_en": "Kumari Kasi",
       "name_te": "కుమారీ కాశి",
       "relationship": "Husband",
       "relative_name_en": "Prasadaravu",

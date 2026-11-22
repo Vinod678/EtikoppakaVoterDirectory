@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T11:47:44"
+    "generated_at": "2026-11-22T16:41:08"
   },
   "voters": [
     {
@@ -1732,7 +1732,7 @@
     {
       "gp_serial_no": 3030,
       "ward_no": 9,
-      "name_en": "Kondamma Visam",
+      "name_en": "Kondamma Veesam",
       "name_te": "కొండమ్మ వీసం",
       "relationship": "Husband",
       "relative_name_en": "Chiluka",
@@ -2548,7 +2548,7 @@
     {
       "gp_serial_no": 3067,
       "ward_no": 9,
-      "name_en": "Ravitheja Thelugunta",
+      "name_en": "Raviteja Thelugunta",
       "name_te": "రవితేజ తెలుగుంట",
       "relationship": "Father",
       "relative_name_en": "Srinivasa Rao",
@@ -6967,7 +6967,7 @@
     {
       "gp_serial_no": 3266,
       "ward_no": 9,
-      "name_en": "Choudavada Thejaswini Choudavada",
+      "name_en": "Choudavada Tejaswini Choudavada",
       "name_te": "చౌడవాడ తేజశ్విని చౌడవాడ",
       "relationship": "Husband",
       "relative_name_en": "Choudavada Satish Kumar Satish Kumar",

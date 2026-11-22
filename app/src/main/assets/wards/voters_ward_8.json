@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T11:47:16"
+    "generated_at": "2026-11-22T16:40:52"
   },
   "voters": [
     {
@@ -971,7 +971,7 @@
       "name_en": "Dinesh Kumar Annam",
       "name_te": "దినేశ్ కుమార్ అన్నం",
       "relationship": "Father",
-      "relative_name_en": "Svarajiya Rao Annam",
+      "relative_name_en": "Swaraj Rao Annam",
       "relative_name_te": "స్వరాజియ రావు అన్నం",
       "age": 30,
       "gender": "Male",
@@ -1411,7 +1411,7 @@
       "name_en": "Satyavathi Annam",
       "name_te": "సత్యవతి అన్నం",
       "relationship": "Husband",
-      "relative_name_en": "Svarajya Rao",
+      "relative_name_en": "Swaraj Rao",
       "relative_name_te": "స్వరాజ్య రావు",
       "age": 54,
       "gender": "Female",
@@ -1430,8 +1430,8 @@
     {
       "gp_serial_no": 2647,
       "ward_no": 8,
-      "name_en": "Govanda Rao Annam",
-      "name_te": "గోవంద రావు అన్నం",
+      "name_en": "Govinda Rao Annam",
+      "name_te": "గోవింద రావు అన్నం",
       "relationship": "Father",
       "relative_name_en": "Kalyanam",
       "relative_name_te": "కళ్యాణం",
@@ -1474,7 +1474,7 @@
     {
       "gp_serial_no": 2649,
       "ward_no": 8,
-      "name_en": "Svarajya Rao Annam",
+      "name_en": "Swaraj Rao Annam",
       "name_te": "స్వరాజ్యరావు అన్నం",
       "relationship": "Father",
       "relative_name_en": "Kalyanam",
@@ -7382,7 +7382,7 @@
     {
       "gp_serial_no": 2916,
       "ward_no": 8,
-      "name_en": "Jaya Ravitheja Senapathi",
+      "name_en": "Jaya Raviteja Senapathi",
       "name_te": "జయ రవితేజ సనపత్తి",
       "relationship": "Father",
       "relative_name_en": "Ramu Senapathi",

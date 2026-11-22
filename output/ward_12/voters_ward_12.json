@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T11:48:28"
+    "generated_at": "2026-11-22T16:26:55"
   },
   "voters": [
     {
@@ -2001,7 +2001,7 @@
     {
       "gp_serial_no": 4149,
       "ward_no": 12,
-      "name_en": "Venkataramanamma Visam",
+      "name_en": "Venkataramanamma Veesam",
       "name_te": "వెంకాటరమణమ్మ వీసం",
       "relationship": "Husband",
       "relative_name_en": "Parasuramudu",
@@ -2023,10 +2023,10 @@
     {
       "gp_serial_no": 4150,
       "ward_no": 12,
-      "name_en": "Venkata Satya Visam Visam",
+      "name_en": "Venkata Satya Veesam Veesam",
       "name_te": "వేంకట సత్య వీసం వీసం",
       "relationship": "Husband",
-      "relative_name_en": "Bangaru Babu Visam",
+      "relative_name_en": "Bangaru Babu Veesam",
       "relative_name_te": "బంగారు బాబు వీసం",
       "age": 43,
       "gender": "Female",
@@ -2045,7 +2045,7 @@
     {
       "gp_serial_no": 4151,
       "ward_no": 12,
-      "name_en": "Bangarubabu Visam",
+      "name_en": "Bangarubabu Veesam",
       "name_te": "బంగారుబాబు వీసం",
       "relationship": "Father",
       "relative_name_en": "Parasuramudu",
@@ -2067,7 +2067,7 @@
     {
       "gp_serial_no": 4152,
       "ward_no": 12,
-      "name_en": "Govindababu Visam",
+      "name_en": "Govindababu Veesam",
       "name_te": "గోవిందబాబు వీసం",
       "relationship": "Father",
       "relative_name_en": "Parusunaydu",
@@ -2089,10 +2089,10 @@
     {
       "gp_serial_no": 4153,
       "ward_no": 12,
-      "name_en": "Venu Sai Visam",
+      "name_en": "Venu Sai Veesam",
       "name_te": "వేణు సాయి వీసం",
       "relationship": "Husband",
-      "relative_name_en": "Govind Babu Visam",
+      "relative_name_en": "Govind Babu Veesam",
       "relative_name_te": "గోవింద్ బాబు వీసం",
       "age": 30,
       "gender": "Female",
@@ -2837,11 +2837,11 @@
     {
       "gp_serial_no": 4187,
       "ward_no": 12,
-      "name_en": "Kanaka Durga Rao Kasee",
-      "name_te": "కనక దుర్గా రావు కాసీ",
+      "name_en": "Kanaka Durga Rao Kasi",
+      "name_te": "కనక దుర్గా రావు కాశి",
       "relationship": "Father",
-      "relative_name_en": "Venkata Rao Kasee",
-      "relative_name_te": "వెంకాటరావ కాసీ",
+      "relative_name_en": "Venkata Rao Kasi",
+      "relative_name_te": "వెంకాటరావ కాశి",
       "age": 30,
       "gender": "Male",
       "house_no": "9-128",
@@ -2859,10 +2859,10 @@
     {
       "gp_serial_no": 4188,
       "ward_no": 12,
-      "name_en": "Kamala Kashi",
+      "name_en": "Kamala Kasi",
       "name_te": "కమల కాశి",
       "relationship": "Husband",
-      "relative_name_en": "Venkata Rao Kashi",
+      "relative_name_en": "Venkata Rao Kasi",
       "relative_name_te": "వెంకాటరావ కాశి",
       "age": 54,
       "gender": "Female",
@@ -3947,7 +3947,7 @@
     {
       "gp_serial_no": 4237,
       "ward_no": 12,
-      "name_en": "Kasubabu Visam",
+      "name_en": "Kasubabu Veesam",
       "name_te": "కాసుబాబు వీసం",
       "relationship": "Father",
       "relative_name_en": "Narayanamoorthi",
@@ -3969,7 +3969,7 @@
     {
       "gp_serial_no": 4238,
       "ward_no": 12,
-      "name_en": "Venkatalakshmi Visam",
+      "name_en": "Venkatalakshmi Veesam",
       "name_te": "వెంకటలక్ష్మి వీసం",
       "relationship": "Husband",
       "relative_name_en": "Kasubabu",
@@ -4813,10 +4813,10 @@
     {
       "gp_serial_no": 4276,
       "ward_no": 12,
-      "name_en": "Hari Prasanna Visam",
+      "name_en": "Hari Prasanna Veesam",
       "name_te": "హరి ప్రసన్నా వీసం",
       "relationship": "Father",
-      "relative_name_en": "Kasubabu Visam",
+      "relative_name_en": "Kasubabu Veesam",
       "relative_name_te": "కసూబాబు వీసం",
       "age": 32,
       "gender": "Male",
@@ -4927,10 +4927,10 @@
     {
       "gp_serial_no": 4281,
       "ward_no": 12,
-      "name_en": "Bhavana Visam",
+      "name_en": "Bhavana Veesam",
       "name_te": "భావన వీసం",
       "relationship": "Father",
-      "relative_name_en": "Venkata Satya Sai Prasad Visam",
+      "relative_name_en": "Venkata Satya Sai Prasad Veesam",
       "relative_name_te": "వెంకట సత్య సాయి ప్రసాద్ వీసం",
       "age": 21,
       "gender": "Female",
@@ -4949,10 +4949,10 @@
     {
       "gp_serial_no": 4282,
       "ward_no": 12,
-      "name_en": "Venkata Ramani Visam",
+      "name_en": "Venkata Ramani Veesam",
       "name_te": "వెంకట రమణి వీసం",
       "relationship": "Father",
-      "relative_name_en": "Bangaru Babu Visam",
+      "relative_name_en": "Bangaru Babu Veesam",
       "relative_name_te": "బంగరు బాబు వీసం",
       "age": 21,
       "gender": "Female",
@@ -4971,7 +4971,7 @@
     {
       "gp_serial_no": 4283,
       "ward_no": 12,
-      "name_en": "Venkatasatyasayiprasad Visam",
+      "name_en": "Venkatasatyasayiprasad Veesam",
       "name_te": "వెంకటసత్యసాయిప్రసాద్ వీసం",
       "relationship": "Father",
       "relative_name_en": "Parasuramudu",
@@ -4993,7 +4993,7 @@
     {
       "gp_serial_no": 4284,
       "ward_no": 12,
-      "name_en": "Kondala Rao Visam",
+      "name_en": "Kondala Rao Veesam",
       "name_te": "కొండలరావు వీసం",
       "relationship": "Father",
       "relative_name_en": "Parasuramudu",
@@ -5015,7 +5015,7 @@
     {
       "gp_serial_no": 4285,
       "ward_no": 12,
-      "name_en": "Achchiyyamma Ganesh Mani Kumari Visam",
+      "name_en": "Achchiyyamma Ganesh Mani Kumari Veesam",
       "name_te": "అచ్చియ్యమ్మ గణేశ మణి కుమారీ వీసం",
       "relationship": "Husband",
       "relative_name_en": "Venkata Satya Sai Prasad",
@@ -5037,10 +5037,10 @@
     {
       "gp_serial_no": 4286,
       "ward_no": 12,
-      "name_en": "Parasuram Visam",
+      "name_en": "Parasuram Veesam",
       "name_te": "పరశురామ్ వీసం",
       "relationship": "Father",
-      "relative_name_en": "Venkata Satya Sai Prasad Visam",
+      "relative_name_en": "Venkata Satya Sai Prasad Veesam",
       "relative_name_te": "వెంకట సత్య సాయి ప్రసాద్ వీసం",
       "age": 19,
       "gender": "Male",
@@ -5059,10 +5059,10 @@
     {
       "gp_serial_no": 4287,
       "ward_no": 12,
-      "name_en": "Likhitha Sirisha Visam",
+      "name_en": "Likhitha Sirisha Veesam",
       "name_te": "లిఖిత శిరీష వీసం",
       "relationship": "Father",
-      "relative_name_en": "Venkata Satya Sai Prasad Visam",
+      "relative_name_en": "Venkata Satya Sai Prasad Veesam",
       "relative_name_te": "వెంకట సత్య సాయి ప్రసాద్ వీసం",
       "age": 27,
       "gender": "Female",
@@ -5081,10 +5081,10 @@
     {
       "gp_serial_no": 4288,
       "ward_no": 12,
-      "name_en": "Bhargav Parashuram Visam",
+      "name_en": "Bhargav Parashuram Veesam",
       "name_te": "భార్గవ్ పరశురాం వీసం",
       "relationship": "Father",
-      "relative_name_en": "Bangarubabu Visam",
+      "relative_name_en": "Bangarubabu Veesam",
       "relative_name_te": "బంగారుబాబు వీసం",
       "age": 19,
       "gender": "Male",

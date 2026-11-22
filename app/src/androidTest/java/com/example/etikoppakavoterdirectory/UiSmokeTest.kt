@@ -39,7 +39,7 @@ class UiSmokeTest {
     @Test
     fun lockScreen_rejectsWrongAndWrongCase_thenUnlocks() {
         rule.waitUntilAtLeastOneExists(hasTestTag("passwordField"), 30_000)
-        rule.onNodeWithText("For any information regarding login, please contact: 938one0638eight").assertIsDisplayed()
+        rule.onNodeWithText("For any information regarding login, please contact: 938one06338eight").assertIsDisplayed()
         // No voter data is composed behind the lock.
         assertTrue(rule.onAllNodes(hasText("Varahalamma")).fetchSemanticsNodes().isEmpty())
         rule.onNodeWithTag("roleAdmin").performClick()

@@ -172,6 +172,14 @@ fun FooterCredit(modifier: Modifier = Modifier) {
         withLink(
             androidx.compose.ui.text.LinkAnnotation.Clickable(
                 tag = "instagram",
+                // Teal and semi-bold, without the default link underline.
+                styles = androidx.compose.ui.text.TextLinkStyles(
+                    androidx.compose.ui.text.SpanStyle(
+                        color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                        textDecoration = androidx.compose.ui.text.style.TextDecoration.None,
+                    ),
+                ),
                 linkInteractionListener = { openInstagramProfile(context) },
             ),
         ) { append(FOOTER_HANDLE) }

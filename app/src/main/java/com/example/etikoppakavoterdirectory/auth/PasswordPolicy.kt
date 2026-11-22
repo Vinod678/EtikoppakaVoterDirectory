@@ -14,6 +14,9 @@ enum class Role { ADMIN, VIEWER }
  * Which password opens which role on a given day (Asia/Kolkata calendar date). The person picks
  * Admin or Viewer on the lock screen and only that role's credential is checked.
  *
+ *  - Up to and including 26 November 2026 ([TEMP_VIEWER_LAST_DATE]): the Viewer ("Member") password
+ *      is the temporary fixed password [Rules.viewerTemp] (no date digits) - it replaces the daily
+ *      Viewer password on those days. Admin is unchanged.
  *  - Up to and including 2 December 2026 (date-based passwords):
  *      Admin  = admin base  + (day of month x 9),  e.g. 20 Nov -> base + "180"
  *      Viewer = viewer base + "111" + (day of month x 19), e.g. 20 Nov -> base + "111380"
@@ -32,6 +35,8 @@ object PasswordPolicy {
     val ZONE: ZoneId = ZoneId.of("Asia/Kolkata")
     /** Last day of the date-based passwords. */
     val LAST_DAILY_DATE: LocalDate = LocalDate.of(2026, 12, 2)
+    /** Last day the temporary Viewer password ([Rules.viewerTemp]) is used instead of the daily one. */
+    val TEMP_VIEWER_LAST_DATE: LocalDate = LocalDate.of(2026, 11, 26)
 
     const val ITERATIONS = 20_000
 
@@ -44,8 +49,15 @@ object PasswordPolicy {
      * [adminBase] / [viewerBase]: fixed parts of the daily passwords (until 2 Dec 2026).
      * [viewerFixed]: the Viewer password from 3 Dec 2026.
      * [adminFixed]: the Admin password from 3 Dec 2026; null = not configured (Admin unavailable).
+     * [viewerTemp]: the complete Viewer password up to [TEMP_VIEWER_LAST_DATE]; null = daily rule throughout.
      */
-    class Rules(val adminBase: Verifier, val viewerBase: Verifier, val viewerFixed: Verifier, val adminFixed: Verifier?)
+    class Rules(
+        val adminBase: Verifier,
+        val viewerBase: Verifier,
+        val viewerFixed: Verifier,
+        val adminFixed: Verifier?,
+        val viewerTemp: Verifier? = null,
+    )
 
     /** The app's rules (see tools/make_password_verifier.py to set or change a password). */
     val APP_RULES = Rules(
@@ -54,6 +66,8 @@ object PasswordPolicy {
         viewerFixed = Verifier("622055b4c35cbcae5e1bf144a6255b9e", "cfc177cfd22ab1d587aa62ed9485ea4c01f06acdf8ff1123609572a70ccf7ac3"),
         // The separate Admin password from 3 Dec 2026.
         adminFixed = Verifier("6114f3c11adc5002fb712b0289738826", "64bf967a0ce9f3c2444d80e5cc301421beefdd95cdbaac3b0f9366718c8f636b"),
+        // The temporary Viewer password up to 26 Nov 2026.
+        viewerTemp = Verifier("c4ae4e50d82ec79fac353fa04cf65b41", "fb412f4daa27618767ae4b25c06d5ea31a59e5eaac351dc122e4392db814580b"),
     )
 
     fun dateAt(epochMillis: Long): LocalDate = Instant.ofEpochMilli(epochMillis).atZone(ZONE).toLocalDate()
@@ -79,7 +93,10 @@ object PasswordPolicy {
      */
     fun verify(input: CharArray, role: Role, date: LocalDate, rules: Rules = APP_RULES): Boolean {
         if (input.isEmpty() || input.size > 128) return false
-        return if (isDaily(date)) {
+        val temp = rules.viewerTemp
+        return if (role == Role.VIEWER && temp != null && !date.isAfter(TEMP_VIEWER_LAST_DATE)) {
+            matches(input, "", temp)
+        } else if (isDaily(date)) {
             when (role) {
                 Role.ADMIN -> matches(input, adminSuffix(date), rules.adminBase)
                 Role.VIEWER -> matches(input, viewerSuffix(date), rules.viewerBase)

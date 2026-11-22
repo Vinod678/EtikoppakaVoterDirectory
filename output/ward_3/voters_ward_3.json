@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T13:20:00"
+    "generated_at": "2026-11-22T16:10:30"
   },
   "voters": [
     {
@@ -5519,7 +5519,7 @@
     {
       "gp_serial_no": 984,
       "ward_no": 3,
-      "name_en": "Appalaratnam Kottali",
+      "name_en": "Appalaratnam Kothali",
       "name_te": "అప్పలరత్నం కొత్తలి",
       "relationship": "Husband",
       "relative_name_en": "Ramana",

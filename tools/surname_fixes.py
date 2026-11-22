@@ -45,8 +45,9 @@ R = {
          'siblings Jayalakshmi Ellapu / Naga Nuka Mahesh Yallapu (Chandra Rao), Manikantha Ellapu / Koumalika Yallapu '
          '(Nageswara Rao, house 1-45), Janaki Ellapu wife of Veeru Naidu Yallapu'),
         ('Buddha', 'బుద్ద', ['Buddu'], ['బుద్దు'], [150], 'same house 1-41 as Ramana Buddha'),
-        ('Veejjupu', 'వీజ్జుపూ', ['Vijjapu'], ['విజ్జపు', 'విజ్జుపు'], [263, 264, 265, 329, 330],
-         'Vani Vijjapu is the wife of Shankar Naresh Veejjupu; relatives printed "Vijjapu"'),
+        ('Vijjapu', 'విజ్జపు', ['Veejjupu'], ['వీజ్జుపూ', 'విజ్జుపు'], [263, 264, 265, 328, 329, 330],
+         'one Vijjapu family (Vani, wife of Shankar Naresh; Varaprasad; Mahesh; Lakshmi, wife of Srinu), printed '
+         'Veejjupu / Vijjapu; spelling Vijjapu confirmed by the user, 2026-11-22'),
         ('Boddeti', 'బొడ్డేటి', ['Boddati'], ['బొద్దటి'], [291], 'son of Ramana Boddeti (same house 1-76)'),
         ('Mulampaka', 'ములంపాక', ['Malampaka'], ['మలంపాక'], [225], 'son of Gangayyamma Mulampaka (husband Demullu), house 1-57'),
         ('Uddandam', 'ఉద్దండం', ['Udandama', 'Udanda', 'Uddandamu'], ['ఉడందమ', 'ఉడండా', 'ఉద్దండాము', 'ఉడంద'], [140, 156, 157],
@@ -58,6 +59,8 @@ R = {
         ('Kurandasu', None, ['Kuraradasu'], ['కూరరదాసూ'], [268], 'same house 1-73 as the Kurandasu family'),
     ],
     2: [
+        ('Vijjapu', 'విజ్జపు', ['Veejjupu'], ['వీజ్జుపూ', 'విజ్జుపు'], [391, 392, 393],
+         'Narasimha Murthy Vijjapu, his wife Satyavathi and son Srinu (the Ward 1 Vijjapu family); spelling confirmed by the user, 2026-11-22'),
         ('Veeramallu', 'వీరమళ్ళు', ['Veeramalla'], ['వీరమల్ల'], [576, 581, 578, 579],
          'houses 2-12/1, 2-13: one family (Prabhakara Rao, Varaha Satya Prasad); spelling confirmed by the user'),
         ('Kothwala', 'కొత్వాల', ['Kotavala', 'Kotwal', 'Kothvala'], ['కోటావాల', 'కొత్వాల్'], [467, 705], 'spelling confirmed by the user'),
@@ -78,6 +81,7 @@ R = {
          'one surname printed రాయి / రాయ / రాయ్ / రయి (e.g. Devi Rayi, father Appala Naidu Rayi, whose own card reads Raya)'),
     ],
     3: [
+        ('Kothali', 'కొత్తలి', ['Kottali'], [], [984], 'spelling Kothali (not Kottali) confirmed by the user, 2026-11-22'),
         ('Kothwala', 'కొత్వాల', ['Kotwal', 'Kothvala'], ['కోఠవాల్', 'కోత్యాల', 'కోత్వాల', 'కొఠవాల', 'కోవ్వాల', 'కొత్తువాల', 'కొత్తువాలు'], None,
          'one Kothwala family (houses 2-69 to 2-125); spelling confirmed by the user'),
         ('Kriyadula', 'క్రియాదుల', ['Kiryadula'], ['కిర్యడుల'], [850], 'son of Ramu (husband of China Venkatalakshmi Kriyadula)'),
@@ -121,6 +125,9 @@ R = {
         ('Gonthumurthy', None, ['Gontumurati', 'Gonthimurti'], ['గోన్టుమూరటీ', 'గోన్ఠిమూర్తీ'], [1810, 1813], 'Gonthumurthy family, houses 4-72/4-73'),
     ],
     6: [
+        ('Kothali', 'కొత్తలి', ['Kottali'], ['కొథళి', 'కొథఅలి', 'కొట్టాలి'], [2001, 2004, 2006, 2007],
+         'house 4-133: Ramana Kothali, his mother Narayanamma (husband Bhuloka) and children; '
+         'spelling Kothali confirmed by the user, 2026-11-22'),
         ('Medeti', 'మెదేటి', ['Madetee'], ['మడేటీ'], [2113], 'house 5-5; spelling confirmed by the user (as in Wards 11 and 12)'),
         ('Sontena', 'సొంటేన', ['Sonthyana'], ['శొంఠ్యాన'], [1862], 'brother of Sontena Eswara Rao (father Konda), house 4-93'),
         ('Mogili', 'మొగిలి', ['Mogali'], ['మొగలి'], [1872], 'wife of Mogili Narayana, house 4-95'),
@@ -217,10 +224,19 @@ R = {
         ('Polumuri', 'పొలుమూరి', ['Polamuri', 'Polimuri'], ['పొలమూరీ', 'పొలిమూరి'], [3959, 3962], 'husband and daughter of Lalitha Polumuri, house 9-61'),
         ('Mathurthi', 'మాథుర్తి', ['Matturthi', 'Matturi', 'Mathurathi'], ['మత్తుర్తి', 'మత్తురి', 'మాథురతి'], [4039, 4040],
          'house 9-86: Sivashamkar and his wife Bhavani; spelling Mathurthi confirmed by the user'),
-        ('Kottali', 'కొత్తలి', ['Kottala'], ['కొత్తా ల', 'కొట్టా ల'], [3883, 3976, 3978], 'Anna Poorna, daughter of Nageswara Rao Kottali; Nanaji of house 9-64'),
+        ('Kothali', 'కొత్తలి', ['Kottala', 'Kottali'], ['కొత్తా ల', 'కొట్టా ల'], [3883, 3976, 3978], 'Anna Poorna, daughter of Nageswara Rao Kothali; Nanaji of house 9-64'),
+        ('Kothali', 'కొత్తలి', ['Kottali'], ['కోత్తలి'], None, 'spelling Kothali (not Kottali) confirmed by the user, 2026-11-22'),
+        ('Kasi', 'కాశి', ['Kashee', 'Kasee', 'Kashi'], ['కాశీ', 'కాసీ', 'కాసి'],
+         [3751, 3944, 3954, 3955, 3956, 3957, 3958, 3966, 3971, 4056],
+         'one Kasi family (Someswara Rao Kasi, house 9-60, and his sons; Prasada Rao Kasi) printed Kashee / Kasee / Kashi; '
+         'spelling Kasi confirmed by the user, 2026-11-22'),
+        ('Chinthala', 'చింతల', ['Chintala'], [], [3742, 3743, 4008, 4010, 4021, 4022, 4023, 4024],
+         'spelling Chinthala (Ward 11) confirmed by the user, 2026-11-22'),
         ('Darabala', None, ['Dorabula'], ['దొరబుల'], [3797, 3798, 3799], 'Ganga Raju Dorabula and Tatabbayi Darabala are both sons of Venkataswamy'),
     ],
     12: [
+        ('Kasi', 'కాశి', ['Kashee', 'Kasee', 'Kashi'], ['కాశీ', 'కాసీ', 'కాసి'], [4187, 4188],
+         'house 9-128: Venkata Rao Kasi, his wife Kamala and son Kanaka Durga Rao (spelling Kasi as in Ward 11)'),
         ('Pichchuka', 'పిచ్చుక', ['Pichchika'], ['పిచ్చిక'], [4085], 'mother of Raju Pichchuka (both list Malleswara Rao), house 9-98'),
         ('Adlaboyina', 'అడ్లబోయిన', ['Addaboyina', 'Edlaboyina'], ['అడ్డబోయిన', 'ఎడ్లబోయిన'], [4164, 4166],
          'Mahesh (wife Lakshmi Adlaboyina, father Paradesi) and his son Prabhakara'),
@@ -264,6 +280,10 @@ R = {
     ],
 }
 
+# వీసం is written Veesam (not Visam) in every ward; spelling confirmed by the user, 2026-11-22.
+for _w in (9, 10, 12, 14):
+    R.setdefault(_w, []).append(('Veesam', 'వీసం', ['Visam'], [], None, 'surname వీసం spelt Veesam; confirmed by the user, 2026-11-22'))
+
 
 # Surnames printed as two words ("Kandra Kota", "Chetti Palli"): joined, so that the grouping never matches two
 # families on a shared fragment ("Nane Palli" / "Chetti Palli" both ended in "Palli").
@@ -294,7 +314,8 @@ JOINED = {
 SAME_HOUSE = {
     1: [('Kurandasu', 'కురందాసు', ['Kuramadasu'], ['కురమాదాసు'], [269], 'house 1-73 of the Kurandasu family')],
     4: [('Satapathi', 'శతపతి', ['Senapathi'], ['సేనాపతి'], [1121], 'wife of Srinivasa Rao Satapathi; Jayanthi Satapathi at the same house 3-17')],
-    6: [('Gadapa', 'గడపా', ['Gadasa'], ['గడసా'], [2163], 'mother of Konda Naidu Gadapa (both list Ramana), house 5-19'),
+    6: [('Gonthumurthy', None, ['Gontahamaurthi'], ['గొన్తహమఉర్ఠి'], [1945], 'Raviteja: surname garbled in print; Gonthumurthy confirmed by the user, 2026-11-22'),
+        ('Gadapa', 'గడపా', ['Gadasa'], ['గడసా'], [2163], 'mother of Konda Naidu Gadapa (both list Ramana), house 5-19'),
         ('Satyavathi Amalakanti', 'సత్యవతి అమలకంటి', ['Satyavathiamalakanti'], ['సత్యవతిఅమలకంటి'], [2009], 'given name and surname printed as one word')],
     7: [('Gonthumurthy', None, ['Gotumurti'], ['గోతుమూర్తి'], [2335], 'house 5-91 of the Gonthumurthy family')],
     8: [('Mallipati', 'మల్లిపాటి', ['Mailapati'], ['మైలపాటి'], [2765], 'son of Apparao Mallipati, husband of Ramalakshmi Mallipati, house 6-90'),
@@ -309,6 +330,20 @@ SAME_HOUSE = {
     13: [('Boddu', 'బొడ్డు', ['Bodda'], ['బొడ్డా'], [4527], 'wife of Thatha Rao Boddu, house 10-89')],
     14: [('Kunduru', None, ['Punduru'], ['పుందూరు'], [4905], 'house 11-43 of the Kunduru family'),
          ('Uggina', 'ఉగ్గిన', ['Vuggina'], ['వుగ్గిన'], [5106], 'one surname (ఉగ్గిన / వుగ్గిన)')],
+}
+
+
+# Given-name spellings corrected by the user (same rule format; only the listed records are touched).
+#   "Teja" is always written Teja, never Theja (English only; the Telugu తేజ is unchanged). 2026-11-22.
+GIVEN = {
+    6: [('Raviteja', None, ['Ravitheja'], [], [1945, 2099], 'Teja, not Theja; corrected by the user, 2026-11-22'),
+        ('Durgateja', None, ['Durgatheja'], [], [2020], 'Teja, not Theja; corrected by the user, 2026-11-22')],
+    9: [('Raviteja', None, ['Ravitheja'], [], [3067], 'Teja, not Theja; corrected by the user, 2026-11-22'),
+        ('Tejaswini', None, ['Thejaswini'], [], [3266], 'Teja, not Theja; corrected by the user, 2026-11-22')],
+    8: [('Raviteja', None, ['Ravitheja'], [], [2916], 'Teja, not Theja; corrected by the user, 2026-11-22'),('Govinda', 'గోవింద', ['Govanda'], ['గోవంద'], [2647], 'Govinda Rao Annam, house 6-40; corrected by the user, 2026-11-22'),
+        # English only: the printed Telugu "స్వరాజ్యరావు" is kept as printed.
+        ('Swaraj', None, ['Svarajya', 'Svarajiya'], [], [2626, 2646, 2649],
+         'Swaraj Rao Annam (2649) and where he is the father / husband (2626, 2646); corrected by the user, 2026-11-22')],
 }
 
 
@@ -361,8 +396,9 @@ def main():
     for ward in wards:
         path, wb, rows = load(ward)
         changed = 0
-        for canon_en, canon_te, en_var, te_var, serials, why in R.get(ward, []) + JOINED.get(ward, []) + SAME_HOUSE.get(ward, []):
-            canon_te = canon_te or canonical_te(rows, canon_en)
+        for canon_en, canon_te, en_var, te_var, serials, why in (R.get(ward, []) + JOINED.get(ward, []) + SAME_HOUSE.get(ward, [])
+                                                                 + GIVEN.get(ward, [])):
+            canon_te = canon_te or (canonical_te(rows, canon_en) if te_var else '')
             rx = word_re(en_var)
             if serials is None:          # every record of the ward that carries a variant
                 serials = [s for s, r in rows.items() if rx.search(r[1].value or '') or rx.search(r[3].value or '')]
@@ -373,7 +409,8 @@ def main():
                 new = [rx.sub(canon_en, en) if en else en,
                        rx.sub(canon_en, rel_en) if rel_en else rel_en,
                        te_sub(te, te_var, canon_te), te_sub(rel_te, te_var, canon_te)]
-                is_canon = re.search(r'(?<![A-Za-z])%s(?![A-Za-z])' % re.escape(canon_en), en or '')
+                # already corrected (in the voter's own name or, for a relative-only fix, the relative's name)
+                is_canon = re.search(r'(?<![A-Za-z])%s(?![A-Za-z])' % re.escape(canon_en), '%s | %s' % (en or '', rel_en or ''))
                 if new == before:
                     if not is_canon:
                         raise SystemExit('ward %d serial %d: no variant of %s found in %r' % (ward, s, canon_en, before))

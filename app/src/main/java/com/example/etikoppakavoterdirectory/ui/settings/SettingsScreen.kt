@@ -68,6 +68,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.etikoppakavoterdirectory.ui.components.AppIcons
 
@@ -76,14 +77,18 @@ private enum class SettingsPage(val title: String) { MENU("Settings"), BACKUP("B
 /** Where Back goes from each page: Terms returns to About, the other pages to the menu. */
 private val SettingsPage.parent get() = if (this == SettingsPage.TERMS) SettingsPage.ABOUT else SettingsPage.MENU
 
-/** Shown on the Terms & Conditions page (Admin and Viewer). */
+/** Header subtitle for each role (the Viewer role is called "Member" in the app). */
+const val MEMBER_SUBTITLE = "Member · Search & View"
+const val ADMIN_SUBTITLE = "Admin · Full Access"
+
+/** Shown on the Terms of Use page (Admin and Member): bold lead-in, then the text. */
 val TERMS_AND_CONDITIONS = listOf(
-    "This application is intended for authorized directory reference and voter-record management.",
-    "Voter information must be handled responsibly and used only for lawful, legitimate purposes.",
-    "Do not copy, distribute, publish, or misuse personal information without appropriate authorization.",
-    "Information is provided for reference and may contain errors or require updates. Verify important details against official records.",
-    "Users are responsible for protecting their login credentials and preventing unauthorized access.",
-    "This is an independently developed application and is not an official government or Election Commission application.",
+    "Authorized Purpose" to "This application is provided strictly for local directory lookup, community reference, and authorized voter-record administration.",
+    "Lawful & Responsible Use" to "All directory records must be handled responsibly and used solely for lawful, legitimate purposes in compliance with applicable data protection laws.",
+    "Prohibition on Misuse" to "Unauthorized copying, scraping, redistribution, public posting, or commercial misuse of personal voter data is strictly prohibited.",
+    "Data Accuracy" to "Records are compiled for reference only and may contain clerical discrepancies or require updates. Always verify critical details against official electoral rolls.",
+    "Credential Security" to "Users are responsible for safeguarding their access passcodes and preventing unauthorized device or account access.",
+    "Non-Government Disclaimer" to "This is an independent community digitization initiative and is neither affiliated with nor endorsed by the Election Commission of India or any government authority.",
 )
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
@@ -137,7 +142,13 @@ fun SettingsScreen(
         topBar = {
             com.example.etikoppakavoterdirectory.ui.components.ScreenHeader(
                 title = page.title,
-                subtitle = if (ward != null) "Ward $ward" else "Viewer · read-only access",
+                // About and Terms show the signed-in role; the other pages show the open ward.
+                subtitle = when {
+                    page == SettingsPage.ABOUT || page == SettingsPage.TERMS -> if (viewer) MEMBER_SUBTITLE else ADMIN_SUBTITLE
+                    ward != null -> "Ward $ward"
+                    viewer -> MEMBER_SUBTITLE
+                    else -> ADMIN_SUBTITLE
+                },
                 navIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 navDescription = when {
                     page == SettingsPage.TERMS -> "Back to About"
@@ -221,26 +232,33 @@ fun SettingsScreen(
                     Spacer(Modifier.height(12.dp))
                     OutlinedButton(onClick = { confirmSignOut = true }) { Text("Sign out") }
                 }
-                SettingsPage.ABOUT -> Section("Etikoppaka Voter Directory") {
+                SettingsPage.ABOUT -> Section("Application Details") {
                     Row2("Application", "Etikoppaka Voter Directory")
                     Row2("Version", versionName)
-                    Row2("Created by", "Vinod Yedla")
+                    Row2("Developed by", "Vinod Yedla")
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        "An offline Android application for organizing and searching village voter-directory records.",
+                        "An offline mobile directory for organizing, searching, and referencing Etikoppaka village voter records.",
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     Spacer(Modifier.height(8.dp))
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-                    MenuRow(Icons.Filled.Info, "Terms & Conditions", "How this app and its information may be used") {
+                    MenuRow(Icons.Filled.Info, "Terms & Conditions", "Usage guidelines, data privacy, and legal disclaimer") {
                         pageName = SettingsPage.TERMS.name
                     }
                 }
-                SettingsPage.TERMS -> Section("Terms & Conditions") {
-                    TERMS_AND_CONDITIONS.forEachIndexed { i, term ->
+                SettingsPage.TERMS -> Section("Terms of Use & Disclaimer") {
+                    TERMS_AND_CONDITIONS.forEachIndexed { i, (lead, body) ->
                         Row(Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                             Text("${i + 1}.", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
-                            Text(term, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                            Text(
+                                androidx.compose.ui.text.buildAnnotatedString {
+                                    withStyle(androidx.compose.ui.text.SpanStyle(fontWeight = FontWeight.Bold)) { append("$lead: ") }
+                                    append(body)
+                                },
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.weight(1f),
+                            )
                         }
                     }
                 }

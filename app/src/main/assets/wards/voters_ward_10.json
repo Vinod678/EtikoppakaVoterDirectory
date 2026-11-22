@@ -26,7 +26,7 @@
       "The Excel file marks all names as automated normalization still needing spelling verification.",
       "pdf_relation_label is null where the PDF card shows no Father/Husband/Mother label."
     ],
-    "generated_at": "2026-11-21T11:48:08"
+    "generated_at": "2026-11-22T16:26:39"
   },
   "voters": [
     {
@@ -5770,7 +5770,7 @@
     {
       "gp_serial_no": 3581,
       "ward_no": 10,
-      "name_en": "Suryakantham Visam",
+      "name_en": "Suryakantham Veesam",
       "name_te": "సూర్యకాంతం వీసం",
       "relationship": "Husband",
       "relative_name_en": "Lakshmana Rao",
@@ -5792,7 +5792,7 @@
     {
       "gp_serial_no": 3582,
       "ward_no": 10,
-      "name_en": "Srinivasa Rao Visam",
+      "name_en": "Srinivasa Rao Veesam",
       "name_te": "శ్రీనివాసరావు వీసం",
       "relationship": "Father",
       "relative_name_en": "Lakshmana Rao",
@@ -5814,7 +5814,7 @@
     {
       "gp_serial_no": 3583,
       "ward_no": 10,
-      "name_en": "Satyalakshmi Visam",
+      "name_en": "Satyalakshmi Veesam",
       "name_te": "సత్యలక్ష్మి వీసం",
       "relationship": "Husband",
       "relative_name_en": "Srinivasa Rao",
@@ -7804,10 +7804,10 @@
     {
       "gp_serial_no": 3673,
       "ward_no": 10,
-      "name_en": "Pavanvinaya Visam",
+      "name_en": "Pavanvinaya Veesam",
       "name_te": "పవన్వినయ వీసం",
       "relationship": "Father",
-      "relative_name_en": "Srinivasu Rao Visam",
+      "relative_name_en": "Srinivasu Rao Veesam",
       "relative_name_te": "శ్రీనువాసు రావు వీసం",
       "age": 25,
       "gender": "Male",
@@ -7826,10 +7826,10 @@
     {
       "gp_serial_no": 3674,
       "ward_no": 10,
-      "name_en": "Likhitha Lahari Visam",
+      "name_en": "Likhitha Lahari Veesam",
       "name_te": "లిఖిత లహరి వీసం",
       "relationship": "Father",
-      "relative_name_en": "Srinivasu Rao Visam",
+      "relative_name_en": "Srinivasu Rao Veesam",
       "relative_name_te": "శ్రీనివాసురావు వీసం",
       "age": 28,
       "gender": "Female",
